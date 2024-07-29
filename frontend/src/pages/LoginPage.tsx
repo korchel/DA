@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 
 import { ButtonComponent } from "../components/ButtonComponent"
 import { InputField } from "../components/InputField"
+import { routes } from '../routes';
 
 interface ILoginData {
   username: string,
@@ -12,7 +13,15 @@ export const LoginPage = () => {
   const { register, control, handleSubmit, formState: { errors }, reset, clearErrors } = useForm<ILoginData>();
 
   const onSubmit = (data: ILoginData) => {
-    console.log(data);
+    fetch(routes.loginPath(), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   };
 
   return (
