@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { ButtonComponent } from "../components/ButtonComponent"
 import { InputField } from "../components/InputField"
 import { routes } from '../routes';
+import { useTranslation } from 'react-i18next';
 
 interface ILoginData {
   username: string,
@@ -10,6 +11,7 @@ interface ILoginData {
 }
 
 export const LoginPage = () => {
+  const { t } = useTranslation();
   const { register, control, handleSubmit, formState: { errors }, reset, clearErrors } = useForm<ILoginData>();
 
   const onSubmit = (data: ILoginData) => {
@@ -28,11 +30,11 @@ export const LoginPage = () => {
     <div className="h-full flex items-center">
       <div className="mx-auto shadow-lg p-6 rounded-md min-w-[400px] bg-white">
         <form id="registerForm" className="flex flex-col gap-4 text-center" onSubmit={handleSubmit(onSubmit)}>
-          <h1 className="text-cyan-800 font-bold text-lg">Авторизация пользователя</h1>
+          <h1 className="text-cyan-800 font-bold text-lg">{t('loginPage.title')}</h1>
           <InputField
             name="username"
             id="username"
-            placeholder="Имя пользователя"
+            placeholder={t('loginPage.placeholders.userName')}
             error={errors.username}
             {...register('username', {required: {value: true, message: 'Укажите имя'}})}
           />
@@ -40,11 +42,11 @@ export const LoginPage = () => {
             type="password"
             name="password"
             id="password"
-            placeholder="Пароль"
+            placeholder={t('loginPage.placeholders.password')}
             error={errors.password}
             {...register('password', {required: {value: true, message: 'Введите пароль'}})}
           />
-          <ButtonComponent variant="primary">Войти</ButtonComponent>
+          <ButtonComponent variant="primary">{t('loginPage.button')}</ButtonComponent>
 
         </form>
       </div>

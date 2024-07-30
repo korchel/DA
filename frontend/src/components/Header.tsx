@@ -14,16 +14,16 @@ export const Header = () => {
         <Link to={routes.documentsRoute()}>
           <ButtonComponent variant="outline">Документы</ButtonComponent>
         </Link>
-
+        <ButtonComponent variant="outline">Поиск</ButtonComponent>
       </nav>
       <div className="flex gap-2">
         <Link to={routes.signupRoute()}>
-          <ButtonComponent variant="outline">Регистрация</ButtonComponent>
+          <ButtonComponent variant="outline">{t('header.register')}</ButtonComponent>
         </Link>
         <Link to={routes.loginRoute()}>
           <ButtonComponent variant="outline">{t('header.login')}</ButtonComponent>
         </Link>
-        <ButtonComponent variant="outline">Поиск</ButtonComponent>
+        <ButtonComponent variant="outline">{t('header.logout')}</ButtonComponent>
       </div>
     </header>
   )

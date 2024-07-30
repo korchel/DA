@@ -1,15 +1,5 @@
 import { ActionButton } from "../components/ActionButton";
-
-interface IDocument {
-  id: number,
-  title: string,
-  number: number,
-  author: string,
-  type: string,
-  content: string,
-  creationDate: string,
-  updateDate: string,
-}
+import { IDocument } from "../interfaces/interfaces";
 
 const documents: IDocument[] = [
   {
