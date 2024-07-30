@@ -4,8 +4,6 @@ import { LinkProps } from "react-router-dom";
 
 interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   variant: 'primary' | 'outline',
-  as?: ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>>,
-  to?: string,
 }
 
 export const ButtonComponent = ({ variant, className, children, ...props }: ButtonProps) => {

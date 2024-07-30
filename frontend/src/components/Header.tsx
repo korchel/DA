@@ -10,11 +10,18 @@ export const Header = () => {
       <nav className="flex gap-2">
         <ButtonComponent variant="outline">Пользователи</ButtonComponent>
         <ButtonComponent variant="outline">Файлы</ButtonComponent>
-        <ButtonComponent variant="outline">Документы</ButtonComponent>
+        <Link to={routes.documentsRoute()}>
+          <ButtonComponent variant="outline">Документы</ButtonComponent>
+        </Link>
+
       </nav>
       <div className="flex gap-2">
-        <ButtonComponent variant="outline">Регистрация</ButtonComponent>
-        <ButtonComponent as={Link} to={routes.loginRoute()} variant="outline">Войти</ButtonComponent>
+        <Link to={routes.signupRoute()}>
+          <ButtonComponent variant="outline">Регистрация</ButtonComponent>
+        </Link>
+        <Link to={routes.loginRoute()}>
+          <ButtonComponent variant="outline">Войти</ButtonComponent>
+        </Link>
         <ButtonComponent variant="outline">Поиск</ButtonComponent>
       </div>
     </header>
