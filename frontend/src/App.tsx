@@ -6,8 +6,9 @@ import { LoginPage } from "./pages/LoginPage";
 import { DocumentsPage } from "./pages/DocumentsPage";
 import { routes } from "./routes";
 import { I18nextProvider } from "react-i18next";
-import i18n from "./locales";
+import i18n from "./locales/i18n";
 import { UserDetails } from "./pages/UserDetails";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
               <Route path={routes.loginRoute()} element={<LoginPage />} />
               <Route path={routes.documentsRoute()} element={<DocumentsPage />} />
               <Route path={'user'} element={<UserDetails />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
         </div>

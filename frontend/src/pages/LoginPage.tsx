@@ -27,12 +27,11 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="h-full flex items-center">
-      <div className="mx-auto shadow-lg p-6 rounded-md min-w-[400px] bg-white">
+    <div className="h-full flex items-center justify-center">
+      <div className="shadow-lg p-6 rounded-md min-w-[400px] bg-white">
         <form id="registerForm" className="flex flex-col gap-4 text-center" onSubmit={handleSubmit(onSubmit)}>
           <h1 className="text-cyan-800 font-bold text-lg">{t('loginPage.title')}</h1>
           <InputField
-            name="username"
             id="username"
             placeholder={t('loginPage.placeholders.userName')}
             error={errors.username}
@@ -40,7 +39,6 @@ export const LoginPage = () => {
           />
           <InputField
             type="password"
-            name="password"
             id="password"
             placeholder={t('loginPage.placeholders.password')}
             error={errors.password}

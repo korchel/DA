@@ -1,5 +1,4 @@
 export const ru = {
-  translation: {
     header: {
       login: 'Войти',
       logout: 'Выйти',
@@ -29,7 +28,9 @@ export const ru = {
         password: 'Пароль',
         repeatPassword: 'Подтвердите пароль',
       }
-    }
-  },
-
+    },
+    notFoundPage: {
+      title: 'Страница не найдена',
+      button: 'На главную',
+    },
 };
