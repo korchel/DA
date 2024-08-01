@@ -4,8 +4,8 @@ import { ButtonComponent } from "../components/ButtonComponent";
 export const NotFoundPage = () => {
   const { t } = useTranslation();
   return (
-    <div className="h-full flex items-center justify-center">
-      <div>{t('notFoundPage.title')}</div>
+    <div className="h-full flex flex-col items-center justify-center gap-3">
+      <div className="text-2xl font-bold">{t('notFoundPage.title')}</div>
       <ButtonComponent variant="primary">{t('notFoundPage.button')}</ButtonComponent>
     </div>
   );
