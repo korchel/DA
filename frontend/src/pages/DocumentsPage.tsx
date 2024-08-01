@@ -28,7 +28,7 @@ export const DocumentsPage = () => {
   return (
     <div className="h-full p-8">
       <table className="w-[100%] bg-white text-left rounded-md shadow-md">
-        <thead className="uppercase text-cyan-600 whitespace-nowrap">
+        <thead className="uppercase text-sky-600 whitespace-nowrap">
           <tr className="border-b ">
             <th className="py-4 px-5 w-10">Номер</th>
             <th className="py-4 px-5">Название</th>

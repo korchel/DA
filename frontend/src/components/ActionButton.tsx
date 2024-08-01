@@ -14,7 +14,7 @@ export const ActionButton = ({ action, className }: ButtonProps) => {
   }[action];
 
   return (
-    <button className={clsx(className, 'text-cyan-600')}>
+    <button className={clsx(className, 'text-sky-600')}>
       {Icon}
     </button>
   );

@@ -8,7 +8,7 @@ export const SignupPage = () => {
     <div className="h-full flex items-center justify-center">
       <div className="shadow-lg p-6 rounded-md min-w-[400px] bg-white">
         <form id="registerForm" className="flex flex-col gap-4">
-          <h1 className="text-cyan-800 font-bold text-lg text-center">{t('signupPage.title')}</h1>
+          <h1 className="text-sky-800 font-bold text-lg text-center">{t('signupPage.title')}</h1>
           <InputField
             id="username"
             placeholder={t('signupPage.placeholders.userName')}

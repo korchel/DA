@@ -7,7 +7,7 @@ export const Header = () => {
   const { t } = useTranslation();
   return (
     <header className="flex h-24 items-center px-8 bg-white drop-shadow-md justify-between">
-      <div className="font-bold text-4xl text-cyan-600">DA</div>
+      <div className="font-bold text-4xl text-sky-600">DA</div>
       <nav className="flex gap-2">
         <ButtonComponent variant="outline">Пользователи</ButtonComponent>
         <ButtonComponent variant="outline">Файлы</ButtonComponent>
