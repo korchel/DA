@@ -1,16 +1,33 @@
-import { DetailedHTMLProps, ForwardedRef, forwardRef, HtmlHTMLAttributes } from "react";
+import clsx from "clsx";
+import { DetailedHTMLProps, ForwardedRef, forwardRef, HtmlHTMLAttributes, useState } from "react";
 import { FieldError } from "react-hook-form";
+import { EyeIcon } from "../icons/EyeIcon";
+import { CrossedEyeIcon } from "../icons/CrossedEyeIcon";
+import { ActionButton } from "./ActionButton";
 
 export interface InputFieldProps extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   type?: string,
   id: string,
   error?: FieldError,
   placeholder: string,
+  isPassword?: boolean,
 }
 
-export const InputField = forwardRef(({ type = "text", id, error, placeholder, className, ...props }: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
+interface passwordInputState {
+  action: "hidePassword" | "showPassword",
+  type: 'password' | 'text',
+}
+
+// separate textfield from password field
+export const InputField = forwardRef(({ type = "text", id, error, placeholder, className, isPassword = false, ...props }: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
+  const [{ action, type }, setShowPassowrd] = useState<passwordInputState>({action: 'eye', type: 'password'});
+
+  const toggleShowPassword = () => {
+    setShowPassowrd((prevState) => !prevState);
+  };
+
   return (
-    <div className={className}>
+    <div className={clsx(className, 'relative')}>
       <input
         type={type}
         id={id}
@@ -19,7 +36,8 @@ export const InputField = forwardRef(({ type = "text", id, error, placeholder, c
         {...props}
         ref={ref}
       />
-      {error && <p className="mt-1 text-sm text-red-500">This is a error message.</p>}
+      {isPassword && <ActionButton onClick={toggleShowPassword} action={showPassowrd ? "hidePassword" : "showPassword"} />}
+      {error && <p className="absolute text-sm text-red-500">{error.message}</p>}
     </div>
   );
 });

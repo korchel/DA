@@ -29,7 +29,7 @@ export const LoginPage = () => {
   return (
     <div className="h-full flex items-center justify-center">
       <div className="shadow-lg p-6 rounded-md min-w-[400px] bg-white">
-        <form id="registerForm" className="flex flex-col gap-4 text-center" onSubmit={handleSubmit(onSubmit)}>
+        <form id="registerForm" className="flex flex-col gap-7 text-center" onSubmit={handleSubmit(onSubmit)}>
           <h1 className="text-sky-800 font-bold text-lg">{t('loginPage.title')}</h1>
           <InputField
             id="username"
@@ -42,7 +42,8 @@ export const LoginPage = () => {
             id="password"
             placeholder={t('loginPage.placeholders.password')}
             error={errors.password}
-            {...register('password', {required: {value: true, message: 'Введите пароль'}})}
+            {...register('password', { required: { value: true, message: 'Введите пароль' } })}
+            isPassword
           />
           <ButtonComponent variant="primary">{t('loginPage.button')}</ButtonComponent>
 
