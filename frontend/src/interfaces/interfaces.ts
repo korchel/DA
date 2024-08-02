@@ -12,8 +12,9 @@ export interface IDocument {
 export interface IUser {
   id: number,
   username: string,
-  email: number,
+  email: string,
   name: string,
   lastName: string,
+  roles: Array<'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_MODERATOR'>,
 }
 

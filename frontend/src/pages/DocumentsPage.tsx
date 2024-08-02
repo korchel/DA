@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
 import { ActionButton } from "../components/ActionButton";
 import { IDocument } from "../interfaces/interfaces";
+import { routes } from "../routes";
+import { useTranslation } from "react-i18next";
 
 const documents: IDocument[] = [
   {
@@ -25,24 +28,26 @@ const documents: IDocument[] = [
 ];
 
 export const DocumentsPage = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="h-full p-8">
       <table className="w-[100%] bg-white text-left rounded-md shadow-md">
         <thead className="uppercase text-sky-600 whitespace-nowrap">
           <tr className="border-b ">
-            <th className="py-4 px-5 w-10">Номер</th>
-            <th className="py-4 px-5">Название</th>
-            <th className="py-4 px-5">Автор</th>
-            <th className="py-4 px-5">Тип</th>
-            <th className="py-4 px-5">Содержание</th>
-            <th className="py-4 px-5">Дата создания</th>
-            <th className="py-4 px-5">Дата обновления</th>
-            <th className="py-4 px-5 text-center">Действия</th>
+            <th className="py-4 px-5 w-10">{t('documentsPage.tableHeader.number')}</th>
+            <th className="py-4 px-5">{t('documentsPage.tableHeader.name')}</th>
+            <th className="py-4 px-5">{t('documentsPage.tableHeader.author')}</th>
+            <th className="py-4 px-5">{t('documentsPage.tableHeader.type')}</th>
+            <th className="py-4 px-5">{t('documentsPage.tableHeader.content')}</th>
+            <th className="py-4 px-5">{t('documentsPage.tableHeader.creationDate')}</th>
+            <th className="py-4 px-5">{t('documentsPage.tableHeader.updateDate')}</th>
+            <th className="py-4 px-5 text-center">{t('documentsPage.tableHeader.actions')}</th>
           </tr>
         </thead>
         <tbody>
           {documents.map((document) => (
-            <tr className="border-b overflow-hidden" key={document.id}>
+            <Link className="border-b overflow-hidden hover:bg-sky-50" to={routes.documentDetailsRoute(document.id)} key={document.id}>
               <td className="py-4 px-5">{document.number}</td>
               <td className="py-4 px-5 truncate">{document.title}</td>
               <td className="py-4 px-5 truncate">{document.author}</td>
@@ -54,9 +59,9 @@ export const DocumentsPage = () => {
                 <ActionButton actionType="edit" />
                 <ActionButton actionType="delete" />
               </td>
-          </tr>
+          </Link>
           ))}
-        </tbody>s
+        </tbody>
       </table>
     </div>
   );

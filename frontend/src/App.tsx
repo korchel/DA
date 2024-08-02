@@ -7,8 +7,10 @@ import { DocumentsPage } from "./pages/DocumentsPage";
 import { routes } from "./routes";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./locales/i18n";
-import { UserDetails } from "./pages/UserDetails";
+import { UserDetailsPage } from "./pages/UserDetailsPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { UsersPage } from "./pages/UsersPage";
+import { DocumentDetailsPage } from "./pages/DocumentDetailsPage";
 
 const App = () => {
   return (
@@ -21,7 +23,9 @@ const App = () => {
               <Route path={routes.signupRoute()} element={<SignupPage />} />
               <Route path={routes.loginRoute()} element={<LoginPage />} />
               <Route path={routes.documentsRoute()} element={<DocumentsPage />} />
-              <Route path={'user'} element={<UserDetails />} />
+              <Route path={routes.usersRoute()} element={<UsersPage />} />
+              <Route path='users/:id' element={<UserDetailsPage />} />
+              <Route path='documents/:id' element={<DocumentDetailsPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>

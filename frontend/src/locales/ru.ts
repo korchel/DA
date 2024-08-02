@@ -37,5 +37,26 @@ export const ru = {
       reuired: 'Обязательное поле',
       passwordLength: 'Длина пароля должна быть от 8 до 14 символов',
       confirmPassword: 'Пароли должны совпадать',
-    }
+    },
+    usersPage: {
+      tableHeader: {
+        userName: 'Имя пользователя',
+        name: 'Имя',
+        lastName: 'Фамилия',
+        roles: 'Роли',
+      }
+    },
+    documentsPage: {
+      tableHeader: {
+        number: 'Номер',
+        name: 'Название',
+        author: 'Автор',
+        type: 'Тип',
+        content: 'Содержание',
+        creationDate: 'Дата создания',
+        updateDate: 'Дата обновления',
+        actions: 'Действия',
+      }
+    },
+
 };

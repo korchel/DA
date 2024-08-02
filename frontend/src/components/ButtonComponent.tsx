@@ -1,9 +1,8 @@
 import clsx from "clsx";
 import { ButtonHTMLAttributes, DetailedHTMLProps, ForwardRefExoticComponent } from "react";
-import { LinkProps } from "react-router-dom";
 
 interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  variant: 'primary' | 'outline',
+  variant: 'primary' | 'outline' | 'danger',
 }
 
 export const ButtonComponent = ({ variant, className, children, ...props }: ButtonProps) => {
@@ -15,6 +14,7 @@ export const ButtonComponent = ({ variant, className, children, ...props }: Butt
     {
       primary: 'bg-sky-600 hover:bg-sky-500 text-white',
       outline: 'border border-sky-500 bg-white text-sky-500 hover:bg-sky-50',
+      danger: 'bg-red-500 hover:bg-red-400 text-white'
     }[variant],
 
   );
