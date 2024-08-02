@@ -7,19 +7,19 @@ import { EyeIcon } from "../icons/EyeIcon";
 import { CrossedEyeIcon } from "../icons/CrossedEyeIcon";
 
 interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  action: 'delete' | 'edit' | 'showPassword' | 'hidePassword',
+  actionType: 'delete' | 'edit' | 'showPassword' | 'hidePassword',
 }
 
-export const ActionButton = ({ action, className }: ButtonProps) => {
+export const ActionButton = ({ actionType, className, onClick }: ButtonProps) => {
   const Icon = {
     delete: <DeleteIcon />,
     edit: <EditButton />,
     showPassword: <EyeIcon />,
     hidePassword: <CrossedEyeIcon />
-  }[action];
+  }[actionType];
 
   return (
-    <button className={clsx(className, 'text-sky-600')}>
+    <button type="button" onClick={onClick} className={clsx(className, 'text-sky-600')}>
       {Icon}
     </button>
   );

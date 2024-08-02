@@ -33,4 +33,9 @@ export const ru = {
       title: 'Страница не найдена',
       button: 'На главную',
     },
+    errorMessages: {
+      reuired: 'Обязательное поле',
+      passwordLength: 'Длина пароля должна быть от 8 до 14 символов',
+      confirmPassword: 'Пароли должны совпадать',
+    }
 };

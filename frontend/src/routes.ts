@@ -5,4 +5,5 @@ export const routes = {
   signupRoute: () => '/signup',
   documentsRoute: () => '/documents',
   loginPath: () => [apiPath, 'auth', 'sign-in'].join('/'),
+  signupPath: () => [apiPath, 'auth', 'sign-un'].join('/'),
 };

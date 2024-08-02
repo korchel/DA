@@ -51,12 +51,12 @@ export const DocumentsPage = () => {
               <td className="py-4 px-5">{document.creationDate}</td>
               <td className="py-4 px-5">{document.updateDate}</td>
               <td className="py-4 px-5 flex justify-around">
-                <ActionButton action="edit" />
-                <ActionButton action="delete" />
+                <ActionButton actionType="edit" />
+                <ActionButton actionType="delete" />
               </td>
           </tr>
           ))}
-        </tbody>
+        </tbody>s
       </table>
     </div>
   );
