@@ -1,5 +1,5 @@
 [submodule "DocumentAccounting2"]
 	path = DocumentAccounting2
 	url = git@github.com:DEGTEVUWU/DocumentAccounting2.git
-[submodule "DbConnector"]
 	branch = main
+
