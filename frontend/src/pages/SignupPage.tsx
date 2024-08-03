@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { routes } from "../routes";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface ISignupData {
+  name: string, //???? lastname?
   username: string,
   email: string,
   password: string,
@@ -14,7 +17,8 @@ interface ISignupData {
 
 export const SignupPage = () => {
   const { t } = useTranslation();
-
+  const { logIn, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues } = useForm<ISignupData>();
 
   const onSubmit = (data: ISignupData) => {
@@ -26,7 +30,11 @@ export const SignupPage = () => {
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        logIn();
+        navigate(routes.documentsRoute());
+      })
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
@@ -59,6 +67,7 @@ export const SignupPage = () => {
           />
           <InputField
             placeholder="имя оно надо?"
+            {...register('name')}
           />
           <InputField
             type="password"

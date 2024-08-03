@@ -17,7 +17,7 @@ export const LoginPage = () => {
   const { t } = useTranslation();
   const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues } = useForm<ILoginData>();
   const ref = useRef(null);
-  const { logIn, userData } = useAuth();
+  const { logIn, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = (data: ILoginData) => {
@@ -31,13 +31,14 @@ export const LoginPage = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
-      });
+        logIn();
+        console.log(isAuthenticated)
+        navigate(routes.documentsRoute());
+      })
+      .catch((error) => console.log(error));
   };
 
-
   useEffect(() => {
-
     setFocus('username');
   });
 

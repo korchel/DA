@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { routes } from "../routes";
 import { ButtonComponent } from "./ButtonComponent";
 import { useTranslation } from "react-i18next";
@@ -6,29 +6,34 @@ import { useAuth } from "../context/AuthContext";
 
 export const Header = () => {
   const { t } = useTranslation();
-  const { logOut } = useAuth();
+  const { logOut, isAuthenticated } = useAuth();
+  const { pathname } = useLocation();
 
   return (
     <header className="flex h-24 items-center px-8 bg-white drop-shadow-md justify-between">
-      <div className="font-bold text-4xl text-sky-600">DA</div>
-      <nav className="flex gap-2">
+      <Link to={routes.documentsRoute()}>
+        <div className="font-bold text-4xl text-sky-600">DA</div>
+      </Link>
+      {isAuthenticated && <nav className="flex gap-2">
         <Link to={routes.usersRoute()}>
-          <ButtonComponent variant="outline">Пользователи</ButtonComponent>
+          <ButtonComponent variant="outline">{t('header.nav.users')}</ButtonComponent>
         </Link>
-        <ButtonComponent variant="outline">Файлы</ButtonComponent>
+        <ButtonComponent variant="outline">{t('header.nav.files')}</ButtonComponent>
         <Link to={routes.documentsRoute()}>
-          <ButtonComponent variant="outline">Документы</ButtonComponent>
+          <ButtonComponent variant="outline">{t('header.nav.documents')}</ButtonComponent>
         </Link>
-        <ButtonComponent variant="outline">Поиск</ButtonComponent>
-      </nav>
+        <ButtonComponent variant="outline">{t('header.nav.search')}</ButtonComponent>
+      </nav>}
       <div className="flex gap-2">
-        <Link to={routes.signupRoute()}>
+        {pathname === routes.loginRoute() && <Link to={routes.signupRoute()}>
           <ButtonComponent variant="outline">{t('header.register')}</ButtonComponent>
-        </Link>
-        <Link to={routes.loginRoute()}>
+        </Link>}
+        {pathname === routes.signupRoute() && <Link to={routes.loginRoute()}>
           <ButtonComponent variant="outline">{t('header.login')}</ButtonComponent>
-        </Link>
-        <ButtonComponent onClick={logOut} variant="outline">{t('header.logout')}</ButtonComponent>
+        </Link>}
+        {isAuthenticated && <Link to={routes.loginRoute()}>
+          <ButtonComponent onClick={logOut} variant="outline">{t('header.logout')}</ButtonComponent>
+        </Link>}
       </div>
     </header>
   )

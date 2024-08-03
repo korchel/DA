@@ -17,37 +17,34 @@ import { Role } from "../interfaces/interfaces";
 // }
 
 interface IAuthContext {
-  logIn: (data: string) => void;
+  logIn: () => void;
   logOut: () => void;
-  userData: string | null;
+  isAuthenticated: boolean;
 }
 
 const initialContext = {
-  logIn: () => {},
-  logOut: () => {},
-  userData: '',
+  logIn: () => undefined,
+  logOut: () => undefined,
+  isAuthenticated: false,
 }
 
 export const AuthContext = createContext<IAuthContext>(initialContext);
 
 const AuthProvider = ({ children }: {children: ReactNode}) => {
-  const [userData, setUserData] = useState<string | null>(
-    (document.cookie as string) || null,
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   
-  const logIn = (data: string) => {
-    Cookies.set("token", data, { path: "/" });
-    setUserData(data);
+  const logIn = () => {
+    console.log('!!')
+    setIsAuthenticated(true);
   };
   const logOut = () => {
-    Cookies.remove("token", { path: "/" });
-    setUserData(null);
+    setIsAuthenticated(false);
   };
 
   const value = {
     logIn,
     logOut,
-    userData,
+    isAuthenticated,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
