@@ -5,6 +5,8 @@ import { InputField } from "../components/InputField"
 import { routes } from '../routes';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface ILoginData {
   username: string,
@@ -15,20 +17,27 @@ export const LoginPage = () => {
   const { t } = useTranslation();
   const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues } = useForm<ILoginData>();
   const ref = useRef(null);
+  const { logIn, userData } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmit = (data: ILoginData) => {
     fetch(routes.loginPath(), {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data)
+      });
   };
 
+
   useEffect(() => {
+
     setFocus('username');
   });
 

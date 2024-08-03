@@ -1,5 +1,20 @@
 import { createContext, useState, useContext, ReactNode, FC } from "react";
 import Cookies from "js-cookie";
+import { Role } from "../interfaces/interfaces";
+
+// interface userData {
+//   jwtToken: string,
+//   user: {
+//     email: string,
+//     idUser: number,
+//     userName: string,
+//     name: string,
+//     roles: {
+//       idRole: number,
+//       name: Role,
+//     }
+//   }
+// }
 
 interface IAuthContext {
   logIn: (data: string) => void;
@@ -7,13 +22,19 @@ interface IAuthContext {
   userData: string | null;
 }
 
-export const AuthContext = createContext<IAuthContext | null>(null);
+const initialContext = {
+  logIn: () => {},
+  logOut: () => {},
+  userData: '',
+}
+
+export const AuthContext = createContext<IAuthContext>(initialContext);
 
 const AuthProvider = ({ children }: {children: ReactNode}) => {
   const [userData, setUserData] = useState<string | null>(
     (document.cookie as string) || null,
   );
-
+  
   const logIn = (data: string) => {
     Cookies.set("token", data, { path: "/" });
     setUserData(data);

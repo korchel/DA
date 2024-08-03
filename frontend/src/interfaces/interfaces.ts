@@ -1,3 +1,5 @@
+export type Role = 'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_MODERATOR';
+
 export interface IDocument {
   id: number,
   title: string,
@@ -15,6 +17,6 @@ export interface IUser {
   email: string,
   name: string,
   lastName: string,
-  roles: Array<'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_MODERATOR'>,
+  roles: Role[],
 }
 

@@ -11,6 +11,12 @@ import { UserDetailsPage } from "./pages/UserDetailsPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { UsersPage } from "./pages/UsersPage";
 import { DocumentDetailsPage } from "./pages/DocumentDetailsPage";
+import { useAuth } from "./context/AuthContext";
+
+// const ProtectedRoute = () => {
+//   const { userData } = useAuth();
+//   return userData ? <Outlet /> : <Navigate to={routes.loginRoute()} />;
+// };
 
 const App = () => {
   return (
