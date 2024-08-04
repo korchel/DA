@@ -46,17 +46,25 @@ export const ru = {
         roles: 'Роли',
       }
     },
-    documentsPage: {
-      tableHeader: {
-        number: 'Номер',
-        name: 'Название',
-        author: 'Автор',
-        type: 'Тип',
-        content: 'Содержание',
-        creationDate: 'Дата создания',
-        updateDate: 'Дата обновления',
-        actions: 'Действия',
-      }
+  documentsPage: {
+    title: 'Список документов',
+    createDocument: 'Создать документ',
+    tableHeader: {
+      number: 'Номер',
+      name: 'Название',
+      author: 'Автор',
+      type: 'Тип',
+      content: 'Содержание',
+      creationDate: 'Дата создания',
+      updateDate: 'Дата обновления',
+      actions: 'Действия',
+    }
+  },
+  modal: {
+    delete: {
+      areYouSure: 'Вы уверены, что хотите удалить эту запись?',
+      cancel: 'Отмена',
+      delete: 'Удалить',
     },
-
+  },
 };

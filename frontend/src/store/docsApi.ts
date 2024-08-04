@@ -1,25 +1,24 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
+import { Role } from "../interfaces";
 
 export const docsApi = createApi({
   reducerPath: "documents",
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8080/api/documents',
     prepareHeaders: (headers) => {
-      headers.set("Authorization", `Bearer ${Cookies.get("token")}` as string);
     },
   }),
   endpoints: (builder) => ({
     getDocs: builder.query({
-      query: () => ({
-        url: '',
-      }),
+      query: (roles: Role[]) => {
+        if (roles.includes("ROLE_ADMIN") || roles.includes("ROLE_MODERATOR")) {
+          return { url: '' };
+        }
+        return { url: "/for_user" };
+      },
     }),
-    getDocsForUsers: builder.query({
-      query: () => ({
-        url: "/for_users",
-      }),
-    }),
+
     getDoc: builder.query({
       query: (id) => ({
         url: `/${id}`,
@@ -52,3 +51,7 @@ export const docsApi = createApi({
     })
   }),
 });
+
+export const {
+  useGetDocsQuery,
+} = docsApi;

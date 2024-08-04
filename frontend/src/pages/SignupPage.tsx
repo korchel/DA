@@ -31,7 +31,7 @@ export const SignupPage = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        logIn();
+        logIn(data.user.roles);
         navigate(routes.documentsRoute());
       })
       .catch((error) => console.log(error));

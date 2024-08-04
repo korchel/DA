@@ -12,6 +12,9 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 import { UsersPage } from "./pages/UsersPage";
 import { DocumentDetailsPage } from "./pages/DocumentDetailsPage";
 import { AuthProvider, useAuth } from "./context/AuthContext";
+import { Provider } from "react-redux";
+import store from "./store";
+import { ModalComponent } from "./components/ModalComponent/ModalComponent";
 
 const LoggedInRoute = () => {
   const { isAuthenticated } = useAuth();
@@ -31,30 +34,33 @@ const LoggedOutRoute = () => {
 
 const App = () => {
   return (
-    <AuthProvider>  
-      <I18nextProvider i18n={i18n}>
-        <BrowserRouter>
-          <div className="h-screen text-slate-900" >
-            <Header />
-            <main className="h-[calc(100%-96px)] bg-slate-50 ">
-              <Routes>
-                <Route element={<LoggedInRoute />}>
-                  <Route path={routes.documentsRoute()} element={<DocumentsPage />} />
-                  <Route path={routes.usersRoute()} element={<UsersPage />} />
-                  <Route path='users/:id' element={<UserDetailsPage />} />
-                  <Route path='documents/:id' element={<DocumentDetailsPage />} />
-                </Route>
-                <Route element={<LoggedOutRoute />}>
-                  <Route path={routes.signupRoute()} element={<SignupPage />} />
-                  <Route path={routes.loginRoute()} element={<LoginPage />} />
-                </Route>
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </main>
-          </div>
-        </BrowserRouter>
-      </I18nextProvider>
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>  
+        <I18nextProvider i18n={i18n}>
+          <BrowserRouter>
+            <div className="h-screen text-slate-900" >
+              <Header />
+              <main className="h-[calc(100%-96px)] bg-slate-50 ">
+                <Routes>
+                  <Route element={<LoggedInRoute />}>
+                    <Route path={routes.documentsRoute()} element={<DocumentsPage />} />
+                    <Route path={routes.usersRoute()} element={<UsersPage />} />
+                    <Route path='users/:id' element={<UserDetailsPage />} />
+                    <Route path='documents/:id' element={<DocumentDetailsPage />} />
+                  </Route>
+                  <Route element={<LoggedOutRoute />}>
+                    <Route path={routes.signupRoute()} element={<SignupPage />} />
+                    <Route path={routes.loginRoute()} element={<LoginPage />} />
+                  </Route>
+                  <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+                <ModalComponent />
+              </main>
+            </div>
+          </BrowserRouter>
+        </I18nextProvider>
+      </AuthProvider>
+    </Provider>
   );
 };
 

@@ -35,6 +35,8 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "@casl/ability": "^6.7.1",
+    "@casl/react": "^4.0.0",
     "@reduxjs/toolkit": "^2.2.7",
     "clsx": "^2.1.1",
     "i18next": "^23.12.2",
