@@ -8,51 +8,72 @@ import { useGetDocsQuery as getDocs } from "../store/docsApi";
 import { ButtonComponent } from "../components/ButtonComponent";
 import { useDispatch } from "react-redux";
 import { openModal } from "../store/modalSlice";
+import { Spinner } from "../icons/Spinner";
 
-// const documents = [
-//   {
-//     id: 1,
-//     title: 'title 1',
-//     number: 11,
-//     author: "author 1",
-//     type: "string",
-//     content: "string",
-//     creationDate: "2024-09-04",
-//     updateDate: "2024-10-04",
-//   },
-//   {
-//     id: 2,
-//     title: 'title 2',
-//     number: 22,
-//     author: "author 2",
-//     type: "string",
-//     content: "stringddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-//     creationDate: "2024-09-04",
-//     updateDate: "2024-10-04",
-//   },
-// ];
+const documents = [
+  {
+    id: 1,
+    title: 'title 1',
+    number: 11,
+    author: {
+      userName: 'ghj',
+    },
+    content: "string",
+    creationDate: "2024-09-04",
+    updateDate: "2024-10-04",
+    type: {
+      id: 1,
+      type: 'note'
+    }
+  },
+  {
+    id: 2,
+    title: 'title 2',
+    number: 22,
+    author: {
+      userName: 'ghj',
+    },
+    content: "stringddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    creationDate: "2024-09-04",
+    updateDate: "2024-10-04",
+    type: {
+      id: 1,
+      type: 'note'
+    }
+  },
+];
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
-  const { currentUserRoles } = useAuth();
-  const { data, isLoading } = getDocs(currentUserRoles);
+  const { currentUser } = useAuth();
+  const { data, isLoading } = getDocs(currentUser.roles);
   const dispatch = useDispatch();
 
   const handleDelete = (id: number): void => {
     dispatch(openModal({ type: "delete", open: true, id }));
   };
 
+  const handleCreate = () => {
+    dispatch(openModal({ type: "create", open: true }))
+  };
+
   if (isLoading) {
     return (
-      <div>
-        loading.....
+      <div className="h-full p-8 flex flex-col justify-center items-center">
+        <Spinner />
       </div>
-    )
+    );
   }
   return (
     <div className="h-full p-8 flex flex-col">
       <h1 className="text-sky-800 font-bold text-lg text-center">{t('documentsPage.title')}</h1>
-      <ButtonComponent variant="primary" className="my-5 ml-auto">{t('documentsPage.createDocument')}</ButtonComponent>
+      <ButtonComponent
+        variant="primary"
+        className="my-5 ml-auto"
+        onClick={handleCreate}
+      >
+        {t('documentsPage.createDocument')}
+      </ButtonComponent>
       <table className="w-[100%] bg-white text-left rounded-md shadow-md">
         <thead className="uppercase text-sky-600 whitespace-nowrap">
           <tr className="border-b ">
@@ -67,7 +88,7 @@ export const DocumentsPage = () => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((document) => (
+          {documents?.map((document) => (
             <tr className="border-b overflow-hidden hover:bg-sky-50" key={document.id}>
               <td className="py-4 px-5">{document.number}</td>
               <td className="py-4 px-5 truncate">{document.title}</td>

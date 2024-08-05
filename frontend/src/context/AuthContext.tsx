@@ -16,29 +16,36 @@ import { Role } from "../interfaces/interfaces";
 //   }
 // }
 
+interface ICurrentUser {
+  roles: Role[];
+  id: string;
+}
+
 interface IAuthContext {
   logIn: (data) => void;
   logOut: () => void;
   isAuthenticated: boolean;
-  currentUserRoles: Role[];
+  currentUser: ICurrentUser;
 }
 
 const initialContext = {
   logIn: () => undefined,
   logOut: () => undefined,
   isAuthenticated: false,
-  currentUserRoles: ["ROLE_USER" as Role],
+  currentUser: {
+    roles: ["ROLE_USER" as Role],
+    id: '',
+  },
 }
 
 export const AuthContext = createContext<IAuthContext>(initialContext);
 
 const AuthProvider = ({ children }: {children: ReactNode}) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
-  const [currentUserRoles, setCurrentUserRoles] = useState<Role[]>([]);
+  const [currentUser, setCurrentUser] = useState<ICurrentUser>({ roles: ["ROLE_USER" as Role], id: ''});
 
-
-  const logIn = (roles: Role[]) => {
-    setCurrentUserRoles(roles);
+  const logIn = (currentUser: ICurrentUser) => {
+    setCurrentUser(currentUser);
     setIsAuthenticated(true);
   };
   const logOut = () => {
@@ -49,7 +56,7 @@ const AuthProvider = ({ children }: {children: ReactNode}) => {
     logIn,
     logOut,
     isAuthenticated,
-    currentUserRoles,
+    currentUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

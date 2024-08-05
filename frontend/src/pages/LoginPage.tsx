@@ -32,7 +32,8 @@ export const LoginPage = () => {
       .then((response) => response.json())
       .then((data) => {
         const roles = data.user.roles.map((role) => role.name);
-        logIn(roles);
+        const id = data.id;
+        logIn({roles, id});
         navigate(routes.documentsRoute());
       })
       .catch((error) => console.log(error));

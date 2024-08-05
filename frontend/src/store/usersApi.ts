@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import Cookies from "js-cookie";
 
 export const usersApi = createApi({
   reducerPath: "users",
@@ -19,3 +18,7 @@ export const usersApi = createApi({
     }),
   }),
 });
+
+export const {
+  useGetUsersQuery,
+} = usersApi;

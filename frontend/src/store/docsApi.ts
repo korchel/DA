@@ -54,4 +54,6 @@ export const docsApi = createApi({
 
 export const {
   useGetDocsQuery,
+  useDeleteDocMutation,
+  useCreateDocMutation,
 } = docsApi;

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, getModalOpen, getModalType } from "../../store/modalSlice";
 import { Delete } from "./Delete";
+import { Create } from "./Create";
 
 export const ModalComponent = () => {
   const dispatch = useDispatch();
@@ -22,8 +23,9 @@ export const ModalComponent = () => {
       onClick={handleBackDropClick}
       className="fixed inset-0 bg-slate-900/60 backdrop-blur overflow-y-auto flex flex-col items-center justify-center"
     >
-      <div data-id="modal" className="bg-white rounded-lg p-5 h-fit flex flex-col max-w-[640px]">
+      <div data-id="modal" className="bg-white rounded-lg p-5 h-fit flex flex-col min-w-[500px]">
         {modalType === "delete" && <Delete />}
+        {modalType === "create" && <Create />}
       </div>
     </div>);
   ;
