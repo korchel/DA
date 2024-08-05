@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IUser } from "../interfaces";
 
 export const usersApi = createApi({
   reducerPath: "users",
@@ -6,7 +7,7 @@ export const usersApi = createApi({
     baseUrl: 'http://localhost:8080/api/users',
   }),
   endpoints: (builder) => ({
-    getUsers: builder.query({
+    getUsers: builder.query<IUser[], void>({
       query: () => ({
         url: '',
       }),

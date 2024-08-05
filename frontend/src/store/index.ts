@@ -13,7 +13,7 @@ const store = configureStore({
     modalSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(docsApi.middleware),
+    getDefaultMiddleware().concat(docsApi.middleware, usersApi.middleware, filesApi.middleware),
 });
 
 export type RootStateType = ReturnType<typeof store.getState>;

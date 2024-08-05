@@ -8,7 +8,7 @@ import { CacheProvider } from '@emotion/react';
 
 interface ISelectOption {
   label: string,
-  value: string,
+  value: number,
 }
 
 interface ISelectInputProps {
@@ -21,11 +21,11 @@ interface ISelectInputProps {
 type onSelect = (newValue: unknown, actionmeta: ActionMeta<unknown>) => void;
 
 const selectOptions: ISelectOption[] = [
-  { value: '1', label: 'Заметка' },
-  { value: '2', label: 'Отчет' },
-  { value: '3', label: 'Презентация' },
-  { value: '4', label: 'Статья' },
-  { value: '5', label: 'По умолчанию???' },
+  { value: 1, label: 'Заметка' },
+  { value: 2, label: 'Отчет' },
+  { value: 3, label: 'Презентация' },
+  { value: 4, label: 'Статья' },
+  { value: 5, label: 'По умолчанию???' },
 ];
 
 const EmotionCacheProvider = ({ children }: { children: React.ReactNode }) => {

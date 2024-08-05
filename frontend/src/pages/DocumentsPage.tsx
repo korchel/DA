@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ActionButton } from "../components/ActionButton";
 import { IDocument } from "../interfaces/interfaces";
 import { routes } from "../routes";
@@ -10,43 +10,44 @@ import { useDispatch } from "react-redux";
 import { openModal } from "../store/modalSlice";
 import { Spinner } from "../icons/Spinner";
 
-const documents = [
-  {
-    id: 1,
-    title: 'title 1',
-    number: 11,
-    author: {
-      userName: 'ghj',
-    },
-    content: "string",
-    creationDate: "2024-09-04",
-    updateDate: "2024-10-04",
-    type: {
-      id: 1,
-      type: 'note'
-    }
-  },
-  {
-    id: 2,
-    title: 'title 2',
-    number: 22,
-    author: {
-      userName: 'ghj',
-    },
-    content: "stringddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-    creationDate: "2024-09-04",
-    updateDate: "2024-10-04",
-    type: {
-      id: 1,
-      type: 'note'
-    }
-  },
-];
+// const documents = [
+//   {
+//     id: 1,
+//     title: 'title 1',
+//     number: 11,
+//     author: {
+//       userName: 'ghj',
+//     },
+//     content: "string",
+//     creationDate: "2024-09-04",
+//     updateDate: "2024-10-04",
+//     type: {
+//       id: 1,
+//       type: 'note'
+//     }
+//   },
+//   {
+//     id: 2,
+//     title: 'title 2',
+//     number: 22,
+//     author: {
+//       userName: 'ghj',
+//     },
+//     content: "stringddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+//     creationDate: "2024-09-04",
+//     updateDate: "2024-10-04",
+//     type: {
+//       id: 1,
+//       type: 'note'
+//     }
+//   },
+// ];
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
   const { currentUser } = useAuth();
-  const { data, isLoading } = getDocs(currentUser.roles);
+  const { data: documents, isLoading } = getDocs(currentUser.roles);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleDelete = (id: number): void => {
@@ -76,7 +77,7 @@ export const DocumentsPage = () => {
       </ButtonComponent>
       <table className="w-[100%] bg-white text-left rounded-md shadow-md">
         <thead className="uppercase text-sky-600 whitespace-nowrap">
-          <tr className="border-b ">
+          <tr className="border-b">
             <th className="py-4 px-5 w-10">{t('documentsPage.tableHeader.number')}</th>
             <th className="py-4 px-5">{t('documentsPage.tableHeader.name')}</th>
             <th className="py-4 px-5">{t('documentsPage.tableHeader.author')}</th>
@@ -89,7 +90,11 @@ export const DocumentsPage = () => {
         </thead>
         <tbody>
           {documents?.map((document) => (
-            <tr className="border-b overflow-hidden hover:bg-sky-50" key={document.id}>
+            <tr
+              className="border-b overflow-hidden hover:bg-sky-50 cursor-pointer"
+              key={document.id}
+              onClick={() => navigate(routes.documentDetailsRoute(document.id))}
+            >
               <td className="py-4 px-5">{document.number}</td>
               <td className="py-4 px-5 truncate">{document.title}</td>
               <td className="py-4 px-5 truncate">{document.author.userName}</td>

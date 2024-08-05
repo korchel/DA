@@ -43,11 +43,13 @@ const App = () => {
               <main className="h-[calc(100%-96px)] bg-slate-50 ">
                 <Routes>
                   <Route element={<LoggedInRoute />}>
-                    <Route path={routes.documentsRoute()} element={<DocumentsPage />} />
+                    
                     <Route path={routes.usersRoute()} element={<UsersPage />} />
                     <Route path='users/:id' element={<UserDetailsPage />} />
-                    <Route path='documents/:id' element={<DocumentDetailsPage />} />
+                    
                   </Route>
+                  <Route path={routes.documentsRoute()} element={<DocumentsPage />} />
+                  <Route path='documents/:id' element={<DocumentDetailsPage />} />
                   <Route element={<LoggedOutRoute />}>
                     <Route path={routes.signupRoute()} element={<SignupPage />} />
                     <Route path={routes.loginRoute()} element={<LoginPage />} />

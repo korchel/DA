@@ -7,7 +7,7 @@ export const ru = {
         search: 'Поиск',
         profile: 'Профиль',
         files: 'Файлы',
-        documents: 'Досументы',
+        documents: 'Документы',
         users: 'Пользователи',
       },
     },

@@ -19,45 +19,44 @@ export interface ICreateDocForm {
   publicDocument: boolean,
 }
 
-const users = [
-  {
-    id: 1,
-    username: 'username1',
-    email: 'email1',
-    name: 'name1',
-    lastName: 'lastname1',
-    roles: ['ROLE_ADMIN'],
-  },
-  {
-    id: 2,
-    username: 'username2',
-    email: 'email2',
-    name: 'name2',
-    lastName: 'lastname2',
-    roles: ['ROLE_ADMIN'],
-  },
-  {
-    id: 3,
-    username: 'username3',
-    email: 'email3',
-    name: 'name3',
-    lastName: 'lastname3',
-    roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR'],
-  },
-];
+// const users = [
+//   {
+//     id: 1,
+//     username: 'username1',
+//     email: 'email1',
+//     name: 'name1',
+//     lastName: 'lastname1',
+//     roles: ['ROLE_ADMIN'],
+//   },
+//   {
+//     id: 2,
+//     username: 'username2',
+//     email: 'email2',
+//     name: 'name2',
+//     lastName: 'lastname2',
+//     roles: ['ROLE_ADMIN'],
+//   },
+//   {
+//     id: 3,
+//     username: 'username3',
+//     email: 'email3',
+//     name: 'name3',
+//     lastName: 'lastname3',
+//     roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR'],
+//   },
+// ];
 
-const options = users.map((user) => ({ label: user.name, value: user.id }));
+
 
 export const Create = () => {
   const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues, setValue } = useForm<ICreateDocForm>({ defaultValues: { publicDocument: false } });
   const { currentUser } = useAuth();
-
   const [createDoc] = useCreateDocMutation();
-  // const { data } = getUsers();
+  const { data: users } = getUsers();
+  const options = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
 
   const onSubmit = (data: ICreateDocForm) => {
-    console.log({ ...data, authorId: currentUser.id })
-    // createDoc({ ...data, authorId: currentUser.id })
+    createDoc({ ...data, number: 12, authorId: currentUser.id })
   };
 
   return (
