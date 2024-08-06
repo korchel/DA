@@ -47,7 +47,7 @@ const App = () => {
                     <Route path='documents/:id' element={<DocumentDetailsPage />} />
                     <Route path={routes.usersRoute()} element={<UsersPage />} />
                     <Route path={routes.documentsRoute()} element={<DocumentsPage />} />
-                    <Route path='user/:id' element={<UserDetailsPage />} />
+                    <Route path='users/:id' element={<UserDetailsPage />} />
                     <Route path={routes.filesRoute()} element={<FilesPage />} />
                   </Route>
 

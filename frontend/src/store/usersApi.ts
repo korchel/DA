@@ -7,11 +7,13 @@ export const usersApi = createApi({
     baseUrl: 'http://localhost:8080/api/users',
     credentials: "include",
   }),
+  tagTypes: ["users"],
   endpoints: (builder) => ({
     getUsers: builder.query<IUser[], void>({
       query: () => ({
         url: '',
       }),
+      providesTags: ["users"],
     }),
     getUser: builder.query({
       query: (id) => ({
@@ -23,4 +25,5 @@ export const usersApi = createApi({
 
 export const {
   useGetUsersQuery,
+  useGetUserQuery,
 } = usersApi;

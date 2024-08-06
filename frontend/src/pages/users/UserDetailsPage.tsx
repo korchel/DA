@@ -3,20 +3,31 @@ import { ButtonComponent } from "../../components/ButtonComponent";
 import { Card } from "../../components/ui";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { useGetUserQuery as getUser } from "../../store/usersApi";
+import { Spinner } from "../../icons/Spinner";
 
-const user = {
-  id: 1,
-  username: 'username1',
-  email: 'email1',
-  name: 'name1',
-  lastName: 'lastname1',
-  roles: ['ROLE_ADMIN'],
-};
+// const user = {
+//   id: 1,
+//   username: 'username1',
+//   email: 'email1',
+//   name: 'name1',
+//   lastName: 'lastname1',
+//   roles: ['ROLE_ADMIN'],
+// };
 
 export const UserDetailsPage = () => {
   const {id} = useParams();
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const {data: user, isLoading} = getUser(id);
+
+  if (isLoading) {
+    return (
+      <div className="h-full p-8 flex flex-col justify-center items-center">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className="h-full p-8 flex flex-col items-center ">

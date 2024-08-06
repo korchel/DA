@@ -6,34 +6,34 @@ import { routes } from "../../routes";
 import { useNavigate } from "react-router-dom";
 
 
-const files = [
-  {
-    id: 1,
-    filename: 'filename1',
-    filetype: 'filetype1',
-    author: 'author',
-    // availableFor: number[],
-    publicEntity: true,
-    creationDate: "2024-10-04",
-    updateDate: "2024-10-04",
-  },
-  {
-    id: 2,
-    filename: 'filename2',
-    filetype: 'filetype2',
-    author: 'author2',
-    // availableFor: number[],
-    publicEntity: true,
-    creationDate: "2024-10-04",
-    updateDate: "2024-10-04",
-  },
-]
+// const files = [
+//   {
+//     id: 1,
+//     filename: 'filename1',
+//     filetype: 'filetype1',
+//     author: 'author',
+//     // availableFor: number[],
+//     publicEntity: true,
+//     creationDate: "2024-10-04",
+//     updateDate: "2024-10-04",
+//   },
+//   {
+//     id: 2,
+//     filename: 'filename2',
+//     filetype: 'filetype2',
+//     author: 'author2',
+//     // availableFor: number[],
+//     publicEntity: true,
+//     creationDate: "2024-10-04",
+//     updateDate: "2024-10-04",
+//   },
+// ]
 
 export const FilesPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  // const {data: files} = getFiles();
-
+  const {data: files} = getFiles();
+  console.log(files)
   const handleCreate = () => {
 
   };

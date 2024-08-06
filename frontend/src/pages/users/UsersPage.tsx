@@ -3,46 +3,47 @@ import { IUser } from "../../interfaces/interfaces";
 import { routes } from "../../routes";
 import { useTranslation } from "react-i18next";
 import { useGetUsersQuery as getUsers} from "../../store/usersApi";
+import { Spinner } from "../../icons/Spinner";
 
-const users: IUser[] = [
-  {
-    id: 1,
-    username: 'username1',
-    email: 'email1',
-    name: 'name1',
-    lastName: 'lastname1',
-    roles: ['ROLE_ADMIN'],
-  },
-  {
-    id: 2,
-    username: 'username2',
-    email: 'email2',
-    name: 'name2',
-    lastName: 'lastname2',
-    roles: ['ROLE_ADMIN'],
-  },
-  {
-    id: 3,
-    username: 'username3',
-    email: 'email3',
-    name: 'name3',
-    lastName: 'lastname3',
-    roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR'],
-  },
-];
+// const users: IUser[] = [
+//   {
+//     id: 1,
+//     username: 'username1',
+//     email: 'email1',
+//     name: 'name1',
+//     lastName: 'lastname1',
+//     roles: ['ROLE_ADMIN'],
+//   },
+//   {
+//     id: 2,
+//     username: 'username2',
+//     email: 'email2',
+//     name: 'name2',
+//     lastName: 'lastname2',
+//     roles: ['ROLE_ADMIN'],
+//   },
+//   {
+//     id: 3,
+//     username: 'username3',
+//     email: 'email3',
+//     name: 'name3',
+//     lastName: 'lastname3',
+//     roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR'],
+//   },
+// ];
 
 export const UsersPage = () => {
   const { t } = useTranslation();
-  // const { data: users, isLoading } = getUsers();
+  const { data: users, isLoading } = getUsers();
   const navigate = useNavigate();
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="h-full p-8 flex flex-col justify-center items-center">
-  //       <Spinner />
-  //     </div>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <div className="h-full p-8 flex flex-col justify-center items-center">
+        <Spinner />
+      </div>
+    );
+  }
   return (
     <div className="h-full p-8">
       <table className="w-[100%] bg-white text-left rounded-md shadow-md">
@@ -60,7 +61,7 @@ export const UsersPage = () => {
               <td className="py-4 px-5">{user.username}</td>
               <td className="py-4 px-5">{user.name}</td>
               <td className="py-4 px-5 truncate">{user.lastName}</td>
-              <td className="py-4 px-5 truncate">{user.roles}</td>
+              <td className="py-4 px-5 truncate">{user.roles.map((role) => role.name)}</td>
             </tr>
           ))}
         </tbody>

@@ -1,5 +1,8 @@
-export type Role = 'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_MODERATOR';
-
+export type RoleName = 'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_MODERATOR';
+export type Role = {
+  idRole: number,
+  name: RoleName,
+}
 export interface IUser {
   id: number,
   username: string,

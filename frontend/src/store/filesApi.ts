@@ -8,11 +8,13 @@ export const filesApi = createApi({
     baseUrl: 'http://localhost:8080/api/files',
     credentials: "include",
   }),
+  tagTypes: ["files"],
   endpoints: (builder) => ({
     getFiles: builder.query<IFile[], void>({
       query: () => ({
         url: '',
       }),
+      providesTags: ["files"],
     }),
     getFilesForUser: builder.query({
       query: () => ({

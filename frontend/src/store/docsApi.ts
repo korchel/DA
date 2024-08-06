@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
-import { Role } from "../interfaces";
+import { Role, RoleName } from "../interfaces";
 
 export const docsApi = createApi({
   reducerPath: "documents",
@@ -10,14 +10,16 @@ export const docsApi = createApi({
     },
     credentials: "include",
   }),
+  tagTypes: ["docs"],
   endpoints: (builder) => ({
     getDocs: builder.query({
-      query: (roles: Role[]) => {
+      query: (roles: RoleName[]) => {
         if (roles.includes("ROLE_ADMIN") || roles.includes("ROLE_MODERATOR")) {
           return { url: '' };
         }
         return { url: "/for_user" };
       },
+      providesTags: ["docs"],
     }),
 
     getDoc: builder.query({
@@ -25,30 +27,37 @@ export const docsApi = createApi({
         url: `/${id}`,
       }),
     }),
+
     createDoc: builder.mutation({
       query: (data) => ({
         url: "",
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["docs"],
     }),
+
     deleteDoc: builder.mutation({
       query: (id) => ({
         url: `/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ["docs"],
     }),
+
     searchDoc: builder.query({   //pageNumber
       query: (params) => ({
         url: `/search?${params}`,
-      })
+      }),
     }),
+
     updateDoc: builder.mutation({
       query: ({data, id}) => ({
         url: `/for_admin/${id}`,
         method: 'PUT',
         body: data,
-      })
+      }),
+      invalidatesTags: ["docs"],
     })
   }),
 });
