@@ -1,52 +1,52 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ActionButton } from "../components/ActionButton";
-import { IDocument } from "../interfaces/interfaces";
-import { routes } from "../routes";
+import { ActionButton } from "../../components/ActionButton";
+import { IDocument } from "../../interfaces/interfaces";
+import { routes } from "../../routes";
 import { useTranslation } from "react-i18next";
-import { useAuth } from "../context/AuthContext";
-import { useGetDocsQuery as getDocs } from "../store/docsApi";
-import { ButtonComponent } from "../components/ButtonComponent";
+import { useAuth } from "../../context/AuthContext";
+import { useGetDocsQuery as getDocs } from "../../store/docsApi";
+import { ButtonComponent } from "../../components/ButtonComponent";
 import { useDispatch } from "react-redux";
-import { openModal } from "../store/modalSlice";
-import { Spinner } from "../icons/Spinner";
+import { openModal } from "../../store/modalSlice";
+import { Spinner } from "../../icons/Spinner";
 
-// const documents = [
-//   {
-//     id: 1,
-//     title: 'title 1',
-//     number: 11,
-//     author: {
-//       userName: 'ghj',
-//     },
-//     content: "string",
-//     creationDate: "2024-09-04",
-//     updateDate: "2024-10-04",
-//     type: {
-//       id: 1,
-//       type: 'note'
-//     }
-//   },
-//   {
-//     id: 2,
-//     title: 'title 2',
-//     number: 22,
-//     author: {
-//       userName: 'ghj',
-//     },
-//     content: "stringddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-//     creationDate: "2024-09-04",
-//     updateDate: "2024-10-04",
-//     type: {
-//       id: 1,
-//       type: 'note'
-//     }
-//   },
-// ];
+const documents = [
+  {
+    id: 1,
+    title: 'title 1',
+    number: 11,
+    author: {
+      userName: 'ghj',
+    },
+    content: "string",
+    creationDate: "2024-09-04",
+    updateDate: "2024-10-04",
+    type: {
+      id: 1,
+      type: 'note'
+    }
+  },
+  {
+    id: 2,
+    title: 'title 2',
+    number: 22,
+    author: {
+      userName: 'ghj',
+    },
+    content: "stringddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    creationDate: "2024-09-04",
+    updateDate: "2024-10-04",
+    type: {
+      id: 1,
+      type: 'note'
+    }
+  },
+];
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
   const { currentUser } = useAuth();
-  const { data: documents, isLoading } = getDocs(currentUser.roles);
+  // const { data: documents, isLoading } = getDocs(currentUser.roles);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -58,13 +58,17 @@ export const DocumentsPage = () => {
     dispatch(openModal({ type: "create", open: true }))
   };
 
-  if (isLoading) {
-    return (
-      <div className="h-full p-8 flex flex-col justify-center items-center">
-        <Spinner />
-      </div>
-    );
-  }
+  const handleEdit = (id: number): void => {
+    dispatch(openModal({ type: "edit", open: true, id }));
+  };
+
+  // if (isLoading) {
+  //   return (
+  //     <div className="h-full p-8 flex flex-col justify-center items-center">
+  //       <Spinner />
+  //     </div>
+  //   );
+  // }
   return (
     <div className="h-full p-8 flex flex-col">
       <h1 className="text-sky-800 font-bold text-lg text-center">{t('documentsPage.title')}</h1>
@@ -103,7 +107,7 @@ export const DocumentsPage = () => {
               <td className="py-4 px-5">{document.creationDate ?? 'no data'}</td>
               <td className="py-4 px-5">{document.updateDate ?? 'no data'}</td>
               <td className="py-4 px-5 flex justify-around">
-                <ActionButton actionType="edit" />
+                <ActionButton actionType="edit" onClick={() => handleEdit(document.id)} />
                 <ActionButton actionType="delete" onClick={() => handleDelete(document.id)} />
               </td>
           </tr>

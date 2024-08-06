@@ -8,6 +8,7 @@ export const docsApi = createApi({
     baseUrl: 'http://localhost:8080/api/documents',
     prepareHeaders: (headers) => {
     },
+    credentials: "include",
   }),
   endpoints: (builder) => ({
     getDocs: builder.query({
@@ -57,4 +58,5 @@ export const {
   useGetDocQuery,
   useDeleteDocMutation,
   useCreateDocMutation,
+  useUpdateDocMutation,
 } = docsApi;

@@ -18,7 +18,9 @@ export const Header = () => {
         <Link to={routes.usersRoute()}>
           <ButtonComponent variant="outline">{t('header.nav.users')}</ButtonComponent>
         </Link>
-        <ButtonComponent variant="outline">{t('header.nav.files')}</ButtonComponent>
+        <Link to={routes.filesRoute()}>
+          <ButtonComponent variant="outline">{t('header.nav.files')}</ButtonComponent>
+        </Link>
         <Link to={routes.documentsRoute()}>
           <ButtonComponent variant="outline">{t('header.nav.documents')}</ButtonComponent>
         </Link>

@@ -1,7 +1,7 @@
 import { ForwardedRef, forwardRef, useMemo,  } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import Select, { type StylesConfig, type ActionMeta } from 'react-select';
-import { ICreateDocForm } from './ModalComponent/Create';
+import { ICreateDocForm } from './ModalComponent/document/CreateDocument';
 import clsx from 'clsx';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';

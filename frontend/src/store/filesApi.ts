@@ -1,13 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
+import { IFile } from "../interfaces";
 
 export const filesApi = createApi({
   reducerPath: "files",
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8080/api/files',
+    credentials: "include",
   }),
   endpoints: (builder) => ({
-    getFiles: builder.query({
+    getFiles: builder.query<IFile[], void>({
       query: () => ({
         url: '',
       }),
@@ -35,4 +37,8 @@ export const filesApi = createApi({
       }),
     }),
   }),
-})
+});
+
+export const {
+  useGetFilesQuery,
+} = filesApi;

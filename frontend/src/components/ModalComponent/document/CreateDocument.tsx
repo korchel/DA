@@ -1,13 +1,15 @@
 import { Controller, useForm } from "react-hook-form";
-import { InputField } from "../InputField";
-import { TextArea } from "../TextArea";
-import { SelectComponent } from "../SelectComponent";
-import { useCreateDocMutation } from "../../store/docsApi";
-import { useAuth } from "../../context/AuthContext";
-import { CheckBox } from "../CheckBox";
-import { ButtonComponent } from "../ButtonComponent";
-import { useGetUsersQuery as getUsers } from "../../store/usersApi";
-import { MultiSelectComponent } from "../MultiSelectComponent";
+import { InputField } from "../../InputField";
+import { TextArea } from "../../TextArea";
+import { SelectComponent } from "../../SelectComponent";
+import { useCreateDocMutation } from "../../../store/docsApi";
+import { useAuth } from "../../../context/AuthContext";
+import { CheckBox } from "../../CheckBox";
+import { ButtonComponent } from "../../ButtonComponent";
+import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
+import { MultiSelectComponent } from "../../MultiSelectComponent";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../../routes";
 
 export interface ICreateDocForm {
   title: string,
@@ -48,15 +50,18 @@ export interface ICreateDocForm {
 
 
 
-export const Create = () => {
+export const CreateDocument = () => {
   const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues, setValue } = useForm<ICreateDocForm>({ defaultValues: { publicDocument: false } });
+  const navigate = useNavigate();
   const { currentUser } = useAuth();
   const [createDoc] = useCreateDocMutation();
   const { data: users } = getUsers();
   const options = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
 
   const onSubmit = (data: ICreateDocForm) => {
-    createDoc({ ...data, number: 12, authorId: currentUser.id })
+    createDoc({ ...data, number: 12, authorId: currentUser.id });
+    navigate(routes.documentsRoute());
+    console.log(data);
   };
 
   return (

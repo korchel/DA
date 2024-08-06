@@ -11,6 +11,7 @@ export const ButtonComponent = ({ variant, className, children, ...props }: Butt
     'transition-colors',
     'rounded-sm',
     'p-2',
+    'leading-none',
     {
       primary: 'bg-sky-600 hover:bg-sky-500 text-white',
       outline: 'border border-sky-500 bg-white text-sky-500 hover:bg-sky-50',

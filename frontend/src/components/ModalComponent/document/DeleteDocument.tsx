@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { ButtonComponent } from "../ButtonComponent";
-import { closeModal, getCurrentDataId } from "../../store/modalSlice";
+import { ButtonComponent } from "../../ButtonComponent";
+import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useDeleteDocMutation } from "../../store/docsApi";
+import { useDeleteDocMutation } from "../../../store/docsApi";
 
-export const Delete = () => {
+export const DeleteDocument = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const id = useSelector(getCurrentDataId);

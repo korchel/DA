@@ -1,3 +1,6 @@
+import { FilesPage } from "../pages/files/FilesPage";
+import { UserDetailsPage } from "../pages/users/UserDetailsPage";
+
 export const ru = {
     header: {
       login: 'Войти',
@@ -60,11 +63,44 @@ export const ru = {
       actions: 'Действия',
     }
   },
+  filesPage: {
+    title: 'Список файлов',
+    addFile: 'Добавить файл',
+    tableHeader: {
+      fileName: 'Название',
+      author: 'Автор',
+      fileType: 'Тип',
+      creationDate: 'Дата создания',
+      updateDate: 'Дата обновления',
+      actions: 'Действия',
+    }
+  },
   modal: {
     delete: {
       areYouSure: 'Вы уверены, что хотите удалить эту запись?',
       cancel: 'Отмена',
       delete: 'Удалить',
     },
+  },
+  documentDetailsPage: {
+    title: 'Информация о документе ',
+    number: 'Номер: ',
+    author: 'Автор: ',
+    type: 'Тип: ',
+    content: 'Содержание: ',
+    creationDate: 'Дата создания: ',
+    updateDate: 'Дата обновления: ',
+    delete: 'Удалить документ',
+    edit: 'Изменить документ',
+  },
+  userDetailsPage: {
+    title: 'Информация о пользователе ',
+    username: 'Имя пользователя: ',
+    name: 'Имя: ',
+    lastName: 'Фамилия: ',
+    email: 'e-mail: ',
+    roles: 'Роли: ',
+    delete: 'Удалить пользователя',
+    edit: 'Редактировать данные',
   },
 };

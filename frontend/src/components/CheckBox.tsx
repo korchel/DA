@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef } from "react";
 import { UseFormSetValue } from "react-hook-form";
-import { ICreateDocForm } from "./ModalComponent/Create";
+import { ICreateDocForm } from "./ModalComponent/document/CreateDocument";
 
 interface ICheckBox {
   label: string,

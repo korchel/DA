@@ -9,6 +9,7 @@ export interface InputFieldProps extends DetailedHTMLProps<HtmlHTMLAttributes<HT
   error?: FieldError,
   placeholder: string,
   showActionButton?: boolean,
+  value?: string | number,
 }
 
 export const InputField = forwardRef(({ type = "text", id, error, placeholder, className, showActionButton = false, ...props }: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
