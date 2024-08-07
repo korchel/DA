@@ -3,6 +3,7 @@ import { closeModal, getModalOpen, getModalType } from "../../store/modalSlice";
 import { DeleteDocument } from "./document/DeleteDocument";
 import { CreateDocument } from "./document/CreateDocument";
 import { EditDocument } from "./document/EditDocument";
+import { CreateUser } from "./user/CreateUser";
 
 export const ModalComponent = () => {
   const dispatch = useDispatch();
@@ -25,9 +26,10 @@ export const ModalComponent = () => {
       className="fixed inset-0 bg-slate-900/60 backdrop-blur overflow-y-auto flex flex-col items-center justify-center"
     >
       <div data-id="modal" className="bg-white rounded-lg p-5 h-fit flex flex-col min-w-[500px]">
-        {modalType === "delete" && <DeleteDocument />}
-        {modalType === "create" && <CreateDocument />}
-        {modalType === "edit" && <EditDocument />}
+        {modalType === "deleteDocument" && <DeleteDocument />}
+        {modalType === "createDocument" && <CreateDocument />}
+        {modalType === "editDocument" && <EditDocument />}
+        {modalType === "createUser" && <CreateUser />}
       </div>
     </div>);
   ;

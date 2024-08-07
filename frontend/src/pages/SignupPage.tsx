@@ -1,5 +1,5 @@
 import { ButtonComponent } from "../components/ButtonComponent";
-import { InputField } from "../components/InputField";
+import { InputField } from "../components/ui/InputField";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";

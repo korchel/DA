@@ -31,11 +31,11 @@ export const DocumentDetailsPage = () => {
   console.log(doc);
 
   const handleDelete = () => {
-    dispatch(openModal({ type: "delete", open: true, id }));
+    dispatch(openModal({ type: "deleteDocument", open: true, id }));
   };
 
   const handleEdit = () => {
-    dispatch(openModal({ type: "edit", open: true, id }));
+    dispatch(openModal({ type: "editDocument", open: true, id }));
   };
 
   if (isLoading) {

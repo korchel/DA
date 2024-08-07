@@ -55,7 +55,7 @@ export const DocumentsPage = () => {
   };
 
   const handleCreate = () => {
-    dispatch(openModal({ type: "create", open: true }))
+    dispatch(openModal({ type: "createDocument", open: true }))
   };
 
   const handleEdit = (id: number): void => {

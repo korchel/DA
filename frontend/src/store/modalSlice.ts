@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootStateType } from ".";
 
 interface IState {
-  type: null | "edit" | "create" | "delete";
+  type: null | "editDocument" | "createDocument" | "deleteDocument";
   id: null | string;
   open: boolean;
 }

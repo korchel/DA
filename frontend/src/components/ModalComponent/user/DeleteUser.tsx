@@ -1,31 +1,30 @@
 import { useTranslation } from "react-i18next";
 import { ButtonComponent } from "../../ButtonComponent";
-import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useDeleteDocMutation } from "../../../store/docsApi";
 import { useNavigate } from "react-router-dom";
+import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { routes } from "../../../routes";
+import { useDeleteUserMutation } from "../../../store/usersApi";
 
-export const DeleteDocument = () => {
+export const DeleteUser = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = useSelector(getCurrentDataId);
-  const [deleteDoc] = useDeleteDocMutation();
+  const [deleteUser] = useDeleteUserMutation();
 
   const handleClose = () => {
     dispatch(closeModal());
   };
 
   const handleDelete = () => {
-    deleteDoc(id);
+    deleteUser(id);
     dispatch(closeModal());
-    navigate(routes.documentsRoute());
+    navigate(routes.usersRoute());
   };
-
   return (
     <>
-      <div className="mb-4 font-bold">{t('modal.deleteDocument.areYouSure')}</div>
+      <div className="mb-4 font-bold">{t('modal.deleteUser.areYouSure')}</div>
       <div className="flex justify-between gap-4">
         <ButtonComponent
           variant="outline"
@@ -41,5 +40,5 @@ export const DeleteDocument = () => {
         </ButtonComponent>
       </div>
     </>
-  );
+  )
 };

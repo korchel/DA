@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useGetUserQuery as getUser } from "../../store/usersApi";
 import { Spinner } from "../../icons/Spinner";
+import { openModal } from "../../store/modalSlice";
 
 // const user = {
 //   id: 1,
@@ -20,6 +21,14 @@ export const UserDetailsPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const {data: user, isLoading} = getUser(id);
+
+  const handleDelete = () => {
+    dispatch(openModal({ type: "deleteUser", open: true, id }));
+  };
+
+  const handleEdit = () => {
+    dispatch(openModal({ type: "editUser", open: true, id }));
+  };
 
   if (isLoading) {
     return (
@@ -40,8 +49,8 @@ export const UserDetailsPage = () => {
           <div><span className="font-bold">{t('userDetailsPage.roles')}</span>{user.roles}</div>
         </Card.Body>
         <Card.Footer>
-          <ButtonComponent variant="primary">{t('userDetailsPage.edit')}</ButtonComponent>
-          <ButtonComponent variant="danger">{t('userDetailsPage.delete')}</ButtonComponent>
+          <ButtonComponent variant="primary" onClick={handleEdit}>{t('userDetailsPage.edit')}</ButtonComponent>
+          <ButtonComponent variant="danger" onClick={handleDelete}>{t('userDetailsPage.delete')}</ButtonComponent>
         </Card.Footer>
       </Card>
     </div>

@@ -76,11 +76,17 @@ export const ru = {
     }
   },
   modal: {
-    delete: {
+    deleteDocument: {
       areYouSure: 'Вы уверены, что хотите удалить эту запись?',
-      cancel: 'Отмена',
-      delete: 'Удалить',
     },
+    deleteUser: {
+      areYouSure: 'Вы уверены, что хотите удалить этого пользователя?',
+    },
+    createDocument: {
+
+    },
+    cancel: 'Отмена',
+    delete: 'Удалить',
   },
   documentDetailsPage: {
     title: 'Информация о документе ',

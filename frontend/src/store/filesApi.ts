@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
-import { IFile } from "../interfaces";
+import { IFile, RoleName } from "../interfaces";
 
 export const filesApi = createApi({
   reducerPath: "files",
@@ -10,10 +10,13 @@ export const filesApi = createApi({
   }),
   tagTypes: ["files"],
   endpoints: (builder) => ({
-    getFiles: builder.query<IFile[], void>({
-      query: () => ({
-        url: '',
-      }),
+    getFiles: builder.query<IFile[], RoleName[]>({
+      query: (roles: RoleName[]) => {
+        if (roles.includes("ROLE_ADMIN") || roles.includes("ROLE_MODERATOR")) {
+          return { url: '' };
+        }
+        return { url: "/for_user" };
+      },
       providesTags: ["files"],
     }),
     getFilesForUser: builder.query({

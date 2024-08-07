@@ -4,6 +4,7 @@ import { ActionButton } from "../../components/ActionButton";
 import { useGetFilesQuery as getFiles } from "../../store/filesApi";
 import { routes } from "../../routes";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 
 // const files = [
@@ -32,7 +33,9 @@ import { useNavigate } from "react-router-dom";
 export const FilesPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const {data: files} = getFiles();
+  const { currentUser } = useAuth();
+  const {data: files} = getFiles(currentUser.roles);
+
   console.log(files)
   const handleCreate = () => {
 

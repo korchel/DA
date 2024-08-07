@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { ButtonComponent } from "../components/ButtonComponent"
-import { InputField } from "../components/InputField"
+import { InputField } from "../components/ui/InputField"
 import { routes } from '../routes';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef } from 'react';

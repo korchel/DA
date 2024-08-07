@@ -1,9 +1,9 @@
 import { Controller, useForm } from "react-hook-form";
-import { InputField } from "../../InputField";
+import { InputField } from "../../ui/InputField";
 import { TextArea } from "../../TextArea";
 import { MultiSelectComponent } from "../../MultiSelectComponent";
 import { SelectComponent } from "../../SelectComponent";
-import { CheckBox } from "../../CheckBox";
+import { CheckBox } from "../../ui/CheckBox";
 import { ButtonComponent } from "../../ButtonComponent";
 
 import { useUpdateDocMutation as updateDoc, useGetDocQuery as getDoc } from "../../../store/docsApi";

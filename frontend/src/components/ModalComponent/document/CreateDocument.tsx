@@ -1,10 +1,10 @@
 import { Controller, useForm } from "react-hook-form";
-import { InputField } from "../../InputField";
+import { InputField } from "../../ui/InputField";
 import { TextArea } from "../../TextArea";
 import { SelectComponent } from "../../SelectComponent";
 import { useCreateDocMutation } from "../../../store/docsApi";
 import { useAuth } from "../../../context/AuthContext";
-import { CheckBox } from "../../CheckBox";
+import { CheckBox } from "../../ui/CheckBox";
 import { ButtonComponent } from "../../ButtonComponent";
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
 import { MultiSelectComponent } from "../../MultiSelectComponent";
@@ -100,10 +100,18 @@ export const CreateDocument = () => {
         )}
       />
       <div className="flex justify-between">
-        <CheckBox
-          setValue={setValue}
-          label="Сделать документ публичным"
-          {...register('publicDocument')}
+        <Controller
+          control={control}
+          name='publicDocument'
+          render={({ field }) => (
+            <CheckBox 
+              label="Сделать документ публичным"
+              {...field}
+
+              onChange={(e) => field.onChange(e.target.checked)}
+              setValue={setValue}
+            />
+          )}
         />
         <ButtonComponent type="submit" variant="primary">Добавить документ</ButtonComponent>
       </div>
