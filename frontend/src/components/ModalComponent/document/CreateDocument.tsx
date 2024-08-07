@@ -10,58 +10,33 @@ import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
 import { MultiSelectComponent } from "../../MultiSelectComponent";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../routes";
+import { useDispatch } from "react-redux";
+import { closeModal } from "../../../store/modalSlice";
 
 export interface ICreateDocForm {
   title: string,
   number: number,
   content: string,
   authorId: number,
-  typeId: string,
-  availableFor: number[],
-  publicDocument: boolean,
+  type_id: number,
+  available_for: number[],
+  public_document: boolean,
 }
 
-// const users = [
-//   {
-//     id: 1,
-//     username: 'username1',
-//     email: 'email1',
-//     name: 'name1',
-//     lastName: 'lastname1',
-//     roles: ['ROLE_ADMIN'],
-//   },
-//   {
-//     id: 2,
-//     username: 'username2',
-//     email: 'email2',
-//     name: 'name2',
-//     lastName: 'lastname2',
-//     roles: ['ROLE_ADMIN'],
-//   },
-//   {
-//     id: 3,
-//     username: 'username3',
-//     email: 'email3',
-//     name: 'name3',
-//     lastName: 'lastname3',
-//     roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR'],
-//   },
-// ];
-
-
-
 export const CreateDocument = () => {
-  const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues, setValue } = useForm<ICreateDocForm>({ defaultValues: { publicDocument: false } });
+  const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues, setValue } = useForm<ICreateDocForm>();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { currentUser } = useAuth();
   const [createDoc] = useCreateDocMutation();
   const { data: users } = getUsers();
   const options = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
 
   const onSubmit = (data: ICreateDocForm) => {
-    createDoc({ ...data, number: 12, authorId: currentUser.id });
+    createDoc({ ...data, authorId: currentUser.id });
+    dispatch(closeModal());
     navigate(routes.documentsRoute());
-    console.log(data);
   };
 
   return (
@@ -80,7 +55,7 @@ export const CreateDocument = () => {
       />
       <Controller
         control={control}
-        name='typeId'
+        name='type_id'
         render={({ field }) => (
           <SelectComponent
             placeholder="Тип документа"
@@ -90,7 +65,7 @@ export const CreateDocument = () => {
       />
       <Controller
         control={control}
-        name='availableFor'
+        name='available_for'
         render={({ field }) => (
           <MultiSelectComponent
             placeholder="Сделать доступным для:"
@@ -102,12 +77,11 @@ export const CreateDocument = () => {
       <div className="flex justify-between">
         <Controller
           control={control}
-          name='publicDocument'
+          name='public_document'
           render={({ field }) => (
             <CheckBox 
               label="Сделать документ публичным"
               {...field}
-
               onChange={(e) => field.onChange(e.target.checked)}
               setValue={setValue}
             />

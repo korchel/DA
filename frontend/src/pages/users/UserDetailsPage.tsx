@@ -46,7 +46,7 @@ export const UserDetailsPage = () => {
           <div><span className="font-bold">{t('userDetailsPage.name')}</span>{user.name}</div>
           <div><span className="font-bold">{t('userDetailsPage.lastName')}</span>{user.lastName}</div>
           <div><span className="font-bold">{t('userDetailsPage.email')}</span>{user.email}</div>
-          <div><span className="font-bold">{t('userDetailsPage.roles')}</span>{user.roles}</div>
+          <div><span className="font-bold">{t('userDetailsPage.roles')}</span>{user.roles.map((role) => role.name)}</div>
         </Card.Body>
         <Card.Footer>
           <ButtonComponent variant="primary" onClick={handleEdit}>{t('userDetailsPage.edit')}</ButtonComponent>

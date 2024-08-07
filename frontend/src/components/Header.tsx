@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 
 export const Header = () => {
   const { t } = useTranslation();
-  const { logOut, isAuthenticated } = useAuth();
+  const { logOut, isAuthenticated, currentUser } = useAuth();
   const { pathname } = useLocation();
 
   return (

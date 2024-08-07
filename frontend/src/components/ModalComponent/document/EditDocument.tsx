@@ -6,14 +6,14 @@ import { SelectComponent } from "../../SelectComponent";
 import { CheckBox } from "../../ui/CheckBox";
 import { ButtonComponent } from "../../ButtonComponent";
 
-import { useUpdateDocMutation as updateDoc, useGetDocQuery as getDoc } from "../../../store/docsApi";
+import { useEditDocMutation, useGetDocQuery as getDoc } from "../../../store/docsApi";
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../routes";
-import { useSelector } from "react-redux";
-import { getCurrentDataId } from "../../../store/modalSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 
-export interface ICreateDocForm {
+export interface IEditDocForm {
   title: string,
   number: number,
   content: string,
@@ -22,6 +22,7 @@ export interface ICreateDocForm {
   availableFor: number[],
   publicDocument: boolean,
 }
+
 
 const doc = {
   id: 1,
@@ -67,34 +68,45 @@ const users = [
 ];
 export const EditDocument = () => {
   const navigate = useNavigate();
-  const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues, setValue } = useForm<ICreateDocForm>({ defaultValues: { publicDocument: false } });
-  const { data: users } = getUsers();
-  const options = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
-   
+  const dispatch = useDispatch();
   const id = useSelector(getCurrentDataId);
-  // const { data: doc } = getDoc(id);
 
-  const onSubmit = (data) => {
+  const { data: users } = getUsers();
+  const { data: doc } = getDoc(id);
+  const [editDoc] = useEditDocMutation();
+
+  const defaultValues: IEditDocForm = {
+    title: doc.title,
+    number: doc.number,
+    content: doc.content,
+    authorId: doc.author.idUser,
+    typeId: doc.type.id,
+    availableFor: doc.availableFor,
+    publicDocument: false,
+  };
+  const options = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
+  const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<IEditDocForm>({ defaultValues });
+   
+
+  const onSubmit = (data: IEditDocForm) => {
     console.log(data)
-    // updateDoc(data);
-    // navigate(routes.documentsRoute());
+    editDoc({ data, id });
+    dispatch(closeModal());
+    navigate(routes.documentsRoute());
   };
 
   return (
     <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
       <InputField
         placeholder="title"
-        value={doc.title}
         {...register('title')}
       />
       <InputField
         placeholder="number это надо?"
-        value={doc.number}
         {...register('number')}
       />
       <TextArea
         placeholder="content"
-        value={doc.content}
         {...register('content')}
       />
       <Controller
@@ -104,7 +116,6 @@ export const EditDocument = () => {
           <SelectComponent
             placeholder="Тип документа"
             onChange={field.onChange}
-
           />
         )}
       />
@@ -113,6 +124,7 @@ export const EditDocument = () => {
         name='availableFor'
         render={({ field }) => (
           <MultiSelectComponent
+            {...field}
             placeholder="Сделать доступным для:"
             onChange={field.onChange}
             selectOptions={options}
@@ -125,7 +137,7 @@ export const EditDocument = () => {
           label="Сделать документ публичным"
           {...register('publicDocument')}
         />
-        <ButtonComponent type="submit" variant="primary">Добавить документ</ButtonComponent>
+        <ButtonComponent type="submit" variant="primary">Сохранить изменения</ButtonComponent>
       </div>
     </form>
   );

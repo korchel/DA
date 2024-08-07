@@ -5,7 +5,6 @@ import { ICreateDocForm } from "../ModalComponent/document/CreateDocument";
 interface ICheckBox extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLInputElement>, HTMLInputElement>  {
   label: string,
   onChange: (e: any) => void,
-
   setValue: any
 }
 
@@ -14,7 +13,7 @@ export const CheckBox = ({label, onChange, ...props}: ICheckBox) => {
 
 
   return (
-    <label htmlFor="check">{label}
+    <label htmlFor="check" className="block">{label}
       <input id="check" type="checkbox" {...props} onChange={onChange} />
     </label>
   );

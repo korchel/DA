@@ -12,7 +12,7 @@ export interface InputFieldProps extends DetailedHTMLProps<HtmlHTMLAttributes<HT
   value?: string | number,
 }
 
-export const InputField = forwardRef(({ type = "text", id, error, placeholder, className, showActionButton = false, ...props }: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
+export const InputField = forwardRef(({ type = "text", id, error, placeholder, className, showActionButton = false, value, ...props }: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
   const [inputType, setInputType] = useState(type);
   const [passwordShown, setPasswordShown] = useState<boolean>(false);
 
@@ -24,6 +24,7 @@ export const InputField = forwardRef(({ type = "text", id, error, placeholder, c
   return (
     <div className={clsx(className, 'relative')}>
       <input
+        value={value}
         type={inputType}
         id={id}
         className={clsx(error && "border-red-500", "block p-2 border border-slate-300 outline-sky-500 rounded-sm w-full focus:ring focus:ring-sky-200 focus:ring-opacity-50")}

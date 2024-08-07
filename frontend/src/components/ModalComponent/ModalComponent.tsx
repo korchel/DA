@@ -3,7 +3,8 @@ import { closeModal, getModalOpen, getModalType } from "../../store/modalSlice";
 import { DeleteDocument } from "./document/DeleteDocument";
 import { CreateDocument } from "./document/CreateDocument";
 import { EditDocument } from "./document/EditDocument";
-import { CreateUser } from "./user/CreateUser";
+import { EditUser } from "./user/EditUser";
+import { DeleteUser } from "./user/DeleteUser";
 
 export const ModalComponent = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,8 @@ export const ModalComponent = () => {
         {modalType === "deleteDocument" && <DeleteDocument />}
         {modalType === "createDocument" && <CreateDocument />}
         {modalType === "editDocument" && <EditDocument />}
-        {modalType === "createUser" && <CreateUser />}
+        {modalType === "editUser" && <EditUser />}
+        {modalType === "deleteUser" && <DeleteUser />}
       </div>
     </div>);
   ;

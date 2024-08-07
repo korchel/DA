@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
-import { Role, RoleName } from "../interfaces";
+import { IDocument, Role, RoleName } from "../interfaces";
 
 export const docsApi = createApi({
   reducerPath: "documents",
@@ -51,7 +51,7 @@ export const docsApi = createApi({
       }),
     }),
 
-    updateDoc: builder.mutation({
+    editDoc: builder.mutation({
       query: ({data, id}) => ({
         url: `/for_admin/${id}`,
         method: 'PUT',
@@ -67,5 +67,5 @@ export const {
   useGetDocQuery,
   useDeleteDocMutation,
   useCreateDocMutation,
-  useUpdateDocMutation,
+  useEditDocMutation,
 } = docsApi;

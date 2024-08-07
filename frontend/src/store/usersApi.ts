@@ -29,6 +29,15 @@ export const usersApi = createApi({
       }),
       invalidatesTags: ["users"],
     }),
+
+    editUser: builder.mutation({
+      query: ({id, data}) => ({
+        url: `/for-admin/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
   }),
 });
 
@@ -36,4 +45,5 @@ export const {
   useGetUsersQuery,
   useGetUserQuery,
   useDeleteUserMutation,
+  useEditUserMutation,
 } = usersApi;
