@@ -1,21 +1,25 @@
 import React from "react";
-import { SignupPage } from "./pages/SignupPage";
-import { Header } from "./components/Header";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { LoginPage } from "./pages/LoginPage";
-import { DocumentsPage } from "./pages/documents/DocumentsPage";
-import { routes } from "./routes";
-import { I18nextProvider } from "react-i18next";
-import i18n from "./locales/i18n";
-import { UserDetailsPage } from "./pages/users/UserDetailsPage";
-import { NotFoundPage } from "./pages/NotFoundPage";
-import { UsersPage } from "./pages/users/UsersPage";
-import { DocumentDetailsPage } from "./pages/documents/DocumentDetailsPage";
-import { AuthProvider, useAuth } from "./context/AuthContext";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { I18nextProvider } from "react-i18next";
+
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import store from "./store";
-import { ModalComponent } from "./components/ModalComponent/ModalComponent";
+import { SignupPage } from "./pages/SignupPage";
+import { LoginPage } from "./pages/LoginPage";
+import { Header } from "./components/Header";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { DocumentsPage } from "./pages/documents/DocumentsPage";
+import { DocumentDetailsPage } from "./pages/documents/DocumentDetailsPage";
+import { UsersPage } from "./pages/users/UsersPage";
+import { UserDetailsPage } from "./pages/users/UserDetailsPage";
 import { FilesPage } from "./pages/files/FilesPage";
+import { routes } from "./routes";
+import i18n from "./locales/i18n";
+import { ModalComponent } from "./components/ModalComponent/ModalComponent";
+import { FileDetailsPage } from "./pages/files/FileDetailsPage";
 
 const LoggedInRoute = () => {
   const { isAuthenticated } = useAuth();
@@ -49,8 +53,8 @@ const App = () => {
                     <Route path={routes.documentsRoute()} element={<DocumentsPage />} />
                     <Route path='users/:id' element={<UserDetailsPage />} />
                     <Route path={routes.filesRoute()} element={<FilesPage />} />
+                    <Route path='files/:id' element={<FileDetailsPage />} />
                   </Route>
-
                   <Route element={<LoggedOutRoute />}>
                     <Route path={routes.signupRoute()} element={<SignupPage />} />
                     <Route path={routes.loginRoute()} element={<LoginPage />} />
@@ -61,6 +65,7 @@ const App = () => {
               </main>
             </div>
           </BrowserRouter>
+          <ToastContainer progressClassName="text-red-100" />
         </I18nextProvider>
       </AuthProvider>
     </Provider>

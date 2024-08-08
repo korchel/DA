@@ -1,36 +1,37 @@
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { ButtonComponent } from "../../ButtonComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import { ButtonComponent } from "../../ButtonComponent";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { routes } from "../../../routes";
-import { useDeleteUserMutation } from "../../../store/usersApi";
+import { useDeleteFileMutation } from "../../../store/filesApi";
 
-export const DeleteUser = () => {
+export const DeleteFile = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = useSelector(getCurrentDataId);
-  const [deleteUser, { isError }] = useDeleteUserMutation();
+  const [deleteFile, { isError }] = useDeleteFileMutation();
 
   const handleClose = () => {
     dispatch(closeModal());
   };
 
   const handleDelete = () => {
-    deleteUser(id);
+    deleteFile(id);
     if (isError) {
-      toast.error(t('modal.deleteUser.toast.error'));
+      toast.error(t('modal.deleteFile.toast.error'));
     } else {
-      toast.success(t('modal.deleteUser.toast.success'));
+      toast.success(t('modal.deleteFile.toast.success'));
     }
     dispatch(closeModal());
-    navigate(routes.usersRoute());
+    navigate(routes.filesRoute());
   };
   return (
     <>
-      <div className="mb-4 font-bold">{t('modal.deleteUser.areYouSure')}</div>
+      <div className="mb-4 font-bold">{t('modal.deleteFile.areYouSure')}</div>
       <div className="flex justify-between gap-4">
         <ButtonComponent
           variant="outline"

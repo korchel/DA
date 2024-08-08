@@ -1,4 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { InputField } from "../../ui/InputField";
 import { TextArea } from "../../TextArea";
 import { MultiSelectComponent } from "../../MultiSelectComponent";
@@ -12,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "../../../routes";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
+import { useTranslation } from "react-i18next";
 
 export interface IEditDocForm {
   title: string,
@@ -67,21 +69,22 @@ const users = [
   },
 ];
 export const EditDocument = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const id = useSelector(getCurrentDataId);
 
   const { data: users } = getUsers();
   const { data: doc } = getDoc(id);
-  const [editDoc] = useEditDocMutation();
+  const [editDoc, { isError }] = useEditDocMutation();
 
   const defaultValues: IEditDocForm = {
-    title: doc.title,
-    number: doc.number,
-    content: doc.content,
-    authorId: doc.author.idUser,
-    typeId: doc.type.id,
-    availableFor: doc.availableFor,
+    title: doc?.title,
+    number: doc?.number,
+    content: doc?.content,
+    authorId: doc?.author.idUser,
+    typeId: doc?.type.id,
+    availableFor: doc?.availableFor,
     publicDocument: false,
   };
   const options = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
@@ -91,6 +94,11 @@ export const EditDocument = () => {
   const onSubmit = (data: IEditDocForm) => {
     console.log(data)
     editDoc({ data, id });
+    if (isError) {
+      toast.error(t('modal.editDocument.toast.error'));
+    } else {
+      toast.success(t('modal.editDocument.toast.success'));
+    }
     dispatch(closeModal());
     navigate(routes.documentsRoute());
   };
@@ -132,11 +140,7 @@ export const EditDocument = () => {
         )}
       />
       <div className="flex justify-between">
-        <CheckBox
-          setValue={setValue}
-          label="Сделать документ публичным"
-          {...register('publicDocument')}
-        />
+        <CheckBox label="Сделать документ публичным" {...register('publicDocument')} onChange={(e) => setValue('publicDocument', e.target.checked)} />
         <ButtonComponent type="submit" variant="primary">Сохранить изменения</ButtonComponent>
       </div>
     </form>

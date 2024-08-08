@@ -1,20 +1,19 @@
-import { DetailedHTMLProps, ForwardedRef, forwardRef, HtmlHTMLAttributes } from "react";
-import { FieldValues, UseFormSetValue } from "react-hook-form";
-import { ICreateDocForm } from "../ModalComponent/document/CreateDocument";
+import { DetailedHTMLProps, HtmlHTMLAttributes } from "react";
 
 interface ICheckBox extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLInputElement>, HTMLInputElement>  {
   label: string,
-  onChange: (e: any) => void,
-  setValue: any
+  onChange?: (e: any) => void,
+  value?: any
+  setValue?: any
 }
 
-
-export const CheckBox = ({label, onChange, ...props}: ICheckBox) => {
+export const CheckBox = ({label, value, onChange, ...props}: ICheckBox) => {
 
 
   return (
     <label htmlFor="check" className="block">{label}
-      <input id="check" type="checkbox" {...props} onChange={onChange} />
+      <input value={value} id={label} type="checkbox" {...props} onChange={onChange} />
     </label>
   );
 };
+

@@ -1,4 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { InputField } from "../../ui/InputField";
 import { TextArea } from "../../TextArea";
 import { SelectComponent } from "../../SelectComponent";
@@ -12,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "../../../routes";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../../store/modalSlice";
+import { useTranslation } from "react-i18next";
 
 export interface ICreateDocForm {
   title: string,
@@ -24,17 +26,24 @@ export interface ICreateDocForm {
 }
 
 export const CreateDocument = () => {
+  const { t } = useTranslation();
   const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues, setValue } = useForm<ICreateDocForm>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { currentUser } = useAuth();
-  const [createDoc] = useCreateDocMutation();
+  const [createDoc, { isError }] = useCreateDocMutation();
   const { data: users } = getUsers();
   const options = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
 
   const onSubmit = (data: ICreateDocForm) => {
     createDoc({ ...data, authorId: currentUser.id });
+    console.log(data)
+    if (isError) {
+      toast.error(t('modal.createDocument.toast.error'));
+    } else {
+      toast.success(t('modal.createDocument.toast.success'));
+    }
     dispatch(closeModal());
     navigate(routes.documentsRoute());
   };
@@ -75,18 +84,7 @@ export const CreateDocument = () => {
         )}
       />
       <div className="flex justify-between">
-        <Controller
-          control={control}
-          name='public_document'
-          render={({ field }) => (
-            <CheckBox 
-              label="Сделать документ публичным"
-              {...field}
-              onChange={(e) => field.onChange(e.target.checked)}
-              setValue={setValue}
-            />
-          )}
-        />
+        <CheckBox label="Сделать документ публичным" {...register('public_document')} onChange={(e) => setValue('public_document', e.target.checked)} />
         <ButtonComponent type="submit" variant="primary">Добавить документ</ButtonComponent>
       </div>
     </form>

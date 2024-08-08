@@ -24,10 +24,17 @@ export const filesApi = createApi({
         url: "for_users",
       }),
     }),
-    getUser: builder.query({
+    getFile: builder.query({
       query: (id) => ({
         url: `/${id}`,
       }),
+    }),
+    deleteFile: builder.mutation({
+      query: (id) => ({
+        url: `/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ["files"],
     }),
     searchFiles: builder.query({
       query: (params) => ({
@@ -46,4 +53,6 @@ export const filesApi = createApi({
 
 export const {
   useGetFilesQuery,
+  useGetFileQuery,
+  useDeleteFileMutation,
 } = filesApi;

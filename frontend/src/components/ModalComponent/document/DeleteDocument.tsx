@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { ButtonComponent } from "../../ButtonComponent";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +12,7 @@ export const DeleteDocument = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = useSelector(getCurrentDataId);
-  const [deleteDoc] = useDeleteDocMutation();
+  const [deleteDoc, { isError }] = useDeleteDocMutation();
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -19,6 +20,11 @@ export const DeleteDocument = () => {
 
   const handleDelete = () => {
     deleteDoc(id);
+    if (isError) {
+      toast.error(t('modal.deleteDocument.toast.error'));
+    } else {
+      toast.success(t('modal.deleteDocument.toast.success'));
+    }
     dispatch(closeModal());
     navigate(routes.documentsRoute());
   };
