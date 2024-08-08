@@ -60,7 +60,7 @@ export const UsersPage = () => {
             <tr className="table-row border-b overflow-hidden hover:bg-sky-50 cursor-pointer" key={user.id} onClick={() => navigate(routes.userDetailsRoute(user.id))}>
               <td className="py-4 px-5">{user.username}</td>
               <td className="py-4 px-5">{user.name}</td>
-              <td className="py-4 px-5 truncate">{user.lastName}</td>
+              <td className="py-4 px-5 truncate">{user.lastname}</td>
               <td className="py-4 px-5 truncate">{user.roles.map((role) => role.name)}</td>
             </tr>
           ))}

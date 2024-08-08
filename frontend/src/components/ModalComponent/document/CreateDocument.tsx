@@ -19,7 +19,7 @@ export interface ICreateDocForm {
   title: string,
   number: number,
   content: string,
-  authorId: number,
+  authorId: string,
   type_id: number,
   available_for: number[],
   public_document: boolean,
@@ -38,7 +38,7 @@ export const CreateDocument = () => {
 
   const onSubmit = (data: ICreateDocForm) => {
     createDoc({ ...data, authorId: currentUser.id });
-    console.log(data)
+
     if (isError) {
       toast.error(t('modal.createDocument.toast.error'));
     } else {

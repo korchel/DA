@@ -16,13 +16,13 @@ export const usersApi = createApi({
       providesTags: ["users"],
     }),
   
-    getUser: builder.query({
+    getUser: builder.query<IUser, string | undefined>({
       query: (id) => ({
         url: `/${id}`,
       }),
     }),
   
-    deleteUser: builder.mutation({
+    deleteUser: builder.mutation<boolean, string | undefined>({
       query: (id) => ({
         url: `/${id}`,
         method: 'DELETE',
@@ -30,7 +30,7 @@ export const usersApi = createApi({
       invalidatesTags: ["users"],
     }),
 
-    editUser: builder.mutation({
+    editUser: builder.mutation<void, {data: IUser, id: string | undefined}>({
       query: ({id, data}) => ({
         url: `/for-admin/${id}`,
         method: 'PUT',

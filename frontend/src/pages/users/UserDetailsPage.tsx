@@ -7,15 +7,6 @@ import { useGetUserQuery as getUser } from "../../store/usersApi";
 import { Spinner } from "../../icons/Spinner";
 import { openModal } from "../../store/modalSlice";
 
-// const user = {
-//   id: 1,
-//   username: 'username1',
-//   email: 'email1',
-//   name: 'name1',
-//   lastName: 'lastname1',
-//   roles: ['ROLE_ADMIN'],
-// };
-
 export const UserDetailsPage = () => {
   const {id} = useParams();
   const { t } = useTranslation();
@@ -41,12 +32,12 @@ export const UserDetailsPage = () => {
   return (
     <div className="h-full p-8 flex flex-col items-center ">
       <Card>
-        <Card.Header>{t('userDetailsPage.title')}<span className="text-sky-600">{user.username}</span></Card.Header>
+        <Card.Header>{t('userDetailsPage.title')}<span className="text-sky-600">{user?.username}</span></Card.Header>
         <Card.Body>
-          <div><span className="font-bold">{t('userDetailsPage.name')}</span>{user.name}</div>
-          <div><span className="font-bold">{t('userDetailsPage.lastName')}</span>{user.lastName}</div>
-          <div><span className="font-bold">{t('userDetailsPage.email')}</span>{user.email}</div>
-          <div><span className="font-bold">{t('userDetailsPage.roles')}</span>{user.roles.map((role) => role.name)}</div>
+          <div><span className="font-bold">{t('userDetailsPage.name')}</span>{user?.name}</div>
+          <div><span className="font-bold">{t('userDetailsPage.lastName')}</span>{user?.lastname}</div>
+          <div><span className="font-bold">{t('userDetailsPage.email')}</span>{user?.email}</div>
+          <div><span className="font-bold">{t('userDetailsPage.roles')}</span>{user?.roles.map((role) => role.name)}</div>
         </Card.Body>
         <Card.Footer>
           <ButtonComponent variant="primary" onClick={handleEdit}>{t('userDetailsPage.edit')}</ButtonComponent>

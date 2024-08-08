@@ -19,9 +19,9 @@ export const DeleteUser = () => {
   };
 
   const handleDelete = () => {
-    deleteUser(id);
+    deleteUser(id); // user is not deleted
     if (isError) {
-      toast.error(t('modal.deleteUser.toast.error'));
+      toast.error(t('modal.deleteUser.toast.error'));  // isError not working
     } else {
       toast.success(t('modal.deleteUser.toast.success'));
     }

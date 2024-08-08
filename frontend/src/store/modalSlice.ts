@@ -3,14 +3,14 @@ import { RootStateType } from ".";
 
 interface IState {
   type: null | "editDocument" | "createDocument" | "deleteDocument" | 'editUser';
-  id: null | string;
+  id: undefined | string;
   open: boolean;
 }
 
 const initialState: IState = {
-  type: 'editDocument',
-  id: null,
-  open: true,
+  type: null,
+  id: undefined,
+  open: false,
 };
 
 const modalSlice = createSlice({
@@ -34,7 +34,7 @@ export const getModalType = (state: RootStateType): string | null =>
   state.modalSlice.type;
 export const getModalOpen = (state: RootStateType): boolean =>
   state.modalSlice.open;
-export const getCurrentDataId = (state: RootStateType): string | null =>
+export const getCurrentDataId = (state: RootStateType): string | undefined =>
   state.modalSlice.id;
 
 export default modalSlice.reducer;

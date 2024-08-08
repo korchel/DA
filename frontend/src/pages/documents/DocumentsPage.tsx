@@ -10,39 +10,6 @@ import { useDispatch } from "react-redux";
 import { openModal } from "../../store/modalSlice";
 import { Spinner } from "../../icons/Spinner";
 
-// const documents = [
-//   {
-//     id: 1,
-//     title: 'title 1',
-//     number: 11,
-//     author: {
-//       userName: 'ghj',
-//     },
-//     content: "string",
-//     creationDate: "2024-09-04",
-//     updateDate: "2024-10-04",
-//     type: {
-//       id: 1,
-//       type: 'note'
-//     }
-//   },
-//   {
-//     id: 2,
-//     title: 'title 2',
-//     number: 22,
-//     author: {
-//       userName: 'ghj',
-//     },
-//     content: "stringddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-//     creationDate: "2024-09-04",
-//     updateDate: "2024-10-04",
-//     type: {
-//       id: 1,
-//       type: 'note'
-//     }
-//   },
-// ];
-
 export const DocumentsPage = () => {
   const { t } = useTranslation();
   const { currentUser } = useAuth();
@@ -101,11 +68,11 @@ export const DocumentsPage = () => {
             >
               <td className="py-4 px-5">{document.number}</td>
               <td className="py-4 px-5 truncate">{document.title}</td>
-              <td className="py-4 px-5 truncate">{document.author.userName}</td>
+              <td className="py-4 px-5 truncate">{document.author.lastname}</td>
               <td className="py-4 px-5">{document.type.type}</td>
               <td className="py-4 px-5 truncate max-w-0">{document.content}</td>
-              <td className="py-4 px-5">{document.creationDate ?? 'no data'}</td>
-              <td className="py-4 px-5">{document.updateDate ?? 'no data'}</td>
+              <td className="py-4 px-5">{document.creationDate ?? t('documentsPage.noData')}</td>
+              <td className="py-4 px-5">{document.updateDate ?? t('documentsPage.noData')}</td>
               <td className="py-4 px-5 flex justify-around">
                 <ActionButton actionType="edit" />
                 <ActionButton actionType="delete" />

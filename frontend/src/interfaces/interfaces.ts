@@ -1,28 +1,46 @@
 export type RoleName = 'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_MODERATOR';
+
 export type Role = {
   idRole: number,
   name: RoleName,
 }
+
 export interface IUser {
   id: number,
   username: string,
   email: string,
   name: string,
-  lastName: string,
+  lastname?: string,
   roles: Role[],
+}
+
+export interface IAuthor {
+  idUser: number,
+  username: string,
+  email: string,
+  name: string,
+  lastname?: string,
+  roles: Role[],
+}
+
+export type DocumentType = 'NOTE' | 'REPORT';
+
+export interface IDocumentType {
+  id: number,
+  type: DocumentType,
 }
 
 export interface IDocument {
   id: number,
   title: string,
   number: number,
-  author: IUser,
-  type: {},
+  author: IAuthor,
+  type: IDocumentType,
   content: string,
-  creationDate: string,
-  updateDate: string,
+  creationDate?: string,
+  updateDate?: string,
   public_document: boolean,
-  availableFor: number[],
+  available_for: number[],
 }
 
 export interface IFile {

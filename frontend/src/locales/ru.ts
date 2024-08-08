@@ -52,6 +52,7 @@ export const ru = {
   documentsPage: {
     title: 'Список документов',
     createDocument: 'Создать документ',
+    noData: 'Нет данных',
     tableHeader: {
       number: 'Номер',
       name: 'Название',
