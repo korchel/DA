@@ -1,4 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { InputField } from "../../ui/InputField";
 import { TextArea } from "../../TextArea";
@@ -14,16 +15,7 @@ import { routes } from "../../../routes";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { useTranslation } from "react-i18next";
-
-export interface IEditDocForm {
-  title: string,
-  number: number,
-  content: string,
-  authorId: number,
-  typeId: number,
-  available_for: number[],
-  public_document: boolean,
-}
+import { docFormSchema, IDocForm } from "./docFormSchema";
 
 export const EditDocument = () => {
   const { t } = useTranslation();
@@ -46,10 +38,10 @@ export const EditDocument = () => {
   };
 
   const options = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
-  const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<IEditDocForm>({ defaultValues });
+  const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<IDocForm>({ defaultValues, resolver: zodResolver(docFormSchema)  });
    
 
-  const onSubmit = (data: IEditDocForm) => {
+  const onSubmit = (data: IDocForm) => {
     console.log(data)
     editDoc({ data, id });
     if (isError) {
@@ -77,7 +69,7 @@ export const EditDocument = () => {
       />
       <Controller
         control={control}
-        name='typeId'
+        name='type_id'
         render={({ field }) => (
           <SelectComponent
             placeholder="Тип документа"

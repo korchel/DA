@@ -1,7 +1,6 @@
 import { ForwardedRef, forwardRef, useState,  } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import Select, { type StylesConfig, type ActionMeta } from 'react-select';
-import { ICreateDocForm } from './ModalComponent/document/CreateDocument';
 
 interface ISelectOption {
   label: string,

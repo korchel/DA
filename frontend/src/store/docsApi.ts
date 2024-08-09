@@ -1,8 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import Cookies from "js-cookie";
 import { IDocument, Role, RoleName } from "../interfaces";
-import { IEditDocForm } from "../components/ModalComponent/document/EditDocument";
-import { ICreateDocForm } from "../components/ModalComponent/document/CreateDocument";
+import { IDocForm } from "../components/ModalComponent/document/docFormSchema";
 
 export const docsApi = createApi({
   reducerPath: "documents",
@@ -28,7 +26,7 @@ export const docsApi = createApi({
       }),
     }),
 
-    createDoc: builder.mutation<void, ICreateDocForm>({
+    createDoc: builder.mutation<void, IDocForm>({
       query: (data) => ({
         url: "",
         method: "POST",
@@ -45,7 +43,7 @@ export const docsApi = createApi({
       invalidatesTags: ["docs"],
     }),
 
-    editDoc: builder.mutation<boolean, {data: IEditDocForm, id: string | undefined}>({
+    editDoc: builder.mutation<boolean, {data: IDocForm, id: string | undefined}>({
       query: ({data, id}) => ({
         url: `/for_admin/${id}`,
         method: 'PUT',

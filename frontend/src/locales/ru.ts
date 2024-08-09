@@ -27,6 +27,7 @@ export const ru = {
       button: 'Зарегистрироваться',
       placeholders: {
         userName: 'Имя пользователя',
+        lastName: 'Имя пользователя',
         email: 'e-mail',
         password: 'Пароль',
         repeatPassword: 'Подтвердите пароль',
@@ -101,7 +102,16 @@ export const ru = {
       toast: {
         error: "Произошла ошибка",
         success: "Документ создан",
-      }
+      },
+      placeHolders: {
+        title: '',
+        number: '',
+        content: '',
+        type: 'Тип документа',
+        availableFor: 'Сделать доступным для:',
+        publicDocument: 'Сделать документ публичным',
+      },
+      button: 'Добавить документ',
     },
     editDocument: {
       toast: {
