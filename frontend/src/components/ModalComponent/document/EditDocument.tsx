@@ -2,11 +2,12 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { InputField } from "../../ui/InputField";
-import { TextArea } from "../../TextArea";
+import { TextArea } from "../../ui/TextArea";
 import { MultiSelectComponent } from "../../MultiSelectComponent";
 import { SelectComponent } from "../../SelectComponent";
 import { CheckBox } from "../../ui/CheckBox";
 import { ButtonComponent } from "../../ButtonComponent";
+import isEqual from "lodash.isequal";
 
 import { useEditDocMutation, useGetDocQuery as getDoc } from "../../../store/docsApi";
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
@@ -15,7 +16,7 @@ import { routes } from "../../../routes";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { useTranslation } from "react-i18next";
-import { docFormSchema, IDocForm } from "./docFormSchema";
+import { editDocFormSchema, IDocForm } from "./docFormSchema";
 
 export const EditDocument = () => {
   const { t } = useTranslation();
@@ -25,55 +26,70 @@ export const EditDocument = () => {
 
   const { data: users } = getUsers();
   const { data: doc } = getDoc(id);
-  const [editDoc, { isError }] = useEditDocMutation();
+  const [editDoc] = useEditDocMutation();
 
   const defaultValues = {
     title: doc?.title,
     number: doc?.number,
     content: doc?.content,
     authorId: doc?.author.idUser,
-    typeId: doc?.type.id,
+    type_id: doc?.type.id,
     available_for: doc?.available_for,
-    public_document: false,
+    public_document: !!doc?.public_document,
   };
 
-  const options = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
-  const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<IDocForm>({ defaultValues, resolver: zodResolver(docFormSchema)  });
-   
+  const availableForOptions = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
+  const { register, control, handleSubmit, formState: { errors }, setValue, getValues } = useForm<IDocForm>({ defaultValues, resolver: zodResolver(editDocFormSchema)  });
 
   const onSubmit = (data: IDocForm) => {
-    console.log(data)
-    editDoc({ data, id });
-    if (isError) {
-      toast.error(t('modal.editDocument.toast.error'));
+    if (isEqual(data, defaultValues)) {
+      dispatch(closeModal());
     } else {
-      toast.success(t('modal.editDocument.toast.success'));
+      editDoc({ data, id })
+        .unwrap()
+        .then(() => {
+          toast.success(t('documents.modal.edit.toast.success'));
+        })
+        .catch(() => {
+          toast.error(t('documents.modal.edit.toast.error'));
+        })
+      dispatch(closeModal());
+      navigate(routes.documentsRoute());
     }
-    dispatch(closeModal());
-    navigate(routes.documentsRoute());
   };
 
   return (
     <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
       <InputField
-        placeholder="title"
         {...register('title')}
+        label={t('documents.modal.form.labels.title')}
+        error={errors.title}
       />
       <InputField
-        placeholder="number это надо?"
         {...register('number')}
+        label={t('documents.modal.form.labels.number')}
+        error={errors.number}
+      />
+      <InputField
+        {...register('authorId')}
+        label={t('documents.modal.form.labels.authorId')}
+        error={errors.authorId}
       />
       <TextArea
-        placeholder="content"
         {...register('content')}
+        label={t('documents.modal.form.labels.content')}
+        error={errors.content}
       />
       <Controller
         control={control}
         name='type_id'
         render={({ field }) => (
           <SelectComponent
-            placeholder="Тип документа"
+            {...field}
+            error={errors.type_id}
+            placeholder={t('documents.modal.form.placeholders.type')}
             onChange={field.onChange}
+            label={t('documents.modal.form.labels.type')}
           />
         )}
       />
@@ -83,15 +99,29 @@ export const EditDocument = () => {
         render={({ field }) => (
           <MultiSelectComponent
             {...field}
-            placeholder="Сделать доступным для:"
+            error={errors.available_for}
+            label={t('documents.modal.form.labels.availableFor')}
             onChange={field.onChange}
-            selectOptions={options}
+            selectOptions={availableForOptions}
+            placeholder={t('documents.modal.form.placeholders.availableFor')}
+            required={false}
           />
         )}
       />
       <div className="flex justify-between">
-        <CheckBox label="Сделать документ публичным" {...register('public_document')} onChange={(e) => setValue('public_document', e.target.checked)} />
-        <ButtonComponent type="submit" variant="primary">Сохранить изменения</ButtonComponent>
+        <Controller
+          control={control}
+          name='public_document'
+          render={({ field }) => (
+            <CheckBox
+              {...field}
+              checked={!!field.value}
+              label={t('documents.modal.form.labels.publicDocument')}
+              onChange={(e) => setValue('public_document', e.target.checked)}
+            />
+          )}
+        />
+        <ButtonComponent type="submit" variant="primary">{t('documents.modal.edit.button')}</ButtonComponent>
       </div>
     </form>
   );

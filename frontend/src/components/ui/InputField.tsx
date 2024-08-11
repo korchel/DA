@@ -2,17 +2,21 @@ import clsx from "clsx";
 import { DetailedHTMLProps, ForwardedRef, forwardRef, HtmlHTMLAttributes, useState } from "react";
 import { FieldError } from "react-hook-form";
 import { ActionButton } from "../ActionButton";
+import { InputLabel } from "./InputLabel";
 
 export interface InputFieldProps extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  type?: 'text' | 'email' | 'password',
+  type?: 'text' | 'email' | 'password' | 'number',
   id?: string,
   error?: FieldError,
-  placeholder: string,
+  placeholder?: string,
+  label?: string,
   showActionButton?: boolean,
-  value?: string | number,
 }
 
-export const InputField = forwardRef(({ type = "text", id, error, placeholder, className, showActionButton = false, value, ...props }: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
+export const InputField = forwardRef(({
+  type = "text", id, error, placeholder, label,
+  className, showActionButton = false, ...props }: InputFieldProps,
+  ref: ForwardedRef<HTMLInputElement>) => {
   const [inputType, setInputType] = useState(type);
   const [passwordShown, setPasswordShown] = useState<boolean>(false);
 
@@ -23,10 +27,10 @@ export const InputField = forwardRef(({ type = "text", id, error, placeholder, c
 
   return (
     <div className={clsx(className, 'relative')}>
+      {label && <InputLabel htmlFor={label}>{label}</InputLabel>}
       <input
-        value={value}
         type={inputType}
-        id={id}
+        id={label}
         className={clsx(error && "border-red-500", "block p-2 border border-slate-300 outline-sky-500 rounded-sm w-full focus:ring focus:ring-sky-200 focus:ring-opacity-50")}
         placeholder={placeholder}
         {...props}

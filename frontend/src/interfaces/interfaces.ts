@@ -44,12 +44,11 @@ export interface IDocument {
 }
 
 export interface IFile {
-  // data: ?
   id: number,
   filename: string,
   filetype: string,
   author: string,
-  availableFor: number[],
+  available_for: number[],
   publicEntity: boolean,
   creationDate: string,
   updateDate: string,

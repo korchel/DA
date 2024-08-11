@@ -5,33 +5,6 @@ import { useTranslation } from "react-i18next";
 import { useGetUsersQuery as getUsers} from "../../store/usersApi";
 import { Spinner } from "../../icons/Spinner";
 
-// const users: IUser[] = [
-//   {
-//     id: 1,
-//     username: 'username1',
-//     email: 'email1',
-//     name: 'name1',
-//     lastName: 'lastname1',
-//     roles: ['ROLE_ADMIN'],
-//   },
-//   {
-//     id: 2,
-//     username: 'username2',
-//     email: 'email2',
-//     name: 'name2',
-//     lastName: 'lastname2',
-//     roles: ['ROLE_ADMIN'],
-//   },
-//   {
-//     id: 3,
-//     username: 'username3',
-//     email: 'email3',
-//     name: 'name3',
-//     lastName: 'lastname3',
-//     roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_MODERATOR'],
-//   },
-// ];
-
 export const UsersPage = () => {
   const { t } = useTranslation();
   const { data: users, isLoading } = getUsers();
@@ -49,10 +22,10 @@ export const UsersPage = () => {
       <table className="w-[100%] bg-white text-left rounded-md shadow-md">
         <thead className="uppercase text-sky-600 whitespace-nowrap">
           <tr className="border-b">
-            <th className="py-4 px-5">{t('usersPage.tableHeader.userName')}</th>
-            <th className="py-4 px-5">{t('usersPage.tableHeader.name')}</th>
-            <th className="py-4 px-5">{t('usersPage.tableHeader.lastName')}</th>
-            <th className="py-4 px-5">{t('usersPage.tableHeader.roles')}</th>
+            <th className="py-4 px-5">{t('users.tableHeader.userName')}</th>
+            <th className="py-4 px-5">{t('users.tableHeader.name')}</th>
+            <th className="py-4 px-5">{t('users.tableHeader.lastName')}</th>
+            <th className="py-4 px-5">{t('users.tableHeader.roles')}</th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +34,7 @@ export const UsersPage = () => {
               <td className="py-4 px-5">{user.username}</td>
               <td className="py-4 px-5">{user.name}</td>
               <td className="py-4 px-5 truncate">{user.lastname}</td>
-              <td className="py-4 px-5 truncate">{user.roles.map((role) => role.name)}</td>
+              <td className="py-4 px-5 truncate">{user.roles.map((role) => t(`users.roles.${role.name}`)).join(', ')}</td>
             </tr>
           ))}
         </tbody>

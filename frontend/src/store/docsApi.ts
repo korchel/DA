@@ -2,13 +2,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IDocument, Role, RoleName } from "../interfaces";
 import { IDocForm } from "../components/ModalComponent/document/docFormSchema";
 
+
 export const docsApi = createApi({
   reducerPath: "documents",
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8080/api/documents',
     credentials: "include",
   }),
-  tagTypes: ["docs"],
+  tagTypes: ["docs", "doc"],
   endpoints: (builder) => ({
     getDocs: builder.query<IDocument[], RoleName[]>({
       query: (roles: RoleName[]) => {
@@ -24,6 +25,7 @@ export const docsApi = createApi({
       query: (id) => ({
         url: `/${id}`,
       }),
+      providesTags: ["doc"],
     }),
 
     createDoc: builder.mutation<void, IDocForm>({
@@ -49,7 +51,7 @@ export const docsApi = createApi({
         method: 'PUT',
         body: data,
       }),
-      invalidatesTags: ["docs"],
+      invalidatesTags: ["docs", "doc"],
     }),
 
     searchDoc: builder.query({   //pageNumber

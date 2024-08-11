@@ -4,31 +4,48 @@ export interface IDocForm {
   title: string,
   number: number,
   content: string,
-  authorId: number,
+  authorId?: number,
   type_id: number,
-  available_for: number[],
+  available_for?: number[] | undefined,
   public_document: boolean,
 }
 
-export const docFormSchema: ZodType<IDocForm> = z.object({
+export const createDocFormSchema: ZodType<Omit<IDocForm, 'authorId'>> = z.object({
   title: z
     .string({
       required_error: "Обязательное поле",
     })
     .min(2, { message: "Не менее 2 символов" })
     .max(50, { message: "Не более 50 символов" }),
-  number: z.number({
-      required_error: "Обязательное поле",
-    }
-  ),
+  number: z.coerce.number().positive({
+    message: "Обязательное поле"
+  }),
   content: z.string({
     required_error: "Обязательное поле",
-    invalid_type_error: "Years of Experience is required",
   }),
-  authorId: z.number(), //???
   type_id: z.number({
     required_error: "Обязательное поле",
   }),
-  available_for: z.array(z.number()),
+  available_for: z.array(z.number()).optional(),
+  public_document: z.boolean(),
+});
+
+export const editDocFormSchema: ZodType<IDocForm> = z.object({
+  title: z
+    .string({
+      required_error: "Обязательное поле",
+    })
+    .min(2, { message: "Не менее 2 символов" })
+    .max(50, { message: "Не более 50 символов" }),
+  number: z.coerce.number().positive({
+    message: "Обязательное поле",
+  }),
+  content: z.string({
+    required_error: "Обязательное поле",
+  }),
+  type_id: z.number({
+    required_error: "Обязательное поле",
+  }),
+  available_for: z.array(z.number()).optional(),
   public_document: z.boolean(),
 });

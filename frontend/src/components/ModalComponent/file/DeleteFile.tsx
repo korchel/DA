@@ -13,25 +13,27 @@ export const DeleteFile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = useSelector(getCurrentDataId);
-  const [deleteFile, { isError }] = useDeleteFileMutation();
+  const [deleteFile] = useDeleteFileMutation();
 
   const handleClose = () => {
     dispatch(closeModal());
   };
 
   const handleDelete = () => {
-    deleteFile(id);
-    if (isError) {
-      toast.error(t('modal.deleteFile.toast.error'));
-    } else {
-      toast.success(t('modal.deleteFile.toast.success'));
-    }
+    deleteFile(id)
+      .unwrap()
+      .then(() => {
+        toast.success(t('files.modal.delete.toast.success'));
+      })
+      .catch(() => {
+        toast.error(t('files.modal.delete.toast.error'));
+      });
     dispatch(closeModal());
     navigate(routes.filesRoute());
   };
   return (
     <>
-      <div className="mb-4 font-bold">{t('modal.deleteFile.areYouSure')}</div>
+      <div className="mb-4 font-bold">{t('files.modal.delete.areYouSure')}</div>
       <div className="flex justify-between gap-4">
         <ButtonComponent
           variant="outline"

@@ -8,11 +8,13 @@ export const routes = {
   documentDetailsRoute: (id: number) => `/documents/${id}`,
 
   usersRoute: () => '/users',
-  userDetailsRoute: (id: number) => `/users/${id}`,
+  userDetailsRoute: (id: string | number | undefined) => `/users/${id}`,
 
   filesRoute: () => '/files',
   fileDetailsRoute: (id: number) => `/files/${id}`,
 
   loginPath: () => [apiPath, 'auth', 'sign-in'].join('/'),
   signupPath: () => [apiPath, 'auth', 'sign-up'].join('/'),
+
+  thumbnailPath: (id) => [apiPath, 'files',`${id}/thumbnail`].join('/'),
 };

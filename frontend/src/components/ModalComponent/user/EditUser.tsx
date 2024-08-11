@@ -1,73 +1,110 @@
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { RoleName } from "../../../interfaces";
+
 import { InputField } from "../../ui/InputField";
 import { CheckBox } from "../../ui/CheckBox";
-import { useEditUserMutation } from "../../../store/usersApi";
-import { useSelector } from "react-redux";
-import { getCurrentDataId } from "../../../store/modalSlice";
+import { useEditUserMutation, useGetUserQuery as getUser } from "../../../store/usersApi";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { ButtonComponent } from "../../ButtonComponent";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../../routes";
+import { ChangeEventHandler } from "react";
 
-interface IEditUserForm {
+export interface IEditUserForm {
   username: string,
   email: string,
   name: string,
   lastName: string,
-  roles: string[],
+  role_ids: number[],
 }
 
 const roles = [
-  { label: "Администратор", value: 'ROLE_ADMIN' },
-  { label: "Пользователь", value: 'ROLE_USER' },
-  { label: "Модератор", value: 'ROLE_MODERATOR' },
+  { label: "Администратор", value: 1 },
+  { label: "Пользователь", value: 3 },
+  { label: "Модератор", value: 2 },
 ];
 
 export const EditUser = () => {
   const { t } = useTranslation();
-  const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues, setValue } = useForm<IEditUserForm>({defaultValues: {roles: []}});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const id = useSelector(getCurrentDataId);
-  const [editUser, { isError }] = useEditUserMutation();
 
-  const onSubmit = (data) => {
-    console.log(data)
-    if (isError) {
-      toast.error(t('modal.editUser.toast.error'));
-    } else {
-      toast.success(t('modal.editUser.toast.success'));
-    }
+  const {data: user} = getUser(id);
+  const [editUser] = useEditUserMutation();
+
+  const defaultValues = {
+    username: user?.username,
+    email: user?.email,
+    name: user?.name,
+    lastName: user?.lastname,
+    role_ids: user?.roles.map((role) => role.idRole),
   };
 
-  const handleCheck = (e) => {
-    const values = getValues('roles')
-    setValue('roles', [...values, e.target.value]);
-  }
+  const { register, control, handleSubmit, formState: { errors }, getValues, setValue } = useForm<IEditUserForm>({defaultValues});
+
+  const onSubmit = (data: IEditUserForm) => {
+    editUser({ data, id })
+      .unwrap()
+      .then(() => {
+        toast.success(t('users.modal.edit.toast.success'));
+      })
+      .catch(() => {
+        toast.error(t('users.modal.edit.toast.error'));
+      });
+    dispatch(closeModal());
+    navigate(routes.userDetailsRoute(id));
+  };
+
+  const handleCheck: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { checked, value } = e.target;
+    const roles = getValues('role_ids')
+    if (checked) {
+      setValue('role_ids', [...roles, Number(value)]);
+    } else {
+      setValue('role_ids', roles.filter((role) => role !== Number(value)));
+    }
+  };
 
   return (
     <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
       <InputField
-        placeholder="Имя пользователя"
+        label={t('users.modal.form.labels.username')}
         {...register('username')}
       />
       <InputField
-        placeholder="email"
+        label={t('users.modal.form.labels.email')}
         {...register('email')}
       />
       <InputField
-        placeholder="Имя"
+        label={t('users.modal.form.labels.name')}
         {...register('name')}
       />
       <InputField
-        placeholder="Фамилия"
+        label={t('users.modal.form.labels.lastname')}
         {...register('lastName')}
       />
       <fieldset>
         {roles.map((role) => (
-          <CheckBox {...register('roles')} label={role.label} value={role.value} onChange={(e) => handleCheck(e)}/>
+          <Controller
+            key={role.value}
+            control={control}
+            name='role_ids'
+            render={({ field }) => (
+              <CheckBox
+                {...field}
+                label={role.label}
+                checked={field.value?.includes(role.value)}
+                value={role.value}
+                onChange={(e) => handleCheck(e)}
+              />
+            )}
+          />
         ))}
       </fieldset>
-        
-      <ButtonComponent type="submit" variant="primary">Сохранить изменения</ButtonComponent>
+      <ButtonComponent type="submit" variant="primary">{t('users.modal.edit.button')}</ButtonComponent>
     </form>
   );
 };

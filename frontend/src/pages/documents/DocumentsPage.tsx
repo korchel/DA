@@ -38,25 +38,25 @@ export const DocumentsPage = () => {
   }
   return (
     <div className="h-full p-8 flex flex-col">
-      <h1 className="text-sky-800 font-bold text-lg text-center">{t('documentsPage.title')}</h1>
+      <h1 className="text-sky-800 font-bold text-lg text-center">{t('documents.title')}</h1>
       <ButtonComponent
         variant="primary"
         className="my-5 ml-auto"
         onClick={handleCreate}
       >
-        {t('documentsPage.createDocument')}
+        {t('documents.createDocument')}
       </ButtonComponent>
       <table className="w-[100%] bg-white text-left rounded-md shadow-md">
         <thead className="uppercase text-sky-600 whitespace-nowrap">
           <tr className="border-b">
-            <th className="py-4 px-5 w-10">{t('documentsPage.tableHeader.number')}</th>
-            <th className="py-4 px-5">{t('documentsPage.tableHeader.name')}</th>
-            <th className="py-4 px-5">{t('documentsPage.tableHeader.author')}</th>
-            <th className="py-4 px-5">{t('documentsPage.tableHeader.type')}</th>
-            <th className="py-4 px-5">{t('documentsPage.tableHeader.content')}</th>
-            <th className="py-4 px-5">{t('documentsPage.tableHeader.creationDate')}</th>
-            <th className="py-4 px-5">{t('documentsPage.tableHeader.updateDate')}</th>
-            <th className="py-4 px-5 text-center">{t('documentsPage.tableHeader.actions')}</th>
+            <th className="py-4 px-5 w-10">{t('documents.tableHeader.number')}</th>
+            <th className="py-4 px-5">{t('documents.tableHeader.name')}</th>
+            <th className="py-4 px-5">{t('documents.tableHeader.author')}</th>
+            <th className="py-4 px-5">{t('documents.tableHeader.type')}</th>
+            <th className="py-4 px-5">{t('documents.tableHeader.content')}</th>
+            <th className="py-4 px-5">{t('documents.tableHeader.creationDate')}</th>
+            <th className="py-4 px-5">{t('documents.tableHeader.updateDate')}</th>
+            <th className="py-4 px-5 text-center">{t('documents.tableHeader.actions')}</th>
           </tr>
         </thead>
         <tbody>
@@ -71,8 +71,8 @@ export const DocumentsPage = () => {
               <td className="py-4 px-5 truncate">{document.author.lastname}</td>
               <td className="py-4 px-5">{document.type.type}</td>
               <td className="py-4 px-5 truncate max-w-0">{document.content}</td>
-              <td className="py-4 px-5">{document.creationDate ?? t('documentsPage.noData')}</td>
-              <td className="py-4 px-5">{document.updateDate ?? t('documentsPage.noData')}</td>
+              <td className="py-4 px-5">{document.creationDate ?? t('documents.noData')}</td>
+              <td className="py-4 px-5">{document.updateDate ?? t('documents.noData')}</td>
               <td className="py-4 px-5 flex justify-around">
                 <ActionButton actionType="edit" />
                 <ActionButton actionType="delete" />

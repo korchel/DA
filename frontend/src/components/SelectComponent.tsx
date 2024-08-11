@@ -1,9 +1,10 @@
-import { ForwardedRef, forwardRef, useMemo,  } from 'react';
-import { UseFormSetValue } from 'react-hook-form';
-import Select, { type StylesConfig, type ActionMeta } from 'react-select';
+import { useMemo,  } from 'react';
+import { FieldError } from 'react-hook-form';
+import Select, { type ActionMeta } from 'react-select';
 import clsx from 'clsx';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
+import { InputLabel } from './ui/InputLabel';
 
 interface ISelectOption {
   label: string,
@@ -11,10 +12,12 @@ interface ISelectOption {
 }
 
 interface ISelectInputProps {
-  onChange: (ISelectOption) => void,
+  onChange: (option: number) => void,
   placeholder: string,
   className?: string,
-  error?: string | undefined,
+  error?: FieldError,
+  value?: number,
+  label?: string,
 }
 
 type onSelect = (newValue: unknown, actionmeta: ActionMeta<unknown>) => void;
@@ -36,30 +39,35 @@ const EmotionCacheProvider = ({ children }: { children: React.ReactNode }) => {
       }),
     []
   );
-
   return <CacheProvider value={cache}>{children}</CacheProvider>;
 };
 
 const classNames = {
   control: () => "border-slate-300 shadow-none rounded-sm !active:border-red-300",
   valueContainer: () => 'p-1',
-  option: ({ isSelected, isFocused }) => clsx(isFocused && !isSelected && '!bg-sky-200', isSelected && 'bg-sky-500',),
+  option: ({ isSelected, isFocused }) => clsx(isFocused && !isSelected && '!bg-sky-200', isSelected && 'bg-sky-500'),
+  menu: () => 'z-20',
 };
 
-export const SelectComponent = ({onChange, placeholder, ...props}: ISelectInputProps) => {
+export const SelectComponent = ({ onChange, label, placeholder, error, value, ...props }: ISelectInputProps) => {
   const handleSelect: onSelect = (option) => {
     const _option = option as ISelectOption;
     onChange(_option.value);
   };
   return (
     <EmotionCacheProvider>
-      <Select
-        classNames={classNames}
-        onChange={handleSelect}
-        options={selectOptions}
-        placeholder={placeholder}
-        {...props}
-      />
+      <div className='relative'>
+        <InputLabel>{label}</InputLabel>
+        <Select
+          value={value ? selectOptions.find(option => option.value === value) : undefined}
+          classNames={classNames}
+          onChange={handleSelect}
+          options={selectOptions}
+          placeholder={placeholder}
+          {...props}
+        />
+        {error && <p className="absolute text-sm text-red-500">{error.message}</p>}
+      </div>
     </EmotionCacheProvider>
   );
 };

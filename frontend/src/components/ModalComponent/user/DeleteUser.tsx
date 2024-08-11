@@ -12,25 +12,27 @@ export const DeleteUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = useSelector(getCurrentDataId);
-  const [deleteUser, { isError }] = useDeleteUserMutation();
+  const [deleteUser] = useDeleteUserMutation();
 
   const handleClose = () => {
     dispatch(closeModal());
   };
 
   const handleDelete = () => {
-    deleteUser(id); // user is not deleted
-    if (isError) {
-      toast.error(t('modal.deleteUser.toast.error'));  // isError not working
-    } else {
-      toast.success(t('modal.deleteUser.toast.success'));
-    }
+    deleteUser(id)
+      .unwrap()
+      .then(() => {
+        toast.success(t('users.modal.delete.toast.success'));
+      })
+      .catch(() => {
+        toast.error(t('users.modal.delete.toast.error'));
+      });
     dispatch(closeModal());
     navigate(routes.usersRoute());
   };
   return (
     <>
-      <div className="mb-4 font-bold">{t('modal.deleteUser.areYouSure')}</div>
+      <div className="mb-4 font-bold">{t('users.modal.delete.areYouSure')}</div>
       <div className="flex justify-between gap-4">
         <ButtonComponent
           variant="outline"

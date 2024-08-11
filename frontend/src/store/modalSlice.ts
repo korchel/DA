@@ -2,15 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootStateType } from ".";
 
 interface IState {
-  type: null | "editDocument" | "createDocument" | "deleteDocument" | 'editUser';
-  id: undefined | string;
+  type: null | "editDocument" | "createDocument" | "deleteDocument" | 'editUser' | 'editFile' | 'uploadFile';
+  id: undefined | string ;
   open: boolean;
 }
 
 const initialState: IState = {
-  type: null,
+  type: 'editUser',
   id: undefined,
-  open: false,
+  open: true,
 };
 
 const modalSlice = createSlice({
