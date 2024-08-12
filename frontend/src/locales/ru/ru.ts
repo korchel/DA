@@ -48,14 +48,9 @@ export const ru = {
   documents,
   files,
   users,
-  modal: {
-    
-    
-    
-
-    cancel: 'Отмена',
-    delete: 'Удалить',
-  },
-
-  
+  cancel: 'Отмена',
+  delete: 'Удалить',
+  download: 'Скачать',
+  see: 'Посмотреть',
+  edit: 'Изменить',
 };

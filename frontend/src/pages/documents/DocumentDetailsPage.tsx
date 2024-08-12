@@ -2,10 +2,10 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useGetDocQuery as getDoc } from "../../store/docsApi";
 import { Card } from "../../components/ui";
-import { ButtonComponent } from "../../components/ButtonComponent";
+import { ButtonComponent } from "../../components/ui/ButtonComponent";
 import { openModal } from "../../store/modalSlice";
 import { useDispatch } from "react-redux";
-import { Spinner } from "../../icons/Spinner";
+import { Spinner } from "../../components/ui/icons/Spinner";
 
 export const DocumentDetailsPage = () => {
   const {id} = useParams();

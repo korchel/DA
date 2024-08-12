@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { ButtonComponent } from "../../components/ButtonComponent";
-import { ActionButton } from "../../components/ActionButton";
+import { ButtonComponent } from "../../components/ui/ButtonComponent";
+import { ActionButton } from "../../components/ui/ActionButton";
 import { useGetFilesQuery as getFiles } from "../../store/filesApi";
 import { routes } from "../../routes";
 import { useNavigate } from "react-router-dom";
@@ -19,14 +19,20 @@ export const FilesPage = () => {
     dispatch(openModal({ type: "uploadFile", open: true }))
   };
 
-
-  const handleDownload = (id: number): void => {
-
+  const handleDownload = (event, id: number): void => {
+    event.stopPropagation();
+    window.open(routes.fileDownloadPath(id), '_blank');
   };
+
+  const handleOverview = (event, id: number) => {
+    event.stopPropagation();
+    window.open(routes.viewFilePath(id), '_blank');
+  };
+
 
   return (
     <div className="h-full p-8 flex flex-col">
-      <h1 className="text-sky-800 font-bold text-lg text-center">{t('files.title')}</h1>
+      <h1 className="text-sky-600 font-bold text-lg text-center">{t('files.title')}</h1>
       <ButtonComponent
         variant="primary"
         className="my-5 ml-auto"
@@ -66,7 +72,8 @@ export const FilesPage = () => {
               <td className="py-4 px-5">{file.creationDate ?? 'no data'}</td>
               <td className="py-4 px-5">{file.updateDate ?? 'no data'}</td>
               <td className="py-4 px-5 flex justify-around">
-                <ActionButton actionType="download" onClick={() => handleDownload(file.id)} />
+                <ActionButton actionType="download" title={t('download')} onClick={(event) => handleDownload(event, file.id)} />
+                <ActionButton actionType="overview" title={t('see')} onClick={(event) => handleOverview(event, file.id)} />
               </td>
           </tr>
           ))}

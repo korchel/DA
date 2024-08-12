@@ -17,4 +17,6 @@ export const routes = {
   signupPath: () => [apiPath, 'auth', 'sign-up'].join('/'),
 
   thumbnailPath: (id) => [apiPath, 'files',`${id}/thumbnail`].join('/'),
+  fileDownloadPath: (id) => [apiPath, 'files',`${id}?download=true`].join('/'),
+  viewFilePath: (id) => [apiPath, 'files',`${id}?download=false`].join('/'),
 };

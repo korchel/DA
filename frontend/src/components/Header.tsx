@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "../routes";
-import { ButtonComponent } from "./ButtonComponent";
+import { ButtonComponent } from "./ui/ButtonComponent";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
 
@@ -10,7 +10,7 @@ export const Header = () => {
   const { pathname } = useLocation();
 
   return (
-    <header className="flex h-24 items-center px-8 bg-white drop-shadow-md justify-between">
+    <header className="flex h-24 items-center px-8 bg-white drop-shadow-md justify-between sticky top-0">
       <Link to={routes.documentsRoute()}>
         <div className="font-bold text-4xl text-sky-600">DA</div>
       </Link>

@@ -1,5 +1,5 @@
 import { Link, LinkProps } from "react-router-dom";
-import { ButtonComponent } from "./ButtonComponent";
+import { ButtonComponent } from "./ui/ButtonComponent";
 import { ForwardRefExoticComponent, HTMLProps, ReactNode } from "react";
 
 interface NavButtonProps extends ForwardRefExoticComponent<LinkProps & HTMLProps<HTMLAnchorElement>> {

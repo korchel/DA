@@ -3,7 +3,7 @@ import { IUser } from "../../interfaces/interfaces";
 import { routes } from "../../routes";
 import { useTranslation } from "react-i18next";
 import { useGetUsersQuery as getUsers} from "../../store/usersApi";
-import { Spinner } from "../../icons/Spinner";
+import { Spinner } from "../../components/ui/icons/Spinner";
 
 export const UsersPage = () => {
   const { t } = useTranslation();

@@ -11,7 +11,7 @@ import { SelectComponent } from "../../SelectComponent";
 import { CheckBox } from "../../ui/CheckBox";
 import { useCreateDocMutation } from "../../../store/docsApi";
 import { useAuth } from "../../../context/AuthContext";
-import { ButtonComponent } from "../../ButtonComponent";
+import { ButtonComponent } from "../../ui/ButtonComponent";
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
 import { MultiSelectComponent } from "../../MultiSelectComponent";
 import { routes } from "../../../routes";

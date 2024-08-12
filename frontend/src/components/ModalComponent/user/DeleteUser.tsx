@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { ButtonComponent } from "../../ButtonComponent";
+import { ButtonComponent } from "../../ui/ButtonComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
@@ -38,13 +38,13 @@ export const DeleteUser = () => {
           variant="outline"
           onClick={handleClose}
         >
-          {t('modal.cancel')}
+          {t('cancel')}
         </ButtonComponent>
         <ButtonComponent
           variant="danger"
           onClick={handleDelete}
         >
-          {t('modal.delete')}
+          {t('delete')}
         </ButtonComponent>
       </div>
     </>

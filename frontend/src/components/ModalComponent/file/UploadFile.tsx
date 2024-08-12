@@ -1,11 +1,17 @@
-import { Controller, useForm } from "react-hook-form"
-import { MultiSelectComponent } from "../../MultiSelectComponent"
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
 import { CheckBox } from "../../ui/CheckBox";
-import { ButtonComponent } from "../../ButtonComponent";
+import { ButtonComponent } from "../../ui/ButtonComponent";
 import { useUploadFileMutation } from "../../../store/filesApi";
-import { ChangeEventHandler } from "react";
-import { t } from "i18next";
+import { MultiSelectComponent } from "../../MultiSelectComponent"
+import { FileInput } from "../../ui/FileInput";
+import { closeModal } from "../../../store/modalSlice";
+import { routes } from "../../../routes";
 
 export interface IFileForm {
   file: any,
@@ -19,21 +25,33 @@ const defaultValues = {
   params: {
     available_for: [],
     public_document: false,
-  }
-}
+  },
+};
 
 export const UploadFile = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { data: users } = getUsers();
   const [uploadFile] = useUploadFileMutation();
   const availableForOptions = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
-  const { register, control, handleSubmit, formState: { errors }, setValue, getValues } = useForm<IFileForm>({ defaultValues });
+  const { control, handleSubmit, formState: { errors }, setValue } = useForm<IFileForm>({ defaultValues });
   
   const onSubmit = (data: IFileForm) => {
     const fomrData = new FormData();
     fomrData.append('params', JSON.stringify(data.params));
     fomrData.append('file', data.file);
     uploadFile(fomrData)
+      .unwrap()
+      .then(() => {
+        toast.success(t('files.modal.upload.toast.success'));
+      })
+      .catch(() => {
+        toast.error(t('files.modal.upload.toast.error'));
+      });
+    dispatch(closeModal());
+    navigate(routes.filesRoute());
   };
   
   return (
@@ -42,11 +60,10 @@ export const UploadFile = () => {
         control={control}
         name="file"
         render={({ field }) => (
-          <input
+          <FileInput
             {...field}
             value={field.value?.fileName}
-            onChange={(e) => field.onChange(e.target.files?.[0])}
-            type="file"
+            onChange={field.onChange}
           />
         )}
       />
@@ -60,7 +77,8 @@ export const UploadFile = () => {
             label={t('files.modal.form.labels.availableFor')}
             onChange={field.onChange}
             selectOptions={availableForOptions}
-            placeholder="dsdg"
+            placeholder={t('files.modal.form.placeholders.availableFor')}
+            required={false}
           />
         )}
       />
@@ -77,7 +95,6 @@ export const UploadFile = () => {
             />
           )}
         />
-       
         <ButtonComponent type="submit" variant="primary">Загрузить файл</ButtonComponent>
       </div>
     </form>

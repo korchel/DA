@@ -1,14 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ActionButton } from "../../components/ActionButton";
+import { ActionButton } from "../../components/ui/ActionButton";
 import { IDocument } from "../../interfaces/interfaces";
 import { routes } from "../../routes";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../context/AuthContext";
 import { useGetDocsQuery as getDocs } from "../../store/docsApi";
-import { ButtonComponent } from "../../components/ButtonComponent";
+import { ButtonComponent } from "../../components/ui/ButtonComponent";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../store/modalSlice";
-import { Spinner } from "../../icons/Spinner";
+import { Spinner } from "../../components/ui/icons/Spinner";
+import { MouseEventHandler } from "react";
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
@@ -17,16 +18,22 @@ export const DocumentsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleDelete = (id: number): void => {
-    dispatch(openModal({ type: "delete", open: true, id }));
-  };
-
   const handleCreate = () => {
     dispatch(openModal({ type: "createDocument", open: true }))
   };
 
-  const handleEdit = (id: number): void => {
-    dispatch(openModal({ type: "edit", open: true, id }));
+  const handleDelete = (event, id: number): void => {
+    event.stopPropagation();
+    dispatch(openModal({ type: "deleteDocument", open: true, id }));
+  };
+
+  const handleEdit = (event, id: number): void => {
+    event.stopPropagation();
+    dispatch(openModal({ type: "editDocument", open: true, id }));
+  };
+
+  const handleGoToDetailsPage = (id: number) => {
+    navigate(routes.documentDetailsRoute(id))
   };
 
   if (isLoading) {
@@ -64,7 +71,7 @@ export const DocumentsPage = () => {
             <tr
               className="border-b overflow-hidden hover:bg-sky-50 cursor-pointer"
               key={document.id}
-              onClick={() => navigate(routes.documentDetailsRoute(document.id))}
+              onClick={() => handleGoToDetailsPage(document.id)}
             >
               <td className="py-4 px-5">{document.number}</td>
               <td className="py-4 px-5 truncate">{document.title}</td>
@@ -74,8 +81,8 @@ export const DocumentsPage = () => {
               <td className="py-4 px-5">{document.creationDate ?? t('documents.noData')}</td>
               <td className="py-4 px-5">{document.updateDate ?? t('documents.noData')}</td>
               <td className="py-4 px-5 flex justify-around">
-                <ActionButton actionType="edit" />
-                <ActionButton actionType="delete" />
+                <ActionButton actionType="edit" title={t('edit')} onClick={(event) => handleEdit(event, document.id)} />
+                <ActionButton actionType="delete" title={t('delete')} onClick={(event) => handleDelete(event, document.id)} />
               </td>
           </tr>
           ))}

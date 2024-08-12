@@ -1,6 +1,6 @@
-import { ForwardedRef, forwardRef, useState,  } from 'react';
-import { FieldError, Merge, UseFormSetValue } from 'react-hook-form';
-import Select, { type StylesConfig, type ActionMeta } from 'react-select';
+import { ForwardedRef, forwardRef } from 'react';
+import { FieldError, Merge } from 'react-hook-form';
+import Select, { type ActionMeta } from 'react-select';
 import { InputLabel } from './ui/InputLabel';
 
 interface ISelectOption {
@@ -9,7 +9,7 @@ interface ISelectOption {
 }
 
 interface ISelectInputProps {
-  onChange: (option: ISelectOption) => void,
+  onChange: (option: ISelectOption[]) => void,
   selectOptions: ISelectOption[],
   placeholder: string,
   className?: string,
@@ -21,13 +21,12 @@ interface ISelectInputProps {
 
 type onSelect = (newValue: unknown, actionmeta: ActionMeta<unknown>) => void;
 
-export const MultiSelectComponent = ({onChange, selectOptions, label, placeholder, error, value, required = true, ...props}: ISelectInputProps) => {
-  const handleSelect = (options: any) => {
-    if (options.length > 0) {
-      return onChange(options.map((option: any) => option.value));
-    }
-    return onChange(options.value)
-  }
+export const MultiSelectComponent = forwardRef(({onChange, selectOptions, label, placeholder, error, value = [], required = true, ...props}: ISelectInputProps, ref: ForwardedRef<HTMLSelectElement>) => {
+  const handleSelect: onSelect = (options) => {
+    const _options = options as  ISelectOption[];
+    onChange( _options.map((option: any) => option.value));
+  };
+
   return (
     <div className='relative'>
       <InputLabel required={required}>{label}</InputLabel>
@@ -36,10 +35,10 @@ export const MultiSelectComponent = ({onChange, selectOptions, label, placeholde
         options={selectOptions}
         placeholder={placeholder}
         isMulti
-        value={value ? selectOptions.filter((option) => value.includes(option.value) ) : undefined}
+        value={selectOptions.filter((option) => value?.includes(option.value) )}
         {...props}
       />
       {error && <p className="absolute text-sm text-red-500">{error.message}</p>}
     </div>
   );
-};
+});

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { DetailedHTMLProps, ForwardedRef, forwardRef, HtmlHTMLAttributes, useState } from "react";
 import { FieldError } from "react-hook-form";
-import { ActionButton } from "../ActionButton";
+import { ActionButton } from "./ActionButton";
 import { InputLabel } from "./InputLabel";
 
 export interface InputFieldProps extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLDivElement>, HTMLDivElement> {

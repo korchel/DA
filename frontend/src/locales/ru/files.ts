@@ -14,7 +14,11 @@ export const files = {
       labels: {
         availableFor: 'Сделать доступным для:',
         publicFile: 'Сделать файл публичным',
-      }
+        addFile: 'Выберите файл',
+      },
+      placeholders: {
+        availableFor: 'Выберите пользователей',
+      },
     },
     delete: {
       areYouSure: 'Вы уверены, что хотите удалить этот файл?',
@@ -29,6 +33,7 @@ export const files = {
         success: "Файл добавлен",
       },
       button: 'Загрузить файл',
+
     },
     edit: {
       toast: {

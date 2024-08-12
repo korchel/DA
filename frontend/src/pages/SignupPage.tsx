@@ -1,4 +1,4 @@
-import { ButtonComponent } from "../components/ButtonComponent";
+import { ButtonComponent } from "../components/ui/ButtonComponent";
 import { InputField } from "../components/ui/InputField";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";

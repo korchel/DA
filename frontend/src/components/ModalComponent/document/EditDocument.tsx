@@ -6,7 +6,7 @@ import { TextArea } from "../../ui/TextArea";
 import { MultiSelectComponent } from "../../MultiSelectComponent";
 import { SelectComponent } from "../../SelectComponent";
 import { CheckBox } from "../../ui/CheckBox";
-import { ButtonComponent } from "../../ButtonComponent";
+import { ButtonComponent } from "../../ui/ButtonComponent";
 import isEqual from "lodash.isequal";
 
 import { useEditDocMutation, useGetDocQuery as getDoc } from "../../../store/docsApi";
@@ -52,7 +52,7 @@ export const EditDocument = () => {
         })
         .catch(() => {
           toast.error(t('documents.modal.edit.toast.error'));
-        })
+        });
       dispatch(closeModal());
       navigate(routes.documentsRoute());
     }

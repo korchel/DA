@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ButtonComponent } from "../../ButtonComponent";
+import { ButtonComponent } from "../../ui/ButtonComponent";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { useDeleteDocMutation } from "../../../store/docsApi";
 import { routes } from "../../../routes";
@@ -41,13 +41,13 @@ export const DeleteDocument = () => {
           variant="outline"
           onClick={handleClose}
         >
-          {t('modal.cancel')}
+          {t('cancel')}
         </ButtonComponent>
         <ButtonComponent
           variant="danger"
           onClick={handleDelete}
         >
-          {t('modal.delete')}
+          {t('delete')}
         </ButtonComponent>
       </div>
     </>

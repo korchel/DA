@@ -6,7 +6,7 @@ import { CheckBox } from "../../ui/CheckBox";
 import { useEditUserMutation, useGetUserQuery as getUser } from "../../../store/usersApi";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
-import { ButtonComponent } from "../../ButtonComponent";
+import { ButtonComponent } from "../../ui/ButtonComponent";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../routes";

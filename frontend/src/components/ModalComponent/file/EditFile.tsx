@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { MultiSelectComponent } from "../../MultiSelectComponent";
-import { ButtonComponent } from "../../ButtonComponent";
+import { ButtonComponent } from "../../ui/ButtonComponent";
 import { CheckBox } from "../../ui/CheckBox";
 import { useEditFileMutation } from "../../../store/filesApi";
 import { routes } from "../../../routes";
@@ -68,7 +68,8 @@ export const EditFile = () => {
             label={t('files.modal.form.labels.availableFor')}
             onChange={field.onChange}
             selectOptions={availableForOptions}
-            placeholder={'hh'}
+            placeholder={t('files.modal.form.placeholders.availableFor')}
+            required={false}
           />
         )}
       />

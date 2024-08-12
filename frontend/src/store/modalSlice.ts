@@ -8,7 +8,7 @@ interface IState {
 }
 
 const initialState: IState = {
-  type: 'editUser',
+  type: 'editDocument',
   id: undefined,
   open: true,
 };
