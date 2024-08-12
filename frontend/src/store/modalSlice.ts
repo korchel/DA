@@ -8,9 +8,9 @@ interface IState {
 }
 
 const initialState: IState = {
-  type: 'editDocument',
+  type: null,
   id: undefined,
-  open: true,
+  open: false,
 };
 
 const modalSlice = createSlice({
