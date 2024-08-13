@@ -6,7 +6,7 @@ import isEqual from "lodash.isequal";
 import { toast } from "react-toastify";
 
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
-import { MultiSelectComponent } from "../../MultiSelectComponent";
+import { MultiSelectComponent } from "../../ui/MultiSelectComponent";
 import { ButtonComponent } from "../../ui/ButtonComponent";
 import { CheckBox } from "../../ui/CheckBox";
 import { useEditFileMutation } from "../../../store/filesApi";

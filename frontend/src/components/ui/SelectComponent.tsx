@@ -1,15 +1,13 @@
-import { useMemo,  } from 'react';
+import { ForwardedRef, forwardRef, useMemo,  } from 'react';
 import { FieldError } from 'react-hook-form';
-import Select, { type ActionMeta } from 'react-select';
+import Select, { ClassNamesConfig, GroupBase } from 'react-select';
 import clsx from 'clsx';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
-import { InputLabel } from './ui/InputLabel';
 
-interface ISelectOption {
-  label: string,
-  value: number,
-}
+import { InputLabel } from './InputLabel';
+import { ErrorMessage } from './ErrorMessage';
+import { ISelectOption, onSelect } from '../../interfaces';
 
 interface ISelectInputProps {
   onChange: (option: number) => void,
@@ -18,17 +16,8 @@ interface ISelectInputProps {
   error?: FieldError,
   value?: number,
   label?: string,
+  selectOptions: ISelectOption[],
 }
-
-type onSelect = (newValue: unknown, actionmeta: ActionMeta<unknown>) => void;
-
-const selectOptions: ISelectOption[] = [
-  { value: 1, label: 'Заметка' },
-  { value: 2, label: 'Отчет' },
-  { value: 3, label: 'Презентация' },
-  { value: 4, label: 'Статья' },
-  { value: 5, label: 'По умолчанию???' },
-];
 
 const EmotionCacheProvider = ({ children }: { children: React.ReactNode }) => {
   const cache = useMemo(
@@ -42,14 +31,14 @@ const EmotionCacheProvider = ({ children }: { children: React.ReactNode }) => {
   return <CacheProvider value={cache}>{children}</CacheProvider>;
 };
 
-const classNames = {
-  control: () => "border-slate-300 shadow-none rounded-sm !active:border-red-300",
+const classNames:  ClassNamesConfig<ISelectOption, false, GroupBase<ISelectOption>> | undefined = {
+  control: (state) => clsx(state.isFocused ? 'ring ring-sky-200 ring-opacity-50 outline-sky-500' : 'border-grey-300', "border-slate-300 focus-visible:border-4 hover:outline-sky-500 shadow-none rounded-sm hover:border-sky-500  hover:ring hover:ring-sky-200 hover:ring-opacity-50"),
   valueContainer: () => 'p-1',
   option: ({ isSelected, isFocused }) => clsx(isFocused && !isSelected && '!bg-sky-200', isSelected && 'bg-sky-500'),
   menu: () => 'z-20',
 };
 
-export const SelectComponent = ({ onChange, label, placeholder, error, value, ...props }: ISelectInputProps) => {
+export const SelectComponent = forwardRef(({ selectOptions, onChange, label, placeholder, error, value, ...props }: ISelectInputProps, ref: ForwardedRef<HTMLSelectElement>) => {
   const handleSelect: onSelect = (option) => {
     const _option = option as ISelectOption;
     onChange(_option.value);
@@ -66,8 +55,8 @@ export const SelectComponent = ({ onChange, label, placeholder, error, value, ..
           placeholder={placeholder}
           {...props}
         />
-        {error && <p className="absolute text-sm text-red-500">{error.message}</p>}
+        {error && <ErrorMessage>{error.message}</ErrorMessage>}
       </div>
     </EmotionCacheProvider>
   );
-};
+});

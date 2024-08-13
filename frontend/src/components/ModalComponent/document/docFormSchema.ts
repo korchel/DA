@@ -20,9 +20,7 @@ export const createDocFormSchema: ZodType<Omit<IDocForm, 'authorId'>> = z.object
   number: z.coerce.number().positive({
     message: "Обязательное поле"
   }),
-  content: z.string({
-    required_error: "Обязательное поле",
-  }),
+  content: z.string().trim().min(1, { message: "Обязательное поле" }),
   type_id: z.number({
     required_error: "Обязательное поле",
   }),
@@ -40,9 +38,7 @@ export const editDocFormSchema: ZodType<IDocForm> = z.object({
   number: z.coerce.number().positive({
     message: "Обязательное поле",
   }),
-  content: z.string({
-    required_error: "Обязательное поле",
-  }),
+  content: z.string().trim().min(1, { message: "Обязательное поле" }),
   type_id: z.number({
     required_error: "Обязательное поле",
   }),

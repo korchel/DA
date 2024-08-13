@@ -3,8 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { InputField } from "../../ui/InputField";
 import { TextArea } from "../../ui/TextArea";
-import { MultiSelectComponent } from "../../MultiSelectComponent";
-import { SelectComponent } from "../../SelectComponent";
+import { MultiSelectComponent } from "../../ui/MultiSelectComponent";
+import { SelectComponent } from "../../ui/SelectComponent";
 import { CheckBox } from "../../ui/CheckBox";
 import { ButtonComponent } from "../../ui/ButtonComponent";
 import isEqual from "lodash.isequal";
@@ -17,6 +17,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { useTranslation } from "react-i18next";
 import { editDocFormSchema, IDocForm } from "./docFormSchema";
+import { ISelectOption } from "../../../interfaces";
+
+export const selectTypeOptions: ISelectOption[] = [
+  { value: 1, label: 'Заметка' },
+  { value: 2, label: 'Отчет' },
+  { value: 3, label: 'Презентация' },
+  { value: 4, label: 'Статья' },
+  { value: 5, label: 'По умолчанию???' },
+];
 
 export const EditDocument = () => {
   const { t } = useTranslation();
@@ -90,6 +99,7 @@ export const EditDocument = () => {
             placeholder={t('documents.modal.form.placeholders.type')}
             onChange={field.onChange}
             label={t('documents.modal.form.labels.type')}
+            selectOptions={selectTypeOptions}
           />
         )}
       />

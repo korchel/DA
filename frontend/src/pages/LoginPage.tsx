@@ -1,12 +1,13 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ButtonComponent } from "../components/ui/ButtonComponent"
 import { InputField } from "../components/ui/InputField"
 import { routes } from '../routes';
-import { useTranslation } from 'react-i18next';
-import { useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { ErrorMessage } from '../components/ui/ErrorMessage';
 
 interface ILoginData {
   username: string,
@@ -15,12 +16,15 @@ interface ILoginData {
 
 export const LoginPage = () => {
   const { t } = useTranslation();
-  const { register, control, setFocus, handleSubmit, formState: { errors }, reset, clearErrors, getValues } = useForm<ILoginData>();
-  const ref = useRef(null);
-  const { logIn, isAuthenticated } = useAuth();
+  const { register, setFocus, handleSubmit, formState: { errors } } = useForm<ILoginData>();
+  const { logIn } = useAuth();
   const navigate = useNavigate();
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
+  const [authFailed, setauthFailed] = useState<boolean>(false);
 
   const onSubmit = (data: ILoginData) => {
+    setauthFailed(false);
+    setButtonDisabled(true);
     fetch(routes.loginPath(), {
       method: 'POST',
       credentials: 'include',
@@ -31,12 +35,19 @@ export const LoginPage = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        const roles = data.user.roles.map((role) => role.name);
-        const id = data.user.idUser;
-        logIn({roles, id});
-        navigate(routes.documentsRoute());
+        if (data.user) {
+          const roles = data.user.roles.map((role) => role.name);
+          const id = data.user.idUser;
+          logIn({roles, id});
+          navigate(routes.documentsRoute());
+        } else {
+          if (data.status === 400) {
+            setauthFailed(true);
+            setButtonDisabled(false)
+          }
+        }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => { console.log(error); });
   };
 
   useEffect(() => {
@@ -45,10 +56,11 @@ export const LoginPage = () => {
 
   return (
     <div className="h-full flex items-center justify-center">
-      <div className="shadow-lg p-6 rounded-md min-w-[400px] bg-white">
+      <div className="shadow-lg p-6 rounded-md min-w-[400px] bg-white relative">
         <form id="registerForm" className="flex flex-col gap-7 text-center" onSubmit={handleSubmit(onSubmit)}>
-          <h1 className="text-sky-800 font-bold text-lg">{t('loginPage.title')}</h1>
+          <h1 className="text-sky-600 font-bold text-lg">{t('loginPage.title')}</h1>
           <InputField
+            autoComplete="on"
             placeholder={t('loginPage.placeholders.userName')}
             error={errors.username}
             {...register('username', {
@@ -58,6 +70,7 @@ export const LoginPage = () => {
             })}
           />
           <InputField
+            autoComplete="on"
             type="password"
             showActionButton
             placeholder={t('loginPage.placeholders.password')}
@@ -76,7 +89,8 @@ export const LoginPage = () => {
               }
             })}
           />
-          <ButtonComponent type="submit" variant="primary">{t('loginPage.button')}</ButtonComponent>
+          {authFailed && <ErrorMessage className="bottom-16">{t('errorMessages.wrongPasswordOrUsername')}</ErrorMessage>}
+          <ButtonComponent disabled={buttonDisabled} type="submit" variant="primary">{t('loginPage.button')}</ButtonComponent>
         </form>
       </div>
     </div>

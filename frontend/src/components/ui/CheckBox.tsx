@@ -7,7 +7,7 @@ interface ICheckBox extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLInputElemen
   checked?: boolean,
 }
 
-export const CheckBox = ({label, value, checked, onChange, ...props}: ICheckBox) => {
+export const CheckBox = forwardRef(({label, value, checked, onChange, ...props}: ICheckBox, ref: ForwardedRef<HTMLSelectElement>) => {
 
 
   return (
@@ -23,5 +23,5 @@ export const CheckBox = ({label, value, checked, onChange, ...props}: ICheckBox)
       />
     </label>
   );
-};
+});
 

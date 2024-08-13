@@ -20,7 +20,7 @@ export const ButtonComponent = ({ variant, className, children, ...props }: Butt
 
   );
   return (
-    <button className={cn} {...props}>
+    <button className={clsx(cn, 'cursor-pointer')} {...props}>
       {children}
     </button>
   );

@@ -1,7 +1,8 @@
 import { ForwardedRef, forwardRef } from 'react';
 import { FieldError, Merge } from 'react-hook-form';
 import Select, { type ActionMeta } from 'react-select';
-import { InputLabel } from './ui/InputLabel';
+import { InputLabel } from './InputLabel';
+import { ErrorMessage } from './ErrorMessage';
 
 interface ISelectOption {
   label: string,
@@ -38,7 +39,7 @@ export const MultiSelectComponent = forwardRef(({onChange, selectOptions, label,
         value={selectOptions.filter((option) => value?.includes(option.value) )}
         {...props}
       />
-      {error && <p className="absolute text-sm text-red-500">{error.message}</p>}
+      {error && <ErrorMessage>{error.message}</ErrorMessage>}
     </div>
   );
 });

@@ -1,3 +1,5 @@
+import { ActionMeta } from "react-select";
+
 export type RoleName = 'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_MODERATOR';
 
 export type Role = {
@@ -53,4 +55,13 @@ export interface IFile {
   creationDate: string,
   updateDate: string,
 }
+
+export type onSelect = (newValue: unknown, actionmeta: ActionMeta<unknown>) => void;
+
+export interface ISelectOption {
+  label: string,
+  value: number,
+}
+
+
 

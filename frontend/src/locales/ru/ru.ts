@@ -1,5 +1,6 @@
 import { documents } from "./documents";
 import { files } from "./files";
+import { signupPage } from "./signupPage";
 import { users } from "./users";
 
 
@@ -24,17 +25,7 @@ export const ru = {
         password: 'Пароль',
       },
     },
-    signupPage:{
-      title: 'Регистрация пользователя',
-      button: 'Зарегистрироваться',
-      placeholders: {
-        userName: 'Имя пользователя',
-        lastName: 'Имя пользователя',
-        email: 'e-mail',
-        password: 'Пароль',
-        repeatPassword: 'Подтвердите пароль',
-      }
-    },
+    
     notFoundPage: {
       title: 'Страница не найдена',
       button: 'На главную',
@@ -43,8 +34,11 @@ export const ru = {
       reuired: 'Обязательное поле',
       passwordLength: 'Длина пароля должна быть от 8 до 14 символов',
       confirmPassword: 'Пароли должны совпадать',
+      wrongPasswordOrUsername: 'Неправильное имя пользователя или пароль',
+      userExists: 'Такой пользователь или адрес электронной почты уже зар',
+      inValidEmail: 'Невалидный адрес электронной почты',
     },
-    
+  signupPage,
   documents,
   files,
   users,

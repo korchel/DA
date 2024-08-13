@@ -7,16 +7,25 @@ import { useTranslation } from "react-i18next";
 
 import { InputField } from "../../ui/InputField";
 import { TextArea } from "../../ui/TextArea";
-import { SelectComponent } from "../../SelectComponent";
+import { SelectComponent } from "../../ui/SelectComponent";
 import { CheckBox } from "../../ui/CheckBox";
 import { useCreateDocMutation } from "../../../store/docsApi";
 import { useAuth } from "../../../context/AuthContext";
 import { ButtonComponent } from "../../ui/ButtonComponent";
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
-import { MultiSelectComponent } from "../../MultiSelectComponent";
+import { MultiSelectComponent } from "../../ui/MultiSelectComponent";
 import { routes } from "../../../routes";
 import { closeModal } from "../../../store/modalSlice";
 import { createDocFormSchema, IDocForm } from "./docFormSchema";
+import { ISelectOption } from "../../../interfaces";
+
+export const selectTypeOptions: ISelectOption[] = [
+  { value: 1, label: 'Заметка' },
+  { value: 2, label: 'Отчет' },
+  { value: 3, label: 'Презентация' },
+  { value: 4, label: 'Статья' },
+  { value: 5, label: 'По умолчанию???' },
+];
 
 export const CreateDocument = () => {
   const { t } = useTranslation();
@@ -74,6 +83,7 @@ export const CreateDocument = () => {
             error={errors.type_id}
             label={t('documents.modal.form.labels.type')}
             onChange={field.onChange}
+            selectOptions={selectTypeOptions}
           />
         )}
       />

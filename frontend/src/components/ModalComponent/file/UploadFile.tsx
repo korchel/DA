@@ -8,7 +8,7 @@ import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
 import { CheckBox } from "../../ui/CheckBox";
 import { ButtonComponent } from "../../ui/ButtonComponent";
 import { useUploadFileMutation } from "../../../store/filesApi";
-import { MultiSelectComponent } from "../../MultiSelectComponent"
+import { MultiSelectComponent } from "../../ui/MultiSelectComponent"
 import { FileInput } from "../../ui/FileInput";
 import { closeModal } from "../../../store/modalSlice";
 import { routes } from "../../../routes";
