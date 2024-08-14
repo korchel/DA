@@ -11,18 +11,17 @@ interface ISelectOption {
 
 interface ISelectInputProps {
   onChange: (option: ISelectOption[]) => void,
-  selectOptions: ISelectOption[],
   placeholder: string,
-  className?: string,
-  error?: Merge<FieldError, (FieldError | undefined)[]>,
-  value?: number[],
-  label: string,
+  selectOptions: ISelectOption[],
+  error?:Merge<FieldError, (FieldError | undefined)[]>,
+  value: number[] | undefined,
+  label?: string,
   required?: boolean,
 }
 
 type onSelect = (newValue: unknown, actionmeta: ActionMeta<unknown>) => void;
 
-export const MultiSelectComponent = forwardRef(({onChange, selectOptions, label, placeholder, error, value, required = true, ...props}: ISelectInputProps, ref: ForwardedRef<HTMLSelectElement>) => {
+export const MultiSelectComponent = forwardRef(({onChange, placeholder, selectOptions, label, error, value, required = true, ...props}: ISelectInputProps, ref: ForwardedRef<HTMLSelectElement>) => {
   const handleSelect: onSelect = (options) => {
     const _options = options as  ISelectOption[];
     onChange( _options.map((option: any) => option.value));
