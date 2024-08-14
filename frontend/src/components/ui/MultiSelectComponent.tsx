@@ -22,7 +22,7 @@ interface ISelectInputProps {
 
 type onSelect = (newValue: unknown, actionmeta: ActionMeta<unknown>) => void;
 
-export const MultiSelectComponent = forwardRef(({onChange, selectOptions, label, placeholder, error, value = [], required = true, ...props}: ISelectInputProps, ref: ForwardedRef<HTMLSelectElement>) => {
+export const MultiSelectComponent = forwardRef(({onChange, selectOptions, label, placeholder, error, value, required = true, ...props}: ISelectInputProps, ref: ForwardedRef<HTMLSelectElement>) => {
   const handleSelect: onSelect = (options) => {
     const _options = options as  ISelectOption[];
     onChange( _options.map((option: any) => option.value));

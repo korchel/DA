@@ -32,9 +32,9 @@ const EmotionCacheProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const classNames:  ClassNamesConfig<ISelectOption, false, GroupBase<ISelectOption>> | undefined = {
-  control: (state) => clsx(state.isFocused ? 'ring ring-sky-200 ring-opacity-50 outline-sky-500' : 'border-grey-300', "border-slate-300 focus-visible:border-4 hover:outline-sky-500 shadow-none rounded-sm hover:border-sky-500  hover:ring hover:ring-sky-200 hover:ring-opacity-50"),
+  control: (state) => clsx(state.isFocused ? 'ring-2 ring-sky-200 ring-opacity-50 border-2 border-sky-500 outline-dotted outline-2 outline-offset-2' : 'border-slate-300', "hover:border-slate-300 rounded-sm cursor-pointer"),
   valueContainer: () => 'p-1',
-  option: ({ isSelected, isFocused }) => clsx(isFocused && !isSelected && '!bg-sky-200', isSelected && 'bg-sky-500'),
+  option: ({ isSelected, isFocused }) => clsx(isFocused && !isSelected && '!bg-sky-200', isSelected && 'bg-sky-500', 'cursor-pointer'),
   menu: () => 'z-20',
 };
 

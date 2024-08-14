@@ -79,6 +79,7 @@ export const CreateDocument = () => {
         name='type_id'
         render={({ field }) => (
           <SelectComponent
+            {...field}
             placeholder={t('documents.modal.form.placeholders.type')}
             error={errors.type_id}
             label={t('documents.modal.form.labels.type')}
@@ -92,6 +93,7 @@ export const CreateDocument = () => {
         name='available_for'
         render={({ field }) => (
           <MultiSelectComponent
+            {...field}
             error={errors.available_for}
             placeholder={t('documents.modal.form.placeholders.availableFor')}
             label={t('documents.modal.form.labels.availableFor')}
