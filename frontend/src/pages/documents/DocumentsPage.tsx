@@ -1,15 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
-import { ActionButton } from "../../components/ui/ActionButton";
-import { IDocument } from "../../interfaces/interfaces";
-import { routes } from "../../routes";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
+import { ActionButton, PageTitle, ButtonComponent } from "../../components/ui";
+import { routes } from "../../routes";
 import { useAuth } from "../../context/AuthContext";
 import { useGetDocsQuery as getDocs } from "../../store/docsApi";
-import { ButtonComponent } from "../../components/ui/ButtonComponent";
-import { useDispatch } from "react-redux";
 import { openModal } from "../../store/modalSlice";
-import { Spinner } from "../../components/ui/icons/Spinner";
-import { MouseEventHandler } from "react";
+import { Spinner } from "../../components/ui/icons";
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
@@ -45,7 +43,7 @@ export const DocumentsPage = () => {
   }
   return (
     <div className="h-full p-8 flex flex-col">
-      <h1 className="text-sky-800 font-bold text-lg text-center">{t('documents.title')}</h1>
+      <PageTitle>{t('documents.title')}</PageTitle>
       <ButtonComponent
         variant="primary"
         className="my-5 ml-auto"

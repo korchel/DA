@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import { closeModal, getModalOpen, getModalType } from "../../store/modalSlice";
 import { DeleteDocument } from "./document/DeleteDocument";
 import { CreateDocument } from "./document/CreateDocument";
@@ -7,8 +8,7 @@ import { EditUser } from "./user/EditUser";
 import { DeleteUser } from "./user/DeleteUser";
 import { EditFile } from "./file/EditFile";
 import { UploadFile } from "./file/UploadFile";
-import { ActionButton } from "../ui/ActionButton";
-
+import { ActionButton } from "../ui";
 
 export const ModalComponent = () => {
   const dispatch = useDispatch();

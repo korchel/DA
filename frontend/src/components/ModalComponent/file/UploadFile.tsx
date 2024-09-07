@@ -5,11 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
-import { CheckBox } from "../../ui/CheckBox";
-import { ButtonComponent } from "../../ui/ButtonComponent";
+import { CheckBox, FileInput, ButtonComponent, MultiSelectComponent } from "../../ui";
 import { useUploadFileMutation } from "../../../store/filesApi";
-import { MultiSelectComponent } from "../../ui/MultiSelectComponent"
-import { FileInput } from "../../ui/FileInput";
 import { closeModal } from "../../../store/modalSlice";
 import { routes } from "../../../routes";
 

@@ -1,21 +1,19 @@
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
-import { InputField } from "../../ui/InputField";
-import { TextArea } from "../../ui/TextArea";
-import { MultiSelectComponent } from "../../ui/MultiSelectComponent";
-import { SelectComponent } from "../../ui/SelectComponent";
-import { CheckBox } from "../../ui/CheckBox";
-import { ButtonComponent } from "../../ui/ButtonComponent";
-import isEqual from "lodash.isequal";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
+import {
+  InputField, SelectComponent, MultiSelectComponent,
+  TextArea, CheckBox, ButtonComponent,
+} from "../../ui";
+import isEqual from "lodash.isequal";
 import { useEditDocMutation, useGetDocQuery as getDoc } from "../../../store/docsApi";
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
-import { useNavigate } from "react-router-dom";
 import { routes } from "../../../routes";
-import { useDispatch, useSelector } from "react-redux";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
-import { useTranslation } from "react-i18next";
 import { editDocFormSchema, IDocForm } from "./docFormSchema";
 import { ISelectOption } from "../../../interfaces";
 

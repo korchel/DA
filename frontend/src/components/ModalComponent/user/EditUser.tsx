@@ -1,16 +1,14 @@
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-
-import { InputField } from "../../ui/InputField";
-import { CheckBox } from "../../ui/CheckBox";
-import { useEditUserMutation, useGetUserQuery as getUser } from "../../../store/usersApi";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
-import { ButtonComponent } from "../../ui/ButtonComponent";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { routes } from "../../../routes";
 import { ChangeEventHandler } from "react";
+
+import { InputField, CheckBox, ButtonComponent } from "../../ui";
+import { useEditUserMutation, useGetUserQuery as getUser } from "../../../store/usersApi";
+import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
+import { routes } from "../../../routes";
 
 export interface IEditUserForm {
   username: string,

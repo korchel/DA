@@ -1,11 +1,11 @@
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { ButtonComponent } from "../../components/ui/ButtonComponent";
-import { ActionButton } from "../../components/ui/ActionButton";
+import { useNavigate } from "react-router-dom";
+
+import { ButtonComponent, ActionButton, PageTitle } from "../../components/ui";
 import { useGetFilesQuery as getFiles } from "../../store/filesApi";
 import { routes } from "../../routes";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { useDispatch } from "react-redux";
 import { openModal } from "../../store/modalSlice";
 
 export const FilesPage = () => {
@@ -32,7 +32,7 @@ export const FilesPage = () => {
 
   return (
     <div className="h-full p-8 flex flex-col">
-      <h1 className="text-sky-600 font-bold text-lg text-center">{t('files.title')}</h1>
+      <PageTitle>{t('files.title')}</PageTitle>
       <ButtonComponent
         variant="primary"
         className="my-5 ml-auto"

@@ -6,13 +6,10 @@ import isEqual from "lodash.isequal";
 import { toast } from "react-toastify";
 
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
-import { MultiSelectComponent } from "../../ui/MultiSelectComponent";
-import { ButtonComponent } from "../../ui/ButtonComponent";
-import { CheckBox } from "../../ui/CheckBox";
-import { useEditFileMutation } from "../../../store/filesApi";
+import { MultiSelectComponent, CheckBox, ButtonComponent } from "../../ui";
+import { useEditFileMutation, useGetFileQuery as getFile } from "../../../store/filesApi";
 import { routes } from "../../../routes";
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
-import { useGetFileQuery as getFile } from "../../../store/filesApi";
 
 export interface IEditFileForm {
   available_for: number[],

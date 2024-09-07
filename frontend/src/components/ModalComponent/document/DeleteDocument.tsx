@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ButtonComponent } from "../../ui/ButtonComponent";
+import { ButtonComponent } from "../../ui";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { useDeleteDocMutation } from "../../../store/docsApi";
 import { routes } from "../../../routes";

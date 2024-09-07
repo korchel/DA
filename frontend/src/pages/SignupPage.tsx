@@ -1,12 +1,11 @@
-import { ButtonComponent } from "../components/ui/ButtonComponent";
-import { InputField } from "../components/ui/InputField";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
+import { ButtonComponent, InputField, ErrorMessage } from "../components/ui";
 import { routes } from "../routes";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { ErrorMessage } from "../components/ui/ErrorMessage";
 
 interface ISignupData {
   name: string,

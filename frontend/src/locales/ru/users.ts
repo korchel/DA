@@ -1,4 +1,5 @@
 export const users = {
+  title: 'Список пользователей',
   tableHeader: {
     userName: 'Имя пользователя',
     name: 'Имя',

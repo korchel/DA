@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { ButtonComponent } from "../../ui/ButtonComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import { ButtonComponent } from "../../ui";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { routes } from "../../../routes";
 import { useDeleteUserMutation } from "../../../store/usersApi";

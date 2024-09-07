@@ -3,11 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ButtonComponent } from "../components/ui/ButtonComponent"
-import { InputField } from "../components/ui/InputField"
+import { ButtonComponent, InputField, ErrorMessage } from "../components/ui";
 import { routes } from '../routes';
 import { useAuth } from '../context/AuthContext';
-import { ErrorMessage } from '../components/ui/ErrorMessage';
 
 interface ILoginData {
   username: string,

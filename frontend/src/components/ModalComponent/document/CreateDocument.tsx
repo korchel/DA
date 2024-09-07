@@ -5,15 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { InputField } from "../../ui/InputField";
-import { TextArea } from "../../ui/TextArea";
-import { SelectComponent } from "../../ui/SelectComponent";
-import { CheckBox } from "../../ui/CheckBox";
+import {
+  InputField, TextArea, SelectComponent, CheckBox,
+  ButtonComponent, MultiSelectComponent,
+} from "../../ui";
 import { useCreateDocMutation } from "../../../store/docsApi";
 import { useAuth } from "../../../context/AuthContext";
-import { ButtonComponent } from "../../ui/ButtonComponent";
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
-import { MultiSelectComponent } from "../../ui/MultiSelectComponent";
 import { routes } from "../../../routes";
 import { closeModal } from "../../../store/modalSlice";
 import { createDocFormSchema, IDocForm } from "./docFormSchema";

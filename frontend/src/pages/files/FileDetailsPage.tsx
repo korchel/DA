@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+
 import { useGetFileQuery as getFile } from "../../store/filesApi";
 import { openModal } from "../../store/modalSlice";
-import { Spinner } from "../../components/ui/icons/Spinner";
-import { Card } from "../../components/ui";
-import { ButtonComponent } from "../../components/ui/ButtonComponent";
+import { Spinner } from "../../components/ui/icons";
+import { Card, ButtonComponent } from "../../components/ui";
 import { routes } from "../../routes";
 
 export const FileDetailsPage = () => {

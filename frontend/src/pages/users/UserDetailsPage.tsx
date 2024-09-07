@@ -1,10 +1,10 @@
-import {useParams} from "react-router-dom";
-import { ButtonComponent } from "../../components/ui/ButtonComponent";
-import { Card } from "../../components/ui";
+import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+
+import { ButtonComponent, Card } from "../../components/ui";
 import { useGetUserQuery as getUser } from "../../store/usersApi";
-import { Spinner } from "../../components/ui/icons/Spinner";
+import { Spinner } from "../../components/ui/icons";
 import { openModal } from "../../store/modalSlice";
 
 export const UserDetailsPage = () => {

@@ -1,9 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
-import { IUser } from "../../interfaces/interfaces";
-import { routes } from "../../routes";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
+import { routes } from "../../routes";
 import { useGetUsersQuery as getUsers} from "../../store/usersApi";
-import { Spinner } from "../../components/ui/icons/Spinner";
+import { Spinner } from "../../components/ui/icons";
+import { PageTitle } from "../../components/ui";
 
 export const UsersPage = () => {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ export const UsersPage = () => {
   }
   return (
     <div className="h-full p-8">
+      <PageTitle className="my-5">{t('users.title')}</PageTitle>
       <table className="w-[100%] bg-white text-left rounded-md shadow-md">
         <thead className="uppercase text-sky-600 whitespace-nowrap">
           <tr className="border-b">
