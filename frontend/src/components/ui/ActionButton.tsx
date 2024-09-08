@@ -3,11 +3,12 @@ import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
 import {
   DeleteIcon, EditIcon, EyeIcon, CrossedEyeIcon,
-  CloseIcon, DownloadIcon, OverviewIcon
+  CloseIcon, DownloadIcon, OverviewIcon,
+  MenuIcon
 } from "./icons";
 
 interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  actionType: 'delete' | 'edit' | 'showPassword' | 'hidePassword' | 'close' | 'download' | 'overview',
+  actionType: 'delete' | 'edit' | 'showPassword' | 'hidePassword' | 'close' | 'download' | 'overview' | 'openMenu',
 }
 
 export const ActionButton = ({ actionType, className, ...props }: ButtonProps) => {
@@ -18,7 +19,8 @@ export const ActionButton = ({ actionType, className, ...props }: ButtonProps) =
     hidePassword: <CrossedEyeIcon />,
     close: <CloseIcon />,
     download: <DownloadIcon />,
-    overview: <OverviewIcon />
+    overview: <OverviewIcon />,
+    openMenu: <MenuIcon />,
   }[actionType];
 
   return (

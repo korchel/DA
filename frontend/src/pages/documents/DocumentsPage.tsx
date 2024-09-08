@@ -61,13 +61,11 @@ export const DocumentsPage = () => {
 
   if (isLoading) {
     return (
-      <div className="h-full p-8 flex flex-col justify-center items-center">
-        <Spinner />
-      </div>
+      <Spinner className="h-[100%]" />
     );
   }
   return (
-    <div className="h-full p-8 flex flex-col">
+    <>
       <PageTitle>{t('documents.title')}</PageTitle>
       <ButtonComponent
         variant="primary"
@@ -86,6 +84,6 @@ export const DocumentsPage = () => {
         <ActionButton actionType="edit" title={t('edit')} onClick={(event) => handleEdit(event, document.id)} />
         <ActionButton actionType="delete" title={t('delete')} onClick={(event) => handleDelete(event, document.id)} />
       </td> */}
-    </div>
+    </>
   );
 };

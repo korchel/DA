@@ -8,13 +8,14 @@ import { routes } from "../../routes";
 import { useAuth } from "../../context/AuthContext";
 import { openModal } from "../../store/modalSlice";
 import { Table } from "../../components/Table";
+import { Spinner } from "../../components/ui/icons";
 
 export const FilesPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const { data: files } = getFiles(currentUser.roles);
+  const { data: files, isLoading } = getFiles(currentUser.roles);
 
   const tableHeaders = [
     t('files.tableHeader.fileName'),
@@ -54,8 +55,14 @@ export const FilesPage = () => {
     navigate(routes.fileDetailsRoute(id));
   };
 
+  if (isLoading) {
+    return (
+      <Spinner className="h-[100%]" />
+    );
+  }
+
   return (
-    <div className="h-full p-8 flex flex-col">
+    <>
       <PageTitle>{t('files.title')}</PageTitle>
       <ButtonComponent
         variant="primary"
@@ -79,6 +86,6 @@ export const FilesPage = () => {
         <ActionButton actionType="download" title={t('download')} onClick={(event) => handleDownload(event, file.id)} />
         <ActionButton actionType="overview" title={t('see')} onClick={(event) => handleOverview(event, file.id)} />
       </td> */}
-    </div>
+    </>
   );
 };

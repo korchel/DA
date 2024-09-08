@@ -23,30 +23,26 @@ export const DocumentDetailsPage = () => {
 
   if (isLoading) {
     return (
-      <div className="h-full p-8 flex flex-col justify-center items-center">
-        <Spinner />
-      </div>
+      <Spinner className="h-[100%]" />
     );
   }
 
   return (
-    <div className="h-full p-8 flex flex-col items-center ">
-      <Card>
-        <Card.Header>{t('documents.detailsPage.title')}<span className="text-sky-600">{doc?.title}</span></Card.Header>
-        <Card.Body>
-          <div><span className="font-bold">{t('documents.detailsPage.number')}</span>{doc?.number}</div>
-          <div><span className="font-bold">{t('documents.detailsPage.author')}</span>{doc?.author.username}</div>
-          <div><span className="font-bold">{t('documents.detailsPage.type')}</span>{doc?.type.type}</div>
-          <div className="font-bold">{t('documents.detailsPage.content')}</div>
-          <div>{doc?.content}</div>
-          <div><span className="font-bold">{t('documents.detailsPage.creationDate')}</span>{doc?.creationDate}</div>
-          <div><span className="font-bold">{t('documents.detailsPage.updateDate')}</span>{doc?.updateDate}</div>
-        </Card.Body>
-        <Card.Footer>
-          <ButtonComponent variant="primary" onClick={handleEdit}>{t('documents.detailsPage.edit')}</ButtonComponent>
-          <ButtonComponent variant="danger" onClick={handleDelete}>{t('documents.detailsPage.delete')}</ButtonComponent>
-        </Card.Footer>
-      </Card>
-    </div>
+    <Card>
+      <Card.Header>{t('documents.detailsPage.title')}<span className="text-sky-600">{doc?.title}</span></Card.Header>
+      <Card.Body>
+        <div><span className="font-bold">{t('documents.detailsPage.number')}</span>{doc?.number}</div>
+        <div><span className="font-bold">{t('documents.detailsPage.author')}</span>{doc?.author.username}</div>
+        <div><span className="font-bold">{t('documents.detailsPage.type')}</span>{doc?.type.type}</div>
+        <div className="font-bold">{t('documents.detailsPage.content')}</div>
+        <div>{doc?.content}</div>
+        <div><span className="font-bold">{t('documents.detailsPage.creationDate')}</span>{doc?.creationDate}</div>
+        <div><span className="font-bold">{t('documents.detailsPage.updateDate')}</span>{doc?.updateDate}</div>
+      </Card.Body>
+      <Card.Footer>
+        <ButtonComponent variant="primary" onClick={handleEdit}>{t('documents.detailsPage.edit')}</ButtonComponent>
+        <ButtonComponent variant="danger" onClick={handleDelete}>{t('documents.detailsPage.delete')}</ButtonComponent>
+      </Card.Footer>
+    </Card>
   );
 };

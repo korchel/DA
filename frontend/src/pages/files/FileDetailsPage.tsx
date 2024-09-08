@@ -24,32 +24,28 @@ export const FileDetailsPage = () => {
 
   if (isLoading) {
     return (
-      <div className="h-full p-8 flex flex-col justify-center items-center">
-        <Spinner />
-      </div>
+      <Spinner className="h-[100%]" />
     );
   }
 
   return (
-    <div className="h-full p-8 flex flex-col items-center ">
-      <Card>
-        <Card.Header>Файл <span className="text-sky-600">{file?.filename}</span></Card.Header>
-        <Card.Body >
-          <div><span className="font-bold">Название: </span>{file?.filename}</div>
-          <div><span className="font-bold">Тип: </span>{file?.filetype}</div>
-          <div><span className="font-bold">Автор: </span>{file?.author}</div>
-          <img
-            src={routes.thumbnailPath(file?.id)}
-            alt={file?.filename}
-            className="max-h-[100px] max-w-[100px] w-auto h-auto"
-          />
-          <div><span className="font-bold">Дата создания: </span>{file?.creationDate}</div>
-        </Card.Body>
-        <Card.Footer>
-          <ButtonComponent variant="primary" onClick={handleEdit}>Изменить файл</ButtonComponent>
-          <ButtonComponent variant="danger" onClick={handleDelete}>Удалить файл</ButtonComponent>
-        </Card.Footer>
-      </Card>
-    </div>
+    <Card>
+      <Card.Header>Файл <span className="text-sky-600">{file?.filename}</span></Card.Header>
+      <Card.Body >
+        <div><span className="font-bold">Название: </span>{file?.filename}</div>
+        <div><span className="font-bold">Тип: </span>{file?.filetype}</div>
+        <div><span className="font-bold">Автор: </span>{file?.author}</div>
+        <img
+          src={routes.thumbnailPath(file?.id)}
+          alt={file?.filename}
+          className="max-h-[100px] max-w-[100px] w-auto h-auto"
+        />
+        <div><span className="font-bold">Дата создания: </span>{file?.creationDate}</div>
+      </Card.Body>
+      <Card.Footer>
+        <ButtonComponent variant="primary" onClick={handleEdit}>Изменить файл</ButtonComponent>
+        <ButtonComponent variant="danger" onClick={handleDelete}>Удалить файл</ButtonComponent>
+      </Card.Footer>
+    </Card>
   );
 };

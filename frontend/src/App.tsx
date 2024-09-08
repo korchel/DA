@@ -45,8 +45,9 @@ const App = () => {
           <BrowserRouter>
             <div className="h-screen text-slate-900" >
               <Header />
-              <main className="h-[calc(100%-96px)] bg-slate-50 ">
-                <Routes>
+              <main className="h-[calc(100%-96px)] bg-slate-50">
+                <div className="h-full p-8 flex flex-col items-center">
+                  <Routes>
                   <Route element={<LoggedInRoute />}>
                     <Route path='documents/:id' element={<DocumentDetailsPage />} />
                     <Route path={routes.usersRoute()} element={<UsersPage />} />
@@ -61,6 +62,7 @@ const App = () => {
                   </Route>
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>
+                </div>
                 <ModalComponent />
               </main>
             </div>

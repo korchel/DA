@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { ButtonHTMLAttributes, DetailedHTMLProps, ForwardRefExoticComponent } from "react";
 
 interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  variant: 'primary' | 'outline' | 'danger',
+  variant: 'primary' | 'outline' | 'danger' | 'highLighted',
 }
 
 export const ButtonComponent = ({ variant, className, children, ...props }: ButtonProps) => {
@@ -12,15 +12,19 @@ export const ButtonComponent = ({ variant, className, children, ...props }: Butt
     'rounded-sm',
     'p-2',
     'leading-none',
+    'h-9',
+    'cursor-pointer',
+    'box-border',
     {
-      primary: 'bg-sky-600 hover:bg-sky-500 text-white',
+      primary: 'border bg-sky-600 hover:bg-sky-500 text-white',
       outline: 'border border-sky-500 bg-white text-sky-500 hover:bg-sky-50',
-      danger: 'bg-red-500 hover:bg-red-400 text-white'
+      danger: 'bg-red-500 hover:bg-red-400 text-white',
+      highLighted: 'border-2 border-sky-500 text-sky-600',
     }[variant],
-
   );
+
   return (
-    <button className={clsx(cn, 'cursor-pointer')} {...props}>
+    <button className={cn} {...props}>
       {children}
     </button>
   );

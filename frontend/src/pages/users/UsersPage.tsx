@@ -35,13 +35,12 @@ export const UsersPage = () => {
 
   if (isLoading) {
     return (
-      <div className="h-full p-8 flex flex-col justify-center items-center">
-        <Spinner />
-      </div>
+      <Spinner className="h-[100%]" />
     );
   }
+
   return (
-    <div className="h-full p-8">
+    <>
       <PageTitle className="my-5">{t('users.title')}</PageTitle>
       <Table
         type='users'
@@ -49,6 +48,6 @@ export const UsersPage = () => {
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
       />
-    </div>
+    </>
   );
 };
