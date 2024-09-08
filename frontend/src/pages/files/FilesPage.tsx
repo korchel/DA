@@ -7,6 +7,7 @@ import { useGetFilesQuery as getFiles } from "../../store/filesApi";
 import { routes } from "../../routes";
 import { useAuth } from "../../context/AuthContext";
 import { openModal } from "../../store/modalSlice";
+import { Table } from "../../components/Table";
 
 export const FilesPage = () => {
   const { t } = useTranslation();
@@ -14,6 +15,26 @@ export const FilesPage = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const { data: files } = getFiles(currentUser.roles);
+
+  const tableHeaders = [
+    t('files.tableHeader.fileName'),
+    t('files.tableHeader.fileType'),
+    t('files.tableHeader.author'),
+    t('files.tableHeader.creationDate'),
+    t('files.tableHeader.updateDate'),
+    t('files.tableHeader.actions'),
+  ];
+
+  const tableData = files?.map((file) => ({
+    id: file.id,
+    data: [
+      file.filename,
+      file.filetype,
+      file.author,
+      file.creationDate ?? 'no data',
+      file.updateDate ?? 'no data',
+    ],
+  }));
 
   const handleCreate = () => {
     dispatch(openModal({ type: "uploadFile", open: true }))
@@ -29,6 +50,9 @@ export const FilesPage = () => {
     window.open(routes.viewFilePath(id), '_blank');
   };
 
+  const handleGoToDetailsPage = (id: number) => {
+    navigate(routes.fileDetailsRoute(id));
+  };
 
   return (
     <div className="h-full p-8 flex flex-col">
@@ -40,45 +64,21 @@ export const FilesPage = () => {
       >
         {t('files.addFile')}
       </ButtonComponent>
-      <table className="w-[100%] bg-white text-left rounded-md shadow-md">
-        <thead className="uppercase text-sky-600 whitespace-nowrap">
-          <tr className="border-b">
-            <th className="py-4 px-5 w-10">{t('files.tableHeader.fileName')}</th>
-            <th className="py-4 px-5">{t('files.tableHeader.fileType')}</th>
-            <th className="py-4 px-5">{t('files.tableHeader.author')}</th>
-            <th className="py-4 px-5">Миниматюра</th>
-            <th className="py-4 px-5">{t('files.tableHeader.creationDate')}</th>
-            <th className="py-4 px-5">{t('files.tableHeader.updateDate')}</th>
-            <th className="py-4 px-5 text-center">{t('files.tableHeader.actions')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {files?.map((file) => (
-            <tr
-              className="border-b overflow-hidden hover:bg-sky-50 cursor-pointer"
-              key={file.id}
-              onClick={() => navigate(routes.fileDetailsRoute(file.id))}
-            >
-              <td className="py-4 px-5">{file.filename}</td>
-              <td className="py-4 px-5 truncate">{file.filetype}</td>
-              <td className="py-4 px-5 truncate">{file.author}</td>
-              <td className="py-4 px-5 truncate">
-                <img
-                  src={routes.thumbnailPath(file.id)}
-                  alt={file.filename}
-                  className="max-h-[100px] max-w-[100px] w-auto h-auto block"
-                />
-              </td>
-              <td className="py-4 px-5">{file.creationDate ?? 'no data'}</td>
-              <td className="py-4 px-5">{file.updateDate ?? 'no data'}</td>
-              <td className="py-4 px-5 flex justify-around">
-                <ActionButton actionType="download" title={t('download')} onClick={(event) => handleDownload(event, file.id)} />
-                <ActionButton actionType="overview" title={t('see')} onClick={(event) => handleOverview(event, file.id)} />
-              </td>
-          </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table
+        type='files'
+        headers={tableHeaders}
+        data={tableData}
+        handleGoToDetailsPage={handleGoToDetailsPage}
+      />
+      {/* <img
+        src={routes.thumbnailPath(file.id)}
+        alt={file.filename}
+        className="max-h-[100px] max-w-[100px] w-auto h-auto block"
+      />
+      <td className="py-4 px-5 flex justify-around">
+        <ActionButton actionType="download" title={t('download')} onClick={(event) => handleDownload(event, file.id)} />
+        <ActionButton actionType="overview" title={t('see')} onClick={(event) => handleOverview(event, file.id)} />
+      </td> */}
     </div>
   );
 };

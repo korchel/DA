@@ -1,6 +1,5 @@
 import { createContext, useState, useContext, ReactNode, FC } from "react";
-import Cookies from "js-cookie";
-import { Role, RoleName } from "../interfaces/interfaces";
+import { RoleName } from "../interfaces/interfaces";
 
 interface ICurrentUser {
   roles: RoleName[];
@@ -27,7 +26,7 @@ const initialContext = {
 export const AuthContext = createContext<IAuthContext>(initialContext);
 
 const AuthProvider = ({ children }: {children: ReactNode}) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
   const [currentUser, setCurrentUser] = useState<ICurrentUser>({ roles: ["ROLE_USER" as RoleName], id: null});
 
   const logIn = (currentUser: ICurrentUser) => {

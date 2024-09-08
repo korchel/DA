@@ -8,6 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useGetDocsQuery as getDocs } from "../../store/docsApi";
 import { openModal } from "../../store/modalSlice";
 import { Spinner } from "../../components/ui/icons";
+import { Table } from "../../components/Table";
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
@@ -16,19 +17,43 @@ export const DocumentsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const tableHeaders = [
+    t('documents.tableHeader.number'),
+    t('documents.tableHeader.name'),
+    t('documents.tableHeader.author'),
+    t('documents.tableHeader.type'),
+    t('documents.tableHeader.content'),
+    t('documents.tableHeader.creationDate'),
+    t('documents.tableHeader.updateDate'),
+    t('documents.tableHeader.actions'),
+  ];
+
+  const tableData = documents?.map((document) => ({
+    id: document.id,
+    data: [
+      document.number,
+      document.title,
+      document.author.username,
+      document.type.type,
+      document.content,
+      document.creationDate ?? t('documents.noData'),
+      document.updateDate ?? t('documents.noData'),
+    ],
+  }));
+
   const handleCreate = () => {
     dispatch(openModal({ type: "createDocument", open: true }))
   };
 
-  const handleDelete = (event, id: number): void => {
-    event.stopPropagation();
-    dispatch(openModal({ type: "deleteDocument", open: true, id }));
-  };
+  // const handleDelete = (event, id: number): void => {
+  //   event.stopPropagation();
+  //   dispatch(openModal({ type: "deleteDocument", open: true, id }));
+  // };
 
-  const handleEdit = (event, id: number): void => {
-    event.stopPropagation();
-    dispatch(openModal({ type: "editDocument", open: true, id }));
-  };
+  // const handleEdit = (event, id: number): void => {
+  //   event.stopPropagation();
+  //   dispatch(openModal({ type: "editDocument", open: true, id }));
+  // };
 
   const handleGoToDetailsPage = (id: number) => {
     navigate(routes.documentDetailsRoute(id))
@@ -51,41 +76,16 @@ export const DocumentsPage = () => {
       >
         {t('documents.createDocument')}
       </ButtonComponent>
-      <table className="w-[100%] bg-white text-left rounded-md shadow-md">
-        <thead className="uppercase text-sky-600 whitespace-nowrap">
-          <tr className="border-b">
-            <th className="py-4 px-5 w-10">{t('documents.tableHeader.number')}</th>
-            <th className="py-4 px-5">{t('documents.tableHeader.name')}</th>
-            <th className="py-4 px-5">{t('documents.tableHeader.author')}</th>
-            <th className="py-4 px-5">{t('documents.tableHeader.type')}</th>
-            <th className="py-4 px-5">{t('documents.tableHeader.content')}</th>
-            <th className="py-4 px-5">{t('documents.tableHeader.creationDate')}</th>
-            <th className="py-4 px-5">{t('documents.tableHeader.updateDate')}</th>
-            <th className="py-4 px-5 text-center">{t('documents.tableHeader.actions')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {documents?.map((document) => (
-            <tr
-              className="border-b overflow-hidden hover:bg-sky-50 cursor-pointer"
-              key={document.id}
-              onClick={() => handleGoToDetailsPage(document.id)}
-            >
-              <td className="py-4 px-5">{document.number}</td>
-              <td className="py-4 px-5 truncate">{document.title}</td>
-              <td className="py-4 px-5 truncate">{document.author.lastname}</td>
-              <td className="py-4 px-5">{document.type.type}</td>
-              <td className="py-4 px-5 truncate max-w-0">{document.content}</td>
-              <td className="py-4 px-5">{document.creationDate ?? t('documents.noData')}</td>
-              <td className="py-4 px-5">{document.updateDate ?? t('documents.noData')}</td>
-              <td className="py-4 px-5 flex justify-around">
-                <ActionButton actionType="edit" title={t('edit')} onClick={(event) => handleEdit(event, document.id)} />
-                <ActionButton actionType="delete" title={t('delete')} onClick={(event) => handleDelete(event, document.id)} />
-              </td>
-          </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table
+        type='documents'
+        headers={tableHeaders}
+        data={tableData}
+        handleGoToDetailsPage={handleGoToDetailsPage}
+      />
+      {/* <td className="xl:table-cell py-4 px-5 flex justify-around">
+        <ActionButton actionType="edit" title={t('edit')} onClick={(event) => handleEdit(event, document.id)} />
+        <ActionButton actionType="delete" title={t('delete')} onClick={(event) => handleDelete(event, document.id)} />
+      </td> */}
     </div>
   );
 };

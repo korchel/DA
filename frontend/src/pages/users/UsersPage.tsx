@@ -5,11 +5,33 @@ import { routes } from "../../routes";
 import { useGetUsersQuery as getUsers} from "../../store/usersApi";
 import { Spinner } from "../../components/ui/icons";
 import { PageTitle } from "../../components/ui";
+import { Table } from "../../components/Table";
 
 export const UsersPage = () => {
   const { t } = useTranslation();
   const { data: users, isLoading } = getUsers();
   const navigate = useNavigate();
+
+  const tableHeaders = [
+    t('users.tableHeader.userName'),
+    t('users.tableHeader.name'),
+    t('users.tableHeader.lastName'),
+    t('users.tableHeader.roles'),
+  ];
+
+  const tableData = users?.map((user) => ({
+    id: user.id,
+    data: [
+      user.username,
+      user.name,
+      user.lastname,
+      user.roles.map((role) => t(`users.roles.${role.name}`)).join(', '),
+    ],
+  }));
+
+  const handleGoToDetailsPage = (id: number) => {
+    navigate(routes.userDetailsRoute(id));
+  };
 
   if (isLoading) {
     return (
@@ -21,26 +43,12 @@ export const UsersPage = () => {
   return (
     <div className="h-full p-8">
       <PageTitle className="my-5">{t('users.title')}</PageTitle>
-      <table className="w-[100%] bg-white text-left rounded-md shadow-md">
-        <thead className="uppercase text-sky-600 whitespace-nowrap">
-          <tr className="border-b">
-            <th className="py-4 px-5">{t('users.tableHeader.userName')}</th>
-            <th className="py-4 px-5">{t('users.tableHeader.name')}</th>
-            <th className="py-4 px-5">{t('users.tableHeader.lastName')}</th>
-            <th className="py-4 px-5">{t('users.tableHeader.roles')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users?.map((user) => (
-            <tr className="table-row border-b overflow-hidden hover:bg-sky-50 cursor-pointer" key={user.id} onClick={() => navigate(routes.userDetailsRoute(user.id))}>
-              <td className="py-4 px-5">{user.username}</td>
-              <td className="py-4 px-5">{user.name}</td>
-              <td className="py-4 px-5 truncate">{user.lastname}</td>
-              <td className="py-4 px-5 truncate">{user.roles.map((role) => t(`users.roles.${role.name}`)).join(', ')}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table
+        type='users'
+        headers={tableHeaders}
+        data={tableData}
+        handleGoToDetailsPage={handleGoToDetailsPage}
+      />
     </div>
   );
 };

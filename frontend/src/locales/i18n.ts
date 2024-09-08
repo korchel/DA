@@ -6,6 +6,9 @@ i18n.use(initReactI18next).init({
   resources,
   lng: "ru",
   fallbackLng: "ru",
+  interpolation: {
+    escapeValue: false, // экранирование уже есть в React, поэтому отключаем
+  },
 });
 
 export default i18n;
