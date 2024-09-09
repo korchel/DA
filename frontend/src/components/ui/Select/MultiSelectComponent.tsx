@@ -1,13 +1,12 @@
 import { ForwardedRef, forwardRef } from 'react';
 import { FieldError, Merge } from 'react-hook-form';
 import Select, { type ActionMeta } from 'react-select';
-import { InputLabel } from './InputLabel';
-import { ErrorMessage } from './ErrorMessage';
 
-interface ISelectOption {
-  label: string,
-  value: number,
-}
+import { InputLabel } from '../InputLabel';
+import { ErrorMessage } from '../ErrorMessage';
+import { EmotionCacheProvider } from './EmotionProvider';
+import { ISelectOption, onSelect } from './interfaces';
+import { classNames } from './styles';
 
 interface ISelectInputProps {
   onChange: (option: ISelectOption[]) => void,
@@ -19,8 +18,6 @@ interface ISelectInputProps {
   required?: boolean,
 }
 
-type onSelect = (newValue: unknown, actionmeta: ActionMeta<unknown>) => void;
-
 export const MultiSelectComponent = forwardRef(({onChange, placeholder, selectOptions, label, error, value, required = true, ...props}: ISelectInputProps, ref: ForwardedRef<HTMLSelectElement>) => {
   const handleSelect: onSelect = (options) => {
     const _options = options as  ISelectOption[];
@@ -28,17 +25,21 @@ export const MultiSelectComponent = forwardRef(({onChange, placeholder, selectOp
   };
 
   return (
-    <div className='relative'>
-      <InputLabel required={required}>{label}</InputLabel>
-      <Select
-        onChange={handleSelect}
-        options={selectOptions}
-        placeholder={placeholder}
-        isMulti
-        value={selectOptions.filter((option) => value?.includes(option.value) )}
-        {...props}
-      />
-      {error && <ErrorMessage>{error.message}</ErrorMessage>}
-    </div>
+    <EmotionCacheProvider>
+      <div className='relative'>
+        <InputLabel required={required}>{label}</InputLabel>
+        <Select
+          onChange={handleSelect}
+          
+          options={selectOptions}
+          placeholder={placeholder}
+          isMulti
+          value={selectOptions.filter((option) => value?.includes(option.value) )}
+          classNames={classNames}
+          {...props}
+        />
+        {error && <ErrorMessage>{error.message}</ErrorMessage>}
+      </div>
+    </EmotionCacheProvider>
   );
 });

@@ -1,12 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { routes } from "../routes";
-import { ButtonComponent } from "./ui/ButtonComponent";
 import { useTranslation } from "react-i18next";
-import { useAuth } from "../context/AuthContext";
-import { ActionButton } from "./ui";
 import { useState } from "react";
-import { LinkComponent } from "./ui";
 import clsx from "clsx";
+
+import { routes } from "../routes";
+import { ButtonComponent, LinkComponent, ActionButton } from "./ui";
+import { useAuth } from "../context/AuthContext";
 
 export const Header = () => {
   const { t } = useTranslation();
