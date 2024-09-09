@@ -5,7 +5,7 @@ import Select, { type ActionMeta } from 'react-select';
 import { InputLabel } from '../InputLabel';
 import { ErrorMessage } from '../ErrorMessage';
 import { EmotionCacheProvider } from './EmotionProvider';
-import { ISelectOption, onSelect } from './interfaces';
+import { ISelectOption, onSelect } from './../../../interfaces';
 import { classNames } from './styles';
 
 interface ISelectInputProps {
@@ -18,7 +18,18 @@ interface ISelectInputProps {
   required?: boolean,
 }
 
-export const MultiSelectComponent = forwardRef(({onChange, placeholder, selectOptions, label, error, value, required = true, ...props}: ISelectInputProps, ref: ForwardedRef<HTMLSelectElement>) => {
+export const MultiSelectComponent = forwardRef(({
+  onChange,
+  placeholder,
+  selectOptions,
+  label,
+  error,
+  value,
+  required = true,
+  ...props
+}: ISelectInputProps,
+  ref: ForwardedRef<HTMLSelectElement>
+) => {
   const handleSelect: onSelect = (options) => {
     const _options = options as  ISelectOption[];
     onChange( _options.map((option: any) => option.value));
@@ -30,7 +41,6 @@ export const MultiSelectComponent = forwardRef(({onChange, placeholder, selectOp
         <InputLabel required={required}>{label}</InputLabel>
         <Select
           onChange={handleSelect}
-          
           options={selectOptions}
           placeholder={placeholder}
           isMulti
