@@ -5,6 +5,7 @@ export { CheckBox } from './CheckBox';
 export { ErrorMessage } from './ErrorMessage';
 export { FileInput } from './FileInput';
 export { InputField } from './InputField';
+export { LinkComponent } from './LinkComponent';
 export { MultiSelectComponent } from './MultiSelectComponent';
 export { PageTitle } from './PageTitle';
 export { SelectComponent } from './SelectComponent';
