@@ -19,6 +19,7 @@ export const Header = () => {
   };
 
   const handleChangeLanguage = (language: string) => {
+    if (language === i18n.language) return;
     i18n.changeLanguage(language);
   };
 
@@ -54,10 +55,10 @@ export const Header = () => {
           {pathname === routes.signupRoute() && <Link to={routes.loginRoute()}>
             <ButtonComponent variant="outline">{t('header.login')}</ButtonComponent>
           </Link>}
+          <DropDown options={languages} name={languages[i18n.language]} action={handleChangeLanguage} />
           {isAuthenticated && <Link to={routes.loginRoute()}>
             <ButtonComponent onClick={logOut} variant="outline">{t('header.logout')}</ButtonComponent>
           </Link>}
-          <DropDown options={languages} name={languages[i18n.language]} action={handleChangeLanguage} />
         </div>
       </div>
       <ActionButton actionType="openMenu" className="md:hidden" onClick={handleOpenMenu} />

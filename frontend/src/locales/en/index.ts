@@ -9,7 +9,7 @@ export const en = {
     english: 'English',
     russian: 'Russian',
     login: 'Log in',
-    logout: 'Lo out',
+    logout: 'Log out',
     signup: 'Sign up',
     nav: {
       search: 'Search',

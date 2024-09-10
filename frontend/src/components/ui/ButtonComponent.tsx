@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { ButtonHTMLAttributes, DetailedHTMLProps, ForwardRefExoticComponent } from "react";
 
 interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  variant: 'primary' | 'outline' | 'danger' | 'highLighted',
+  variant: 'primary' | 'outline' | 'danger' | 'highLighted' | 'borderLess',
 }
 
 export const ButtonComponent = ({ variant, className, children, ...props }: ButtonProps) => {
@@ -20,6 +20,7 @@ export const ButtonComponent = ({ variant, className, children, ...props }: Butt
       outline: 'border border-sky-500 bg-white text-sky-500 hover:bg-sky-50',
       danger: 'bg-red-500 hover:bg-red-400 text-white',
       highLighted: 'border-2 border-sky-500 text-sky-600',
+      borderLess: 'border-white bg-white text-sky-500 hover:bg-sky-50',
     }[variant],
   );
 

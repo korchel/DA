@@ -13,6 +13,7 @@ export const DropDown = ({ name, options, action, className }: IDropDown) => {
 
   const handleChooseOption = (e) => {
     const param = e.target.dataset.param;
+    setMenuOpen(false);
     action(param);
   };
 
@@ -27,10 +28,11 @@ export const DropDown = ({ name, options, action, className }: IDropDown) => {
         {
           Object.keys(options).map((option) => (
             <ButtonComponent
-              variant="outline"
-              className="w-full"
+              variant="borderLess"
+              className="w-full text-right rounded-none"
               onClick={(e) => handleChooseOption(e)}
               data-param={option}
+              key={option}
             >
               {options[option]}
             </ButtonComponent>
