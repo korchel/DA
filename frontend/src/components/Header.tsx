@@ -4,11 +4,11 @@ import { useState } from "react";
 import clsx from "clsx";
 
 import { routes } from "../routes";
-import { ButtonComponent, LinkComponent, ActionButton } from "./ui";
+import { ButtonComponent, LinkComponent, ActionButton, DropDown } from "./ui";
 import { useAuth } from "../context/AuthContext";
 
 export const Header = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { logOut, isAuthenticated, currentUser } = useAuth();
   const { pathname } = useLocation();
 
@@ -16,6 +16,15 @@ export const Header = () => {
 
   const handleOpenMenu = () => {
     setMenuOpen((state) => !state);
+  };
+
+  const handleChangeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  };
+
+  const languages = {
+    ru: t('header.russian'),
+    en: t('header.english'),
   };
 
   return (
@@ -40,7 +49,7 @@ export const Header = () => {
         </nav>}
         <div className="md:flex gap-2">
           {pathname === routes.loginRoute() && <Link to={routes.signupRoute()}>
-            <ButtonComponent variant="outline">{t('header.register')}</ButtonComponent>
+            <ButtonComponent variant="outline">{t('header.signup')}</ButtonComponent>
           </Link>}
           {pathname === routes.signupRoute() && <Link to={routes.loginRoute()}>
             <ButtonComponent variant="outline">{t('header.login')}</ButtonComponent>
@@ -48,9 +57,9 @@ export const Header = () => {
           {isAuthenticated && <Link to={routes.loginRoute()}>
             <ButtonComponent onClick={logOut} variant="outline">{t('header.logout')}</ButtonComponent>
           </Link>}
+          <DropDown options={languages} name={languages[i18n.language]} action={handleChangeLanguage} />
         </div>
       </div>
-      
       <ActionButton actionType="openMenu" className="md:hidden" onClick={handleOpenMenu} />
     </header>
   )

@@ -30,21 +30,21 @@ export const FileDetailsPage = () => {
 
   return (
     <Card>
-      <Card.Header>Файл <span className="text-sky-600">{file?.filename}</span></Card.Header>
+      <Card.Header>{t('files.detailsPage.title')}<span className="text-sky-600">{file?.filename}</span></Card.Header>
       <Card.Body >
-        <div><span className="font-bold">Название: </span>{file?.filename}</div>
-        <div><span className="font-bold">Тип: </span>{file?.filetype}</div>
-        <div><span className="font-bold">Автор: </span>{file?.author}</div>
+        <div><span className="font-bold">{t('files.detailsPage.name')}</span>{file?.filename}</div>
+        <div><span className="font-bold">{t('files.detailsPage.type')}</span>{file?.filetype}</div>
+        <div><span className="font-bold">{t('files.detailsPage.author')}</span>{file?.author}</div>
         <img
           src={routes.thumbnailPath(file?.id)}
           alt={file?.filename}
           className="max-h-[100px] max-w-[100px] w-auto h-auto"
         />
-        <div><span className="font-bold">Дата создания: </span>{file?.creationDate}</div>
+        <div><span className="font-bold">{t('files.detailsPage.creationDate')}</span>{file?.creationDate}</div>
       </Card.Body>
       <Card.Footer>
-        <ButtonComponent variant="primary" onClick={handleEdit}>Изменить файл</ButtonComponent>
-        <ButtonComponent variant="danger" onClick={handleDelete}>Удалить файл</ButtonComponent>
+        <ButtonComponent variant="primary" onClick={handleEdit}>{t('files.detailsPage.edit')}</ButtonComponent>
+        <ButtonComponent variant="danger" onClick={handleDelete}>{t('files.detailsPage.delete')}</ButtonComponent>
       </Card.Footer>
     </Card>
   );

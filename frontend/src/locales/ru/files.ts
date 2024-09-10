@@ -9,6 +9,15 @@ export const files = {
     updateDate: 'Дата обновления',
     actions: 'Действия',
   },
+  detailsPage: {
+    title: 'Файл',
+    name: 'Название: ',
+    author: 'Автор: ',
+    type: 'Тип: ',
+    creationDate: 'Дата создания: ',
+    delete: 'Удалить файл',
+    edit: 'Изменить файл',
+  },
   modal: {
     form: {
       labels: {
@@ -24,7 +33,7 @@ export const files = {
       areYouSure: 'Вы уверены, что хотите удалить этот файл?',
       toast: {
         error: "Произошла ошибка",
-        success: "Запись удалена",
+        success: "Файл удален",
       },
     },
     upload: {
