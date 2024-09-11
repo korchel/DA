@@ -5,7 +5,7 @@ interface ICard extends DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRE
 }
 
 export const Card = ({children}: ICard) => (
-  <div className="bg-white dark:bg-secondaryDark w-1/2 p-4 rounded-md shadow-lg">
+  <div className="bg-white dark:bg-secondaryDark w-1/2 p-4 rounded-md shadow-lg min-w-[350px]">
     {children}
   </div>
 );
@@ -21,7 +21,7 @@ Card.Body = ({ children }) => (
 );
 
 Card.Footer = ({ children }) => (
-  <div className="flex justify-between mt-5">
+  <div className="flex flex-col xs:flex-row justify-between gap-1 mt-5">
     {children}
   </div>
 );

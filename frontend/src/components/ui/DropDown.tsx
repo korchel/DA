@@ -24,7 +24,7 @@ export const DropDown = ({ name, options, action, className }: IDropDown) => {
   return (
     <div className={clsx(className, 'relative')}>
       <ButtonComponent variant="outline" onClick={handleOpenMenu}>{name}</ButtonComponent>
-      <div className={clsx(menuOpen ? 'block' : 'hidden', 'absolute right-0')}>
+      <div className={clsx(menuOpen ? 'block' : 'hidden', 'absolute right-0 top-10')}>
         {
           Object.keys(options).map((option) => (
             <ButtonComponent

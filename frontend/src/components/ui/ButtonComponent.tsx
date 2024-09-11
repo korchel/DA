@@ -9,17 +9,22 @@ export const ButtonComponent = ({ variant, className, children, ...props }: Butt
   const cn = clsx(
     className,
     'transition-colors',
-    'rounded-sm',
+    'rounded',
     'p-2',
     'leading-none',
     'h-9',
     'cursor-pointer',
     'box-border',
+    'text-nowrap',
     {
-      primary: 'bg-secondary dark:bg-primaryDark hover:bg-secondaryHover dark:hover:bg-secondaryDarkHover text-white dark:text-whiteDark dark:border dark:border-whiteDark',
-      outline: 'border-2 border-secondary bg-white dark:bg-whiteDark text-secondary dark:text-primaryDark hover:bg-whiteHover dark:hover:bg-whiteDarkHover',
-      danger: 'bg-danger dark:bg-dangerDark hover:bg-dangerHover text-white dark:text-whiteDark',
-      borderLess: 'bg-white dark:bg-whiteDark text-secondary dark:text-primaryDark hover:bg-whiteDark dark:hover:bg-whiteDarkHover',
+      primary: `bg-secondary hover:bg-secondaryHover text-white
+        dark:bg-secondaryDark dark:hover:bg-secondaryDarkHover dark:text-whiteDark dark:border dark:border-whiteDark`,
+      outline: `border-2 border-secondary bg-white text-secondary hover:bg-whiteHover
+        dark:border-whiteDark dark:bg-whiteDark dark:text-primaryDark dark:hover:bg-whiteDarkHover`,
+      danger: `bg-danger hover:bg-dangerHover text-white 
+        dark:bg-dangerDark dark:text-whiteDark`,
+      borderLess: `bg-white text-secondary hover:bg-whiteHover !rounded-none
+      dark:bg-whiteDark dark:text-primaryDark dark:hover:bg-whiteDarkHover`,
     }[variant],
   );
 

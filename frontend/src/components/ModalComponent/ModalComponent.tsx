@@ -24,7 +24,9 @@ export const ModalComponent = () => {
     <div
       className="fixed inset-0 bg-slate-900/60 backdrop-blur overflow-y-auto flex flex-col items-center justify-center"
     >
-      <div data-id="modal" className="bg-white rounded-lg p-8 h-fit flex flex-col min-w-[500px] relative">
+      <div data-id="modal" className="relative bg-white rounded-lg p-8 h-fit flex flex-col min-w-[500px] 
+        dark:bg-secondaryDark"
+      >
         {modalType === "deleteDocument" && <DeleteDocument />}
         {modalType === "createDocument" && <CreateDocument />}
         {modalType === "editDocument" && <EditDocument />}

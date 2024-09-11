@@ -49,8 +49,8 @@ export const Header = () => {
             {t('header.nav.search')}
           </LinkComponent>
         </nav>}
-        <ThemeSwitcher />
-        <div className="md:flex gap-2">
+        <div className="md:flex gap-2 items-center">
+          <ThemeSwitcher />
           {pathname === routes.loginRoute() && <Link to={routes.signupRoute()}>
             <ButtonComponent variant="outline">{t('header.signup')}</ButtonComponent>
           </Link>}

@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { Switcher } from './ui';
+import { MoonIcon, SunIcon } from './ui/icons';
+import clsx from 'clsx';
 
-export const ThemeSwitcher = () => {
+interface IThemeSwitcher {
+  className?: string;
+}
+
+export const ThemeSwitcher = ({ className }: IThemeSwitcher) => {
   const [theme, setTheme] = useLocalStorage('theme', 'light');
   const [isToggled, setIsToggled] = useState(theme == 'dark');
 
@@ -18,6 +24,11 @@ export const ThemeSwitcher = () => {
   }, [theme]);
 
   return (
-    <Switcher isToggled={isToggled} onToggle={handleChengeTheme} />
+    <Switcher
+      className={className}
+      isToggled={isToggled}
+      onToggle={handleChengeTheme}
+      icons={{ left: <SunIcon className='absolute text-red-500 z-50' />, right: <MoonIcon className='absolute text-red-500  z-50 right-0  h-5 w-5' /> }}
+    />
   );
 };

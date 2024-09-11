@@ -32,12 +32,20 @@ export const InputField = forwardRef(({
       <input
         type={inputType}
         id={label}
-        className={clsx(error ? "border-danger" : 'border-gray', "block p-2 border bg-white outline-primary rounded-sm w-full focus:ring focus:ring-primary focus:ring-opacity-50")}
+        className={clsx(error ? "border-danger" : 'border-gray',
+          "block p-2 border bg-transparent outline-primary rounded-sm w-full",
+          "focus:ring focus:ring-primary focus:ring-opacity-50",
+          "dark:border-whiteDark dark:outline-secondaryDark dark:focus:ring-secondaryDark",
+        )}
         placeholder={placeholder}
         {...props}
         ref={ref}
       />
-      {!error && showActionButton && <ActionButton className="absolute top-2 right-3" onClick={toggleShowPassword} actionType={passwordShown ? "hidePassword" : "showPassword"} />}
+      {!error && showActionButton && <ActionButton
+        className="absolute top-2 right-3"
+        onClick={toggleShowPassword}
+        actionType={passwordShown ? "hidePassword" : "showPassword"}
+      />}
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
     </div>
   );
