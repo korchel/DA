@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { ButtonComponent, InputField, ErrorMessage } from "../components/ui";
+import { ButtonComponent, InputField, ErrorMessage, PageTitle } from "../components/ui";
 import { routes } from "../routes";
 import { useAuth } from "../context/AuthContext";
 
@@ -62,7 +62,7 @@ export const SignupPage = () => {
     <div className="h-full flex items-center justify-center">
       <div className="shadow-lg p-6 rounded-md min-w-[400px] bg-white">
         <form id="registerForm" className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)} noValidate>
-          <h1 className="text-sky-600 font-bold text-lg text-center">{t('signupPage.title')}</h1>
+          <PageTitle>{t('signupPage.title')}</PageTitle>
           <InputField
             placeholder={t('signupPage.placeholders.username')}
             error={errors.username}

@@ -16,11 +16,10 @@ export const ButtonComponent = ({ variant, className, children, ...props }: Butt
     'cursor-pointer',
     'box-border',
     {
-      primary: 'border bg-sky-600 hover:bg-sky-500 text-white',
-      outline: 'border border-sky-500 bg-white text-sky-500 hover:bg-sky-50',
-      danger: 'bg-red-500 hover:bg-red-400 text-white',
-      highLighted: 'border-2 border-sky-500 text-sky-600',
-      borderLess: 'border-white bg-white text-sky-500 hover:bg-sky-50',
+      primary: 'bg-secondary dark:bg-primaryDark hover:bg-secondaryHover dark:hover:bg-secondaryDarkHover text-white dark:text-whiteDark dark:border dark:border-whiteDark',
+      outline: 'border-2 border-secondary bg-white dark:bg-whiteDark text-secondary dark:text-primaryDark hover:bg-whiteHover dark:hover:bg-whiteDarkHover',
+      danger: 'bg-danger dark:bg-dangerDark hover:bg-dangerHover text-white dark:text-whiteDark',
+      borderLess: 'bg-white dark:bg-whiteDark text-secondary dark:text-primaryDark hover:bg-whiteDark dark:hover:bg-whiteDarkHover',
     }[variant],
   );
 

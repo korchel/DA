@@ -18,7 +18,7 @@ export const TextArea = forwardRef(({ error, placeholder, label, required = true
     <div className={clsx(className, 'relative')}>
       <InputLabel htmlFor={label}>{label}</InputLabel>
       <textarea
-        className={clsx(error ? "border-red-500" : 'border-slate-300', "block p-2 border classNames outline-sky-500 rounded-sm w-full focus:ring focus:ring-sky-200 focus:ring-opacity-50 min-h-44")}
+        className={clsx(error ? "border-danger" : 'border-gray', "block p-2 border classNames outline-highlight rounded-sm w-full bg-white focus:ring focus:ring-primary focus:ring-opacity-50 min-h-44")}
         placeholder={placeholder}
         {...props}
         ref={ref}

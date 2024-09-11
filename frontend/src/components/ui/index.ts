@@ -10,4 +10,5 @@ export { LinkComponent } from './LinkComponent';
 export { MultiSelectComponent } from './Select/MultiSelectComponent';
 export { PageTitle } from './PageTitle';
 export { SelectComponent } from './Select/SelectComponent';
+export { Switcher } from './Switcher';
 export { TextArea } from './TextArea';

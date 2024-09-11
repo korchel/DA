@@ -24,7 +24,7 @@ export const ActionButton = ({ actionType, className, ...props }: ButtonProps) =
   }[actionType];
 
   return (
-    <button type="button" {...props} className={clsx(className, 'text-sky-600')}>
+    <button type="button" {...props} className={clsx(className, 'text-secondary')}>
       {Icon}
     </button>
   );

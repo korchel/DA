@@ -5,7 +5,7 @@ interface ICard extends DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRE
 }
 
 export const Card = ({children}: ICard) => (
-  <div className="bg-white w-1/2 p-4 rounded-md shadow-lg">
+  <div className="bg-white dark:bg-secondaryDark w-1/2 p-4 rounded-md shadow-lg">
     {children}
   </div>
 );

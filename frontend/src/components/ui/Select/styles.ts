@@ -4,9 +4,10 @@ import { ISelectOption } from'./../../../interfaces';
 
 export const classNames:  ClassNamesConfig<ISelectOption, true, GroupBase<ISelectOption>> | undefined = {
   control: (state) => clsx(
-    state.isFocused ? 'ring ring-sky-200 ring-opacity-50 border-sky-500 !outline !outline-1 !outline-sky-500' : 'border-slate-300', "hover:border-slate-300 rounded-sm cursor-pointer"
+    'bg-white',
+    state.isFocused ? 'ring ring-primary ring-opacity-50 border-primary !outline !outline-1 !outline-primary' : 'border-gray', "hover:border-gray rounded-sm cursor-pointer"
   ),
   valueContainer: () => 'p-1',
-  option: ({ isSelected, isFocused }) => clsx(isFocused && !isSelected && '!bg-sky-200', isSelected && 'bg-sky-500', 'cursor-pointer'),
+  option: ({ isSelected, isFocused }) => clsx(isFocused && !isSelected && '!bg-primary', isSelected && 'bg-secondary', 'cursor-pointer'),
   menu: () => 'z-20',
 };

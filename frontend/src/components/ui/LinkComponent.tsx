@@ -16,9 +16,8 @@ export const LinkComponent = ({ route, children, active, className }: ILinkCompo
       className={clsx(
         className,
         "block h-9 leading-9 w-full md:w-fit",
-        "text-sky-500 transition-colors",
-        active && 'text-sky-700',
-        !active && 'hover:bg-sky-100 md:hover:bg-white md:hover:text-sky-400'
+        "transition-colors",
+        active ? 'text-highlight dark:text-highlightDark' : 'text-secondary dark:text-whiteDark md:hover:text-highlight dark:hover:text-highlightDark',
       )}
     >
       {children}

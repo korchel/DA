@@ -30,7 +30,7 @@ export const FileDetailsPage = () => {
 
   return (
     <Card>
-      <Card.Header>{t('files.detailsPage.title')}<span className="text-sky-600">{file?.filename}</span></Card.Header>
+      <Card.Header>{t('files.detailsPage.title')}<span className="text-highlight">{file?.filename}</span></Card.Header>
       <Card.Body >
         <div><span className="font-bold">{t('files.detailsPage.name')}</span>{file?.filename}</div>
         <div><span className="font-bold">{t('files.detailsPage.type')}</span>{file?.filetype}</div>

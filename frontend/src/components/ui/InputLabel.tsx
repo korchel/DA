@@ -8,7 +8,7 @@ interface IInputLabelProps extends DetailedHTMLProps<LabelHTMLAttributes<HTMLLab
 export const InputLabel = ({ required = true, children, className, ...props }: IInputLabelProps) => {
   return (
     <label
-      className="absolute -top-2.5 left-1 text-slate-500 text-sm bg-white leading-tight mx-2 z-10"
+      className="absolute -top-2.5 left-1 text-gray text-sm bg-white leading-tight mx-2 z-10"
       {...props}
     >
       {children}{required && '*'}

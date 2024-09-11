@@ -53,6 +53,7 @@
     "react-router-dom": "^6.25.1",
     "react-select": "^5.8.0",
     "react-toastify": "^10.0.5",
+    "usehooks-ts": "^3.1.0",
     "zod": "^3.23.8"
   }
 }

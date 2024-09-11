@@ -43,9 +43,9 @@ const App = () => {
       <AuthProvider>  
         <I18nextProvider i18n={i18n}>
           <BrowserRouter>
-            <div className="h-screen text-slate-900" >
+            <div className="h-screen text-black dark:text-whiteDark" >
               <Header />
-              <main className="h-[calc(100%-96px)] bg-slate-50">
+              <main className="h-[calc(100%-96px)] bg-primary dark:bg-primaryDark">
                 <div className="h-full p-8 flex flex-col items-center">
                   <Routes>
                   <Route element={<LoggedInRoute />}>

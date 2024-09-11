@@ -29,7 +29,7 @@ export const UserDetailsPage = () => {
 
   return (
     <Card>
-      <Card.Header>{t('users.detailsPage.title')}<span className="text-sky-600">{user?.username}</span></Card.Header>
+      <Card.Header>{t('users.detailsPage.title')}<span className="text-highlight">{user?.username}</span></Card.Header>
       <Card.Body>
         <div><span className="font-bold">{t('users.detailsPage.name')}</span>{user?.name}</div>
         <div><span className="font-bold">{t('users.detailsPage.lastName')}</span>{user?.lastname}</div>

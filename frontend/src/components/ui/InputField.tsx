@@ -32,7 +32,7 @@ export const InputField = forwardRef(({
       <input
         type={inputType}
         id={label}
-        className={clsx(error ? "border-red-500" : 'border-slate-300', "block p-2 border  outline-sky-500 rounded-sm w-full focus:ring focus:ring-sky-200 focus:ring-opacity-50")}
+        className={clsx(error ? "border-danger" : 'border-gray', "block p-2 border bg-white outline-primary rounded-sm w-full focus:ring focus:ring-primary focus:ring-opacity-50")}
         placeholder={placeholder}
         {...props}
         ref={ref}

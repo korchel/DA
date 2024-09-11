@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ButtonComponent, InputField, ErrorMessage } from "../components/ui";
+import { ButtonComponent, InputField, ErrorMessage, PageTitle } from "../components/ui";
 import { routes } from '../routes';
 import { useAuth } from '../context/AuthContext';
 
@@ -54,9 +54,9 @@ export const LoginPage = () => {
 
   return (
     <div className="h-full flex items-center justify-center">
-      <div className="shadow-lg p-6 rounded-md min-w-[400px] bg-white relative">
+      <div className="shadow-lg p-6 rounded-md min-w-[400px] bg-white dark:bg-secondaryDark relative">
         <form id="registerForm" className="flex flex-col gap-7 text-center" onSubmit={handleSubmit(onSubmit)}>
-          <h1 className="text-sky-600 font-bold text-lg">{t('loginPage.title')}</h1>
+          <PageTitle>{t('loginPage.title')}</PageTitle>
           <InputField
             autoComplete="on"
             placeholder={t('loginPage.placeholders.userName')}
