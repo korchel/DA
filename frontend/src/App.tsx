@@ -1,15 +1,14 @@
 import React from "react";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./index.css";
 import { I18nextProvider } from "react-i18next";
 
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import store from "./store";
 import { SignupPage } from "./pages/SignupPage";
 import { LoginPage } from "./pages/LoginPage";
-import { Header } from "./components/Header";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { DocumentsPage } from "./pages/documents/DocumentsPage";
 import { DocumentDetailsPage } from "./pages/documents/DocumentDetailsPage";
@@ -18,8 +17,9 @@ import { UserDetailsPage } from "./pages/users/UserDetailsPage";
 import { FilesPage } from "./pages/files/FilesPage";
 import { routes } from "./routes";
 import i18n from "./locales/i18n";
-import { ModalComponent } from "./components/ModalComponent/ModalComponent";
 import { FileDetailsPage } from "./pages/files/FileDetailsPage";
+import { ThemeProvider } from "./context/ThemeContext";
+import { Layout } from "./components/Layout";
 
 const LoggedInRoute = () => {
   const { isAuthenticated } = useAuth();
@@ -40,14 +40,12 @@ const LoggedOutRoute = () => {
 const App = () => {
   return (
     <Provider store={store}>
-      <AuthProvider>  
-        <I18nextProvider i18n={i18n}>
-          <BrowserRouter>
-            <div className="h-screen text-black dark:text-whiteDark">
-              <Header />
-              <main className="h-[calc(100%-96px)] bg-primary dark:bg-primaryDark">
-                <div className="h-full p-8 flex flex-col items-center">
-                  <Routes>
+      <AuthProvider>
+        <ThemeProvider>
+          <I18nextProvider i18n={i18n}>
+            <BrowserRouter>
+              <Layout >
+                <Routes>
                   <Route element={<LoggedInRoute />}>
                     <Route path='documents/:id' element={<DocumentDetailsPage />} />
                     <Route path={routes.usersRoute()} element={<UsersPage />} />
@@ -62,16 +60,13 @@ const App = () => {
                   </Route>
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>
-                </div>
-                <ModalComponent />
-              </main>
-            </div>
-          </BrowserRouter>
-          <ToastContainer progressClassName="text-red-100" />
-        </I18nextProvider>
+              </Layout>
+            </BrowserRouter>
+          </I18nextProvider>
+        </ThemeProvider>
       </AuthProvider>
     </Provider>
   );
 };
 
-export default App
+export default App;

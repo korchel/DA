@@ -22,4 +22,13 @@
   --white-dark-color: #bac0c9;
   --white-dark-color-hover: #9499a0;
   --danger-dark-color: #ac190e;
+
+  /*Toastify styles*/
+  --toastify-color-light: #f3f6f4;
+  --toastify-color-dark: var(--primary-dark-color);
+  --toastify-color-info: #3498db;
+  --toastify-color-success: #00a896;
+  --toastify-color-warning: #f1c40f;
+  --toastify-color-error: var(--danger-color);
 }
+
