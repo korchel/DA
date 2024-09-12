@@ -6,9 +6,10 @@ import {
   CloseIcon, DownloadIcon, OverviewIcon,
   MenuIcon
 } from "./icons";
+import { SearchIcon } from "./icons/SearchIcon";
 
 interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  actionType: 'delete' | 'edit' | 'showPassword' | 'hidePassword' | 'close' | 'download' | 'overview' | 'openMenu',
+  actionType: 'delete' | 'edit' | 'showPassword' | 'hidePassword' | 'close' | 'download' | 'overview' | 'openMenu' | 'search',
 }
 
 export const ActionButton = ({ actionType, className, ...props }: ButtonProps) => {
@@ -21,10 +22,18 @@ export const ActionButton = ({ actionType, className, ...props }: ButtonProps) =
     download: <DownloadIcon />,
     overview: <OverviewIcon />,
     openMenu: <MenuIcon />,
+    search: <SearchIcon />,
   }[actionType];
 
   return (
-    <button type="button" {...props} className={clsx(className, 'text-secondary hover:text-secondaryHover dark:text-whiteDark dark:hover:text-whiteDarkHover')}>
+    <button
+      type="button"
+      {...props}
+      className={clsx(
+        className,
+        'text-secondary hover:text-secondaryHover dark:text-whiteDark dark:hover:text-whiteDarkHover'
+      )}
+    >
       {Icon}
     </button>
   );
