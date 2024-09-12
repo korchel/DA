@@ -20,7 +20,7 @@ export const ButtonComponent = ({ variant, className, children, ...props }: Butt
       primary: `bg-secondary hover:bg-secondaryHover text-white
         dark:bg-secondaryDark dark:hover:bg-secondaryDarkHover dark:text-whiteDark dark:border dark:border-whiteDark`,
       outline: `border-2 border-secondary bg-white text-secondary hover:bg-whiteHover
-        dark:border-whiteDark dark:bg-whiteDark dark:text-primaryDark dark:hover:bg-whiteDarkHover`,
+        dark:border-whiteDark dark:bg-whiteDark dark:text-primaryDark dark:hover:bg-whiteDarkHover dark:hover:border-whiteDarkHover`,
       danger: `bg-danger hover:bg-dangerHover text-white 
         dark:bg-dangerDark dark:text-whiteDark`,
       borderLess: `bg-white text-secondary hover:bg-whiteHover !rounded-none

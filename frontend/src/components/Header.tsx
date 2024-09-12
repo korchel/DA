@@ -8,7 +8,7 @@ import { ButtonComponent, LinkComponent, ActionButton, DropDown } from "./ui";
 import { useAuth } from "../context/AuthContext";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
-export const Header = () => {
+export const Header = ({ className }) => {
   const { t, i18n } = useTranslation();
   const { logOut, isAuthenticated, currentUser } = useAuth();
   const { pathname } = useLocation();
@@ -30,26 +30,26 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex h-24 items-center px-8 bg-white dark:bg-secondaryDark drop-shadow-xl justify-between sticky top-0">
+    <header className={clsx(className, "flex items-center  bg-white dark:bg-secondaryDark drop-shadow-xl justify-between")}>
       <Link to={routes.documentsRoute()}>
-        <div className="font-bold text-4xl text-secondary dark:text-highlightDark">DA</div>
+        <div className="font-bold text-xl sm:text-2xl md:text-4xl text-secondary dark:text-highlightDark">DA</div>
       </Link>
-      <div className={clsx(menuOpen ? "block" : "hidden", "absolute top-full left-0 md:static md:flex w-full md:justify-between px-8 md:px-0 pb-8 md:pb-0")}>
+      <div className={clsx(menuOpen ? "block" : "hidden", "absolute top-full left-0 md:static md:flex w-full md:justify-between pb-8 md:pb-0 bg-white dark:bg-secondaryDark")}>
         {isAuthenticated && <nav className={'md:flex gap-5 md:ml-20'}>
-          <LinkComponent route={routes.usersRoute()} active={pathname === routes.usersRoute()}>
+          <LinkComponent route={routes.usersRoute()} active={pathname === routes.usersRoute()} className="hover:bg-whiteHover px-2 sm:px-5 md:px-0 md:hover:bg-inherit dark:hover:bg-secondaryDarkHover dark:md:hover:bg-inherit">
             {t('header.nav.users')}
           </LinkComponent>
-          <LinkComponent route={routes.filesRoute()} active={pathname === routes.filesRoute()}>
+          <LinkComponent route={routes.filesRoute()} active={pathname === routes.filesRoute()} className="hover:bg-whiteHover px-2 sm:px-5 md:px-0 md:hover:bg-inherit dark:hover:bg-secondaryDarkHover dark:md:hover:bg-inherit">
             {t('header.nav.files')}
           </LinkComponent>
-          <LinkComponent route={routes.documentsRoute()} active={pathname === routes.documentsRoute()}>
+          <LinkComponent route={routes.documentsRoute()} active={pathname === routes.documentsRoute()} className="hover:bg-whiteHover px-2 sm:px-5 md:px-0 md:hover:bg-inherit dark:hover:bg-secondaryDarkHover dark:md:hover:bg-inherit">
             {t('header.nav.documents')}
           </LinkComponent>
-          <LinkComponent route={''}>
+          <LinkComponent route={''} className="hover:bg-whiteHover px-2 sm:px-5 md:px-0 md:hover:bg-inherit dark:hover:bg-secondaryDarkHover dark:md:hover:bg-inherit">
             {t('header.nav.search')}
           </LinkComponent>
         </nav>}
-        <div className="md:flex gap-2 items-center">
+        <div className="flex gap-2 items-center px-2 sm:px-5 md:px-0">
           <ThemeSwitcher />
           {pathname === routes.loginRoute() && <Link to={routes.signupRoute()}>
             <ButtonComponent variant="outline">{t('header.signup')}</ButtonComponent>

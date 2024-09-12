@@ -24,7 +24,7 @@ export const ActionButton = ({ actionType, className, ...props }: ButtonProps) =
   }[actionType];
 
   return (
-    <button type="button" {...props} className={clsx(className, 'text-secondary dark:text-whiteDark')}>
+    <button type="button" {...props} className={clsx(className, 'text-secondary hover:text-secondaryHover dark:text-whiteDark dark:hover:text-whiteDarkHover')}>
       {Icon}
     </button>
   );
