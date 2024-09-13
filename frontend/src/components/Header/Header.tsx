@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useRef, useState } from "react";
 import clsx from "clsx";
 
-import { routes } from "../routes";
-import { ButtonComponent, LinkComponent, ActionButton } from "./ui";
-import { useAuth } from "../context/AuthContext";
+import { routes } from "../../routes";
+import { ButtonComponent, LinkComponent, ActionButton } from "../ui";
+import { useAuth } from "../../context/AuthContext";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { useClickOutside } from "../hooks";
+import { useClickOutside } from "../../hooks";
 import { Label } from "./Label";
 
 export const Header = ({ className }) => {
@@ -57,7 +57,7 @@ export const Header = ({ className }) => {
           >
             {t('header.nav.documents')}
           </LinkComponent>
-          <LinkComponent route={''} className="hidden md:flex">
+          <LinkComponent route={routes.searchRoute()} className="hidden md:flex">
             <ActionButton actionType="search" />
           </LinkComponent>
         </nav>}

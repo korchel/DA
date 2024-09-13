@@ -5,6 +5,7 @@ import { users } from "./users";
 import { loginPage } from "./loginPage";
 
 export const ru = {
+  pageDummy: 'Здесь пока ничего нет. Зайдите по-позже.',
   header: {
     english: 'Английский',
     russian: 'Русский',

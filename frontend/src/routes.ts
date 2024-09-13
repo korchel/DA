@@ -4,6 +4,8 @@ export const routes = {
   loginRoute: () => '/login',
   signupRoute: () => '/signup',
 
+  searchRoute: () => '/search',
+
   documentsRoute: () => '/',
   documentDetailsRoute: (id: number) => `/documents/${id}`,
 

@@ -63,7 +63,7 @@ export const FilesPage = () => {
 
   return (
     <>
-      <PageTitle>{t('files.title')}</PageTitle>
+      <PageTitle className="my-5">{t('files.title')}</PageTitle>
       <ButtonComponent
         variant="primary"
         className="my-5 ml-auto"

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { routes } from "../routes";
+import { routes } from "../../routes";
 
 export const Label = () => (
   <Link to={routes.documentsRoute()}>

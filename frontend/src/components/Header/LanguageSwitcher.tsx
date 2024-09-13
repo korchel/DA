@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { DropDown } from "./ui";
+import { DropDown } from "../ui";
 
 export const LanguageSwitcher = () => {
   const { t, i18n } = useTranslation();

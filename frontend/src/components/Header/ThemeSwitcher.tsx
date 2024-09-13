@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { Switcher } from './ui';
-import { MoonIcon, SunIcon } from './ui/icons';
-import { useTheme } from '../context/ThemeContext';
+import { Switcher } from '../ui';
+import { MoonIcon, SunIcon } from '../ui/icons';
+import { useTheme } from '../../context/ThemeContext';
 
 interface IThemeSwitcher {
   className?: string;

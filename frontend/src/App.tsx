@@ -15,6 +15,7 @@ import { FilesPage } from "./pages/files/FilesPage";
 import { routes } from "./routes";
 import { Layout } from "./components/Layout";
 import { FileDetailsPage } from "./pages/files/FileDetailsPage";
+import { SearchPage } from "./pages/search/SearchPage";
 
 const LoggedInRoute = () => {
   const { isAuthenticated } = useAuth();
@@ -44,6 +45,7 @@ const App = () => {
             <Route path='users/:id' element={<UserDetailsPage />} />
             <Route path={routes.filesRoute()} element={<FilesPage />} />
             <Route path='files/:id' element={<FileDetailsPage />} />
+            <Route path={routes.searchRoute()} element={<SearchPage />} />
           </Route>
           <Route element={<LoggedOutRoute />}>
             <Route path={routes.signupRoute()} element={<SignupPage />} />
