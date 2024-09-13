@@ -12,7 +12,7 @@ export const ThemeSwitcher = ({ className }: IThemeSwitcher) => {
   const { theme, setDarkTheme, setLightTheme } = useTheme();
   const [isToggled, setIsToggled] = useState(theme == 'dark');
 
-  const handleChengeTheme = () => {
+  const handleChangeTheme = () => {
     setIsToggled((state) => !state);
   };
 
@@ -25,7 +25,7 @@ export const ThemeSwitcher = ({ className }: IThemeSwitcher) => {
     <Switcher
       className={className}
       isToggled={isToggled}
-      onToggle={handleChengeTheme}
+      onToggle={handleChangeTheme}
       icons={{ left: <SunIcon className='absolute text-white z-20 left-0.5 top-0.5' />, right: <MoonIcon className='absolute text-whiteDark z-20 right-0.5 top-[3px]' /> }}
     />
   );

@@ -4,12 +4,13 @@ import { useState } from "react";
 import clsx from "clsx";
 
 import { routes } from "../routes";
-import { ButtonComponent, LinkComponent, ActionButton, DropDown } from "./ui";
+import { ButtonComponent, LinkComponent, ActionButton } from "./ui";
 import { useAuth } from "../context/AuthContext";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export const Header = ({ className }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { logOut, isAuthenticated, currentUser } = useAuth();
   const { pathname } = useLocation();
 
@@ -17,16 +18,6 @@ export const Header = ({ className }) => {
 
   const handleOpenMenu = () => {
     setMenuOpen((state) => !state);
-  };
-
-  const handleChangeLanguage = (language: string) => {
-    if (language === i18n.language) return;
-    i18n.changeLanguage(language);
-  };
-
-  const languages = {
-    ru: t('header.russian'),
-    en: t('header.english'),
   };
 
   const linkClassnames = `px-2 sm:px-5 md:px-0
@@ -70,7 +61,7 @@ export const Header = ({ className }) => {
         </nav>}
         <div className="flex gap-2 items-center px-2 sm:px-5 md:px-0 ml-auto">
           <ThemeSwitcher />
-          <DropDown options={languages} name={languages[i18n.language]} action={handleChangeLanguage} />
+          <LanguageSwitcher />
           {pathname === routes.loginRoute() && <Link to={routes.signupRoute()}>
             <ButtonComponent variant="outline">{t('header.signup')}</ButtonComponent>
           </Link>}

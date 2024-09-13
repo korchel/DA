@@ -1,12 +1,9 @@
 import React from "react";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { Provider } from "react-redux";
+
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
-import { I18nextProvider } from "react-i18next";
-
-import { AuthProvider, useAuth } from "./context/AuthContext";
-import store from "./store";
+import { useAuth } from "./context/AuthContext";
 import { SignupPage } from "./pages/SignupPage";
 import { LoginPage } from "./pages/LoginPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -16,10 +13,8 @@ import { UsersPage } from "./pages/users/UsersPage";
 import { UserDetailsPage } from "./pages/users/UserDetailsPage";
 import { FilesPage } from "./pages/files/FilesPage";
 import { routes } from "./routes";
-import i18n from "./locales/i18n";
-import { FileDetailsPage } from "./pages/files/FileDetailsPage";
-import { ThemeProvider } from "./context/ThemeContext";
 import { Layout } from "./components/Layout";
+import { FileDetailsPage } from "./pages/files/FileDetailsPage";
 
 const LoggedInRoute = () => {
   const { isAuthenticated } = useAuth();
@@ -39,33 +34,25 @@ const LoggedOutRoute = () => {
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <AuthProvider>
-        <ThemeProvider>
-          <I18nextProvider i18n={i18n}>
-            <BrowserRouter>
-              <Layout >
-                <Routes>
-                  <Route element={<LoggedInRoute />}>
-                    <Route path='documents/:id' element={<DocumentDetailsPage />} />
-                    <Route path={routes.usersRoute()} element={<UsersPage />} />
-                    <Route path={routes.documentsRoute()} element={<DocumentsPage />} />
-                    <Route path='users/:id' element={<UserDetailsPage />} />
-                    <Route path={routes.filesRoute()} element={<FilesPage />} />
-                    <Route path='files/:id' element={<FileDetailsPage />} />
-                  </Route>
-                  <Route element={<LoggedOutRoute />}>
-                    <Route path={routes.signupRoute()} element={<SignupPage />} />
-                    <Route path={routes.loginRoute()} element={<LoginPage />} />
-                  </Route>
-                  <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-              </Layout>
-            </BrowserRouter>
-          </I18nextProvider>
-        </ThemeProvider>
-      </AuthProvider>
-    </Provider>
+    <BrowserRouter>
+      <Layout >
+        <Routes>
+          <Route element={<LoggedInRoute />}>
+            <Route path='documents/:id' element={<DocumentDetailsPage />} />
+            <Route path={routes.usersRoute()} element={<UsersPage />} />
+            <Route path={routes.documentsRoute()} element={<DocumentsPage />} />
+            <Route path='users/:id' element={<UserDetailsPage />} />
+            <Route path={routes.filesRoute()} element={<FilesPage />} />
+            <Route path='files/:id' element={<FileDetailsPage />} />
+          </Route>
+          <Route element={<LoggedOutRoute />}>
+            <Route path={routes.signupRoute()} element={<SignupPage />} />
+            <Route path={routes.loginRoute()} element={<LoginPage />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 };
 

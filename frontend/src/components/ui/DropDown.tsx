@@ -1,6 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes, useState } from "react";
 import { ButtonComponent } from "./ButtonComponent";
 import clsx from "clsx";
+import { useClickOutside } from "../../hooks";
 
 interface IDropDown extends DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement> {
   name: string;
@@ -17,14 +18,20 @@ export const DropDown = ({ name, options, action, className }: IDropDown) => {
     action(param);
   };
 
+  const handleClickOutside = () => {
+    setMenuOpen(false);
+  };
+
   const handleOpenMenu = () => {
     setMenuOpen((state) => !state);
   };
 
+  const ref = useClickOutside(handleClickOutside);
+
   return (
     <div className={clsx(className, 'relative')}>
       <ButtonComponent variant="outline" onClick={handleOpenMenu}>{name}</ButtonComponent>
-      <div className={clsx(menuOpen ? 'block' : 'hidden', 'absolute right-0 top-10')}>
+      <div ref={ref} className={clsx(menuOpen ? 'block' : 'hidden', 'absolute right-0 top-10')}>
         {
           Object.keys(options).map((option) => (
             <ButtonComponent

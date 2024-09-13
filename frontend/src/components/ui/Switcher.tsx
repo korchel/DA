@@ -19,11 +19,12 @@ export const Switcher = ({ isToggled, onToggle, icons, className }: ISwitcher) =
       />
       <span
         className="absolute inset-0 box-border border border-secondary h-6 
-          rounded-full bg-secondary peer-checked:before:translate-x-6 
+          rounded-full bg-secondary  
           dark:bg-highlightDark dark:border-highlightDark
           before:absolute before:z-50 before:content-[''] before:-left-[1px] before:-top-[1px] before:w-6 before:h-6 
           before:bg-primary before:rounded-full before:transition-transform
           dark:before:bg-primaryDark
+          peer-checked:before:translate-x-6
         "
       />
       {icons?.left}
