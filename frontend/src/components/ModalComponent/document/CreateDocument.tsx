@@ -101,7 +101,7 @@ export const CreateDocument = () => {
           />
         )}
       />
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <CheckBox
           label={t('documents.modal.form.labels.publicDocument')}
           {...register('public_document')}

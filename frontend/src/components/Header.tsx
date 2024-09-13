@@ -68,15 +68,15 @@ export const Header = ({ className }) => {
             <ActionButton actionType="search" />
           </LinkComponent>
         </nav>}
-        <div className="flex gap-2 items-center px-2 sm:px-5 md:px-0">
+        <div className="flex gap-2 items-center px-2 sm:px-5 md:px-0 ml-auto">
           <ThemeSwitcher />
+          <DropDown options={languages} name={languages[i18n.language]} action={handleChangeLanguage} />
           {pathname === routes.loginRoute() && <Link to={routes.signupRoute()}>
             <ButtonComponent variant="outline">{t('header.signup')}</ButtonComponent>
           </Link>}
           {pathname === routes.signupRoute() && <Link to={routes.loginRoute()}>
             <ButtonComponent variant="outline">{t('header.login')}</ButtonComponent>
           </Link>}
-          <DropDown options={languages} name={languages[i18n.language]} action={handleChangeLanguage} />
           {isAuthenticated && <Link to={routes.loginRoute()}>
             <ButtonComponent onClick={logOut} variant="outline">{t('header.logout')}</ButtonComponent>
           </Link>}
