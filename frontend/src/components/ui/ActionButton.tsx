@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps, ForwardedRef, forwardRef } from "react";
 
 import {
   DeleteIcon, EditIcon, EyeIcon, CrossedEyeIcon,
@@ -12,7 +12,7 @@ interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonE
   actionType: 'delete' | 'edit' | 'showPassword' | 'hidePassword' | 'close' | 'download' | 'overview' | 'openMenu' | 'search',
 }
 
-export const ActionButton = ({ actionType, className, ...props }: ButtonProps) => {
+export const ActionButton = forwardRef(({ actionType, className, ...props }: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
   const Icon = {
     delete: <DeleteIcon />,
     edit: <EditIcon />,
@@ -33,8 +33,9 @@ export const ActionButton = ({ actionType, className, ...props }: ButtonProps) =
         className,
         'text-secondary hover:text-secondaryHover dark:text-whiteDark dark:hover:text-whiteDarkHover'
       )}
+      ref={ref}
     >
       {Icon}
     </button>
   );
-};
+});

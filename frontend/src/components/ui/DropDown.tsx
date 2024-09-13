@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, HTMLAttributes, useState } from "react";
+import { DetailedHTMLProps, HTMLAttributes, useRef, useState } from "react";
 import { ButtonComponent } from "./ButtonComponent";
 import clsx from "clsx";
 import { useClickOutside } from "../../hooks";
@@ -11,6 +11,7 @@ interface IDropDown extends DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTM
 
 export const DropDown = ({ name, options, action, className }: IDropDown) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const ref = useRef(null);
 
   const handleChooseOption = (e) => {
     const param = e.target.dataset.param;
@@ -18,7 +19,7 @@ export const DropDown = ({ name, options, action, className }: IDropDown) => {
     action(param);
   };
 
-  const handleClickOutside = () => {
+  const handleClickOutside = (e) => {
     setMenuOpen(false);
   };
 
@@ -26,7 +27,7 @@ export const DropDown = ({ name, options, action, className }: IDropDown) => {
     setMenuOpen((state) => !state);
   };
 
-  const ref = useClickOutside(handleClickOutside);
+  useClickOutside(ref, handleClickOutside);
 
   return (
     <div className={clsx(className, 'relative')}>
