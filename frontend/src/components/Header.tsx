@@ -9,6 +9,7 @@ import { useAuth } from "../context/AuthContext";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useClickOutside } from "../hooks";
+import { Label } from "./Label";
 
 export const Header = ({ className }) => {
   const { t } = useTranslation();
@@ -23,16 +24,13 @@ export const Header = ({ className }) => {
 
   useClickOutside(headerRef, () => setMenuOpen(false));
 
-
   const linkClassnames = `px-2 sm:px-5 md:px-0
     hover:bg-whiteHover md:hover:bg-inherit
     dark:hover:bg-secondaryDarkHover dark:md:hover:bg-inherit`;
 
   return (
     <header className={clsx(className, "flex items-center bg-white dark:bg-secondaryDark drop-shadow-xl justify-between")}>
-      <Link to={routes.documentsRoute()}>
-        <div className="font-bold text-xl sm:text-2xl md:text-4xl text-secondary dark:text-highlightDark">DA</div>
-      </Link>
+      <Label />
       <div ref={headerRef} className={clsx(
         menuOpen ? "block" : "hidden",
         "absolute top-full left-0 md:static md:flex w-full md:justify-between pb-4 md:pb-0 bg-white dark:bg-secondaryDark",
