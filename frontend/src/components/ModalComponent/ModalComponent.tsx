@@ -22,10 +22,16 @@ export const ModalComponent = () => {
 
   return open && (
     <div
-      className="fixed inset-0 bg-slate-900/60 backdrop-blur overflow-y-auto flex flex-col items-center justify-center"
+      className="fixed inset-0 bg-slate-900/60 backdrop-blur overflow-y-auto
+        flex flex-col items-center justify-center"
     >
-      <div data-id="modal" className="relative bg-white rounded-lg p-8 h-fit flex flex-col min-w-[500px] 
-        dark:bg-secondaryDark"
+      <div
+        data-id="modal"
+        className="relative rounded-lg h-fit
+        flex flex-col
+        md:min-w-[500px] 
+        p-4 sm:p-6 md:p-8 
+        bg-white dark:bg-secondaryDark"
       >
         {modalType === "deleteDocument" && <DeleteDocument />}
         {modalType === "createDocument" && <CreateDocument />}

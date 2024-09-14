@@ -8,7 +8,7 @@ export const Spinner = ({ className }: ISpinner) => {
   return (
     <svg
       aria-hidden="true"
-      className={clsx("w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-sky-500", className)}
+      className={clsx("w-12 h-12 animate-spin text-secondary dark:text-secondaryDark fill-white dark:fill-whiteDark", className)}
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

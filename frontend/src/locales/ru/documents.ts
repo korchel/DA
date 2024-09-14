@@ -24,7 +24,12 @@ export const documents = {
     edit: 'Изменить документ',
   },
   modal: {
+    title: {
+      edit: 'Редактирование документа',
+      create: 'Создание документа',
+    },
     form: {
+
       labels: {
         title: 'Название',
         number: 'Номер документа',

@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 import {
   InputField, TextArea, SelectComponent, CheckBox,
-  ButtonComponent, MultiSelectComponent,
+  ButtonComponent, MultiSelectComponent, Title,
 } from "../../ui";
 import { useCreateDocMutation } from "../../../store/docsApi";
 import { useAuth } from "../../../context/AuthContext";
@@ -54,7 +54,8 @@ export const CreateDocument = () => {
   };
 
   return (
-    <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col gap-3 sm:gap-5 md:gap-7" onSubmit={handleSubmit(onSubmit)}>
+      <Title>{t('documents.modal.title.create')}</Title>
       <InputField
         {...register('title')}
         label={t('documents.modal.form.labels.title')}
@@ -101,7 +102,7 @@ export const CreateDocument = () => {
           />
         )}
       />
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col gap-5 md:flex-row justify-between items-center">
         <CheckBox
           label={t('documents.modal.form.labels.publicDocument')}
           {...register('public_document')}

@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { ButtonComponent, ActionButton, PageTitle } from "../../components/ui";
+import { ButtonComponent, Title } from "../../components/ui";
 import { useGetFilesQuery as getFiles } from "../../store/filesApi";
 import { routes } from "../../routes";
 import { useAuth } from "../../context/AuthContext";
@@ -63,7 +63,7 @@ export const FilesPage = () => {
 
   return (
     <>
-      <PageTitle className="my-5">{t('files.title')}</PageTitle>
+      <Title>{t('files.title')}</Title>
       <ButtonComponent
         variant="primary"
         className="my-5 ml-auto"

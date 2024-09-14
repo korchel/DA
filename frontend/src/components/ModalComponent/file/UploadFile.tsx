@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
-import { CheckBox, FileInput, ButtonComponent, MultiSelectComponent } from "../../ui";
+import { CheckBox, FileInput, ButtonComponent, MultiSelectComponent, Title } from "../../ui";
 import { useUploadFileMutation } from "../../../store/filesApi";
 import { closeModal } from "../../../store/modalSlice";
 import { routes } from "../../../routes";
@@ -52,7 +52,8 @@ export const UploadFile = () => {
   };
   
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-7" > 
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-7">
+      <Title>{t('files.modal.title.create')}</Title>
       <Controller
         control={control}
         name="file"

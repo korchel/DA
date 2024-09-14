@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ChangeEventHandler } from "react";
 
-import { InputField, CheckBox, ButtonComponent } from "../../ui";
+import { InputField, CheckBox, ButtonComponent, Title } from "../../ui";
 import { useEditUserMutation, useGetUserQuery as getUser } from "../../../store/usersApi";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { routes } from "../../../routes";
@@ -68,6 +68,7 @@ export const EditUser = () => {
 
   return (
     <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
+      <Title>{t('users.modal.title.edit')}</Title>
       <InputField
         label={t('users.modal.form.labels.username')}
         {...register('username')}

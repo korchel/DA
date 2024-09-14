@@ -75,8 +75,8 @@ export const Header = ({ className }) => {
           </Link>}
         </div>
       </div>
-      <LinkComponent route={''} className="md:hidden flex w-6 ml-auto mr-4">
-        <ActionButton actionType="search" />
+      <LinkComponent route={routes.searchRoute()} className="md:hidden flex w-6 ml-auto mr-4">
+        <ActionButton actionType="search" className="ml-auto" />
       </LinkComponent>
       <ActionButton actionType="openMenu" className="md:hidden" onClick={handleClickMenu} />
     </header>

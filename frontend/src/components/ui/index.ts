@@ -8,7 +8,7 @@ export { FileInput } from './FileInput';
 export { InputField } from './InputField';
 export { LinkComponent } from './LinkComponent';
 export { MultiSelectComponent } from './Select/MultiSelectComponent';
-export { PageTitle } from './PageTitle';
+export { Title } from './Title';
 export { SelectComponent } from './Select/SelectComponent';
 export { Switcher } from './Switcher';
 export { TextArea } from './TextArea';

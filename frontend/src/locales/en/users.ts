@@ -22,6 +22,9 @@ export const users = {
     edit: 'Update data',
   },
   modal: {
+    title: {
+      edit: 'Update user data',
+    },
     form: {
       labels: {
         username: 'Username',

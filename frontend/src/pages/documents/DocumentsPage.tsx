@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import { ActionButton, PageTitle, ButtonComponent } from "../../components/ui";
+import { Title, ButtonComponent } from "../../components/ui";
 import { routes } from "../../routes";
 import { useAuth } from "../../context/AuthContext";
 import { useGetDocsQuery as getDocs } from "../../store/docsApi";
@@ -66,7 +66,7 @@ export const DocumentsPage = () => {
   }
   return (
     <>
-      <PageTitle className="my-5">{t('documents.title')}</PageTitle>
+      <Title>{t('documents.title')}</Title>
       <ButtonComponent
         variant="primary"
         className="my-5 ml-auto"

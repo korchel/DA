@@ -6,7 +6,7 @@ import isEqual from "lodash.isequal";
 import { toast } from "react-toastify";
 
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
-import { MultiSelectComponent, CheckBox, ButtonComponent } from "../../ui";
+import { MultiSelectComponent, CheckBox, ButtonComponent, Title } from "../../ui";
 import { useEditFileMutation, useGetFileQuery as getFile } from "../../../store/filesApi";
 import { routes } from "../../../routes";
 import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
@@ -55,6 +55,7 @@ export const EditFile = () => {
 
   return (
     <form onSubmit={(handleSubmit(onSubmit))} className="flex flex-col gap-7">
+      <Title>{t('files.modal.title.edit')}</Title>
       <Controller
         control={control}
         name='available_for'

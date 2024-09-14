@@ -22,6 +22,9 @@ export const users = {
     edit: 'Редактировать данные',
   },
   modal: {
+    title: {
+      edit: 'Редактирование данных пользователя',
+    },
     form: {
       labels: {
         username: 'Имя пользователя',

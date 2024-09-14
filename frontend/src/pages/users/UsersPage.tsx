@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { routes } from "../../routes";
 import { useGetUsersQuery as getUsers} from "../../store/usersApi";
 import { Spinner } from "../../components/ui/icons";
-import { PageTitle } from "../../components/ui";
+import { Title } from "../../components/ui";
 import { Table } from "../../components/Table";
 
 export const UsersPage = () => {
@@ -41,7 +41,7 @@ export const UsersPage = () => {
 
   return (
     <>
-      <PageTitle className="my-5">{t('users.title')}</PageTitle>
+      <Title>{t('users.title')}</Title>
       <Table
         type='users'
         headers={tableHeaders}

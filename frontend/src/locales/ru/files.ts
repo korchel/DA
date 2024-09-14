@@ -19,6 +19,10 @@ export const files = {
     edit: 'Изменить файл',
   },
   modal: {
+    title: {
+      edit: 'Загрузка файла',
+      create: 'Редактирование доступа к файлу',
+    },
     form: {
       labels: {
         availableFor: 'Сделать доступным для:',

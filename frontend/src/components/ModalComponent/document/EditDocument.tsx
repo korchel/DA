@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 import {
   InputField, SelectComponent, MultiSelectComponent,
-  TextArea, CheckBox, ButtonComponent,
+  TextArea, CheckBox, ButtonComponent, Title,
 } from "../../ui";
 import isEqual from "lodash.isequal";
 import { useEditDocMutation, useGetDocQuery as getDoc } from "../../../store/docsApi";
@@ -67,6 +67,7 @@ export const EditDocument = () => {
 
   return (
     <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
+      <Title>{t('documents.modal.title.edit')}</Title>
       <InputField
         {...register('title')}
         label={t('documents.modal.form.labels.title')}

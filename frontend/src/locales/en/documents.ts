@@ -24,6 +24,10 @@ export const documents = {
     edit: 'Update document',
   },
   modal: {
+    title: {
+      edit: 'Document update',
+      create: 'New document',
+    },
     form: {
       labels: {
         title: 'Name',
