@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useClickOutside } from "../../hooks";
 
 interface IDropDown extends DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement> {
-  name: string;
+  name: string | null;
   options: Record<string, string>;
   action: (param: string) => void;
 }

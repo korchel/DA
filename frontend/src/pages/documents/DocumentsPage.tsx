@@ -25,7 +25,6 @@ export const DocumentsPage = () => {
     t('documents.tableHeader.content'),
     t('documents.tableHeader.creationDate'),
     t('documents.tableHeader.updateDate'),
-    t('documents.tableHeader.actions'),
   ];
 
   const tableData = documents?.map((document) => ({
@@ -44,16 +43,6 @@ export const DocumentsPage = () => {
   const handleCreate = () => {
     dispatch(openModal({ type: "createDocument", open: true }))
   };
-
-  // const handleDelete = (event, id: number): void => {
-  //   event.stopPropagation();
-  //   dispatch(openModal({ type: "deleteDocument", open: true, id }));
-  // };
-
-  // const handleEdit = (event, id: number): void => {
-  //   event.stopPropagation();
-  //   dispatch(openModal({ type: "editDocument", open: true, id }));
-  // };
 
   const handleGoToDetailsPage = (id: number) => {
     navigate(routes.documentDetailsRoute(id))
@@ -80,10 +69,6 @@ export const DocumentsPage = () => {
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
       />
-      {/* <td className="xl:table-cell py-4 px-5 flex justify-around">
-        <ActionButton actionType="edit" title={t('edit')} onClick={(event) => handleEdit(event, document.id)} />
-        <ActionButton actionType="delete" title={t('delete')} onClick={(event) => handleDelete(event, document.id)} />
-      </td> */}
     </>
   );
 };

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 import { ButtonComponent, InputField, ErrorMessage, Title } from "../components/ui";
 import { routes } from "../routes";
-import { useAuth } from "../context/AuthContext";
 
 interface ISignupData {
   name: string,
@@ -18,7 +17,6 @@ interface ISignupData {
 
 export const SignupPage = () => {
   const { t } = useTranslation();
-  const { logIn } = useAuth();
   const navigate = useNavigate();
   const { register, setFocus, handleSubmit, formState: { errors }, getValues } = useForm<ISignupData>();
   const [signupFailed, setSignupFailed] = useState(false);
@@ -35,17 +33,10 @@ export const SignupPage = () => {
       body: JSON.stringify(data),
     })
       .then((response) => {
-        console.log(response)
-        return response.json()
-      })
-      .then((data) => {
-        if (data.user) {
-          const roles = data.user.roles.map((role) => role.name);
-          const id = data.id;
-          logIn({roles, id});
-          navigate(routes.documentsRoute());
+        if (response.ok) {
+          navigate(routes.loginRoute());
         } else {
-          if (data.status === 400) {
+          if (response.status === 400) {
             setSignupFailed(true);
             setButtonDisabled(false)
           }
@@ -60,7 +51,9 @@ export const SignupPage = () => {
 
   return (
     <div className="h-full flex items-center justify-center">
-      <div className="shadow-lg p-6 rounded-md min-w-[400px] bg-white">
+      <div className="relative min-w-[400px] p-6 shadow-lg rounded-md
+        bg-white dark:bg-secondaryDark"
+      >
         <form id="registerForm" className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)} noValidate>
           <Title>{t('signupPage.title')}</Title>
           <InputField
@@ -89,9 +82,9 @@ export const SignupPage = () => {
             {...register('name', {required: {value: true, message: t('errorMessages.reuired')}})}
           />
           <InputField
-            autoComplete="off"
+            error={errors.lastname}
             placeholder={t('signupPage.placeholders.lastname')}
-            {...register('lastname')}
+            {...register('lastname', {required: {value: true, message: t('errorMessages.reuired')}})}
           />
           <InputField
             autoComplete="new-password"

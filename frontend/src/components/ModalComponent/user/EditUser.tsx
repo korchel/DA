@@ -9,6 +9,9 @@ import { InputField, CheckBox, ButtonComponent, Title } from "../../ui";
 import { useEditUserMutation, useGetUserQuery as getUser } from "../../../store/usersApi";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { routes } from "../../../routes";
+import { useAuth } from "../../../context/AuthContext";
+import { defineAbilityFor } from "../../../casl/ability";
+import { Can } from "@casl/react";
 
 export interface IEditUserForm {
   username: string,
@@ -26,12 +29,17 @@ const roles = [
 
 export const EditUser = () => {
   const { t } = useTranslation();
+  const { currentUser, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const id = useSelector(getCurrentDataId);
 
   const {data: user} = getUser(id);
   const [editUser] = useEditUserMutation();
+
+  const ability = defineAbilityFor({
+    user: { ...currentUser, isAuthenticated },
+  });
 
   const defaultValues = {
     username: user?.username,
@@ -85,24 +93,26 @@ export const EditUser = () => {
         label={t('users.modal.form.labels.lastname')}
         {...register('lastName')}
       />
-      <fieldset>
-        {roles.map((role) => (
-          <Controller
+      <Can I="edit" a="role" ability={ability}>
+        <fieldset>
+          {roles.map((role) => (
+            <Controller
             key={role.value}
             control={control}
             name='role_ids'
             render={({ field }) => (
               <CheckBox
-                {...field}
-                label={role.label}
-                checked={field.value?.includes(role.value)}
-                value={role.value}
-                onChange={(e) => handleCheck(e)}
+              {...field}
+              label={role.label}
+              checked={field.value?.includes(role.value)}
+              value={role.value}
+              onChange={(e) => handleCheck(e)}
               />
             )}
-          />
-        ))}
-      </fieldset>
+            />
+          ))}
+        </fieldset>
+      </Can>
       <ButtonComponent type="submit" variant="primary">{t('users.modal.edit.button')}</ButtonComponent>
     </form>
   );

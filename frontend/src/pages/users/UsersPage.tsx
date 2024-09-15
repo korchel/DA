@@ -47,6 +47,7 @@ export const UsersPage = () => {
         headers={tableHeaders}
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
+        className="mt-4"
       />
     </>
   );

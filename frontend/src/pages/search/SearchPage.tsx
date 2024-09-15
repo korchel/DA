@@ -4,6 +4,7 @@ import { Title } from "../../components/ui";
 
 export const SearchPage = () => {
   const { t } = useTranslation();
+
   return (
     <>
       <Title>{t('pageDummy')}</Title>

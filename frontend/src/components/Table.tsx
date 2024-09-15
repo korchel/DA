@@ -1,4 +1,7 @@
-interface ITableProps {
+import clsx from "clsx";
+import { DetailedHTMLProps, TableHTMLAttributes } from "react";
+
+interface ITableProps extends DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> {
   type: 'documents' | 'files' | 'users';
   headers: string[];
   data: {
@@ -8,10 +11,10 @@ interface ITableProps {
   handleGoToDetailsPage: (id: number) => void;
 }
 
-export const Table = ({ type, headers, data, handleGoToDetailsPage }: ITableProps) => {
+export const Table = ({ type, headers, data, handleGoToDetailsPage, className }: ITableProps) => {
 
   return (
-    <table className="w-[100%] bg-white dark:bg-secondaryDark text-left rounded-md shadow-md table-fixed ">
+    <table className={clsx(className, "w-[100%] bg-white dark:bg-secondaryDark text-left rounded-md shadow-md table-fixed")}>
       <thead className="block xl:table-header-group float-left xl:float-none uppercase text-secondary dark:text-whiteDark whitespace-nowrap">
         <tr className="border-r xl:border-r-0 border-b-0 xl:border-b border-gray">
           {headers.map((header, index) => (

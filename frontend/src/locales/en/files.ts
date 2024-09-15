@@ -20,8 +20,8 @@ export const files = {
   },
   modal: {
     title: {
-      edit: 'File upload',
-      create: 'Update file permissions',
+      edit: 'Update file permissions',
+      create: 'File upload',
     },
     form: {
       labels: {

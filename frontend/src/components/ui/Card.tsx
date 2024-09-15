@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
 interface ICard extends DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement> {
@@ -14,8 +15,8 @@ Card.Header = ({ children }) => (
   <h1 className="font-bold text-center uppercase">{children}</h1>
 );
 
-Card.Body = ({ children }) => (
-  <div  className="mt-5">
+Card.Body = ({ children, className }: {children: ReactNode, className?: string}) => (
+  <div  className={clsx(className, "mt-5")}>
     {children}
   </div>
 );

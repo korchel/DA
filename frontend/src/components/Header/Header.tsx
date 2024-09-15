@@ -10,11 +10,12 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useClickOutside } from "../../hooks";
 import { Label } from "./Label";
+import { UserButton } from "./UserButton";
 
 export const Header = ({ className }) => {
   const { t } = useTranslation();
   const headerRef = useRef(null);
-  const { logOut, isAuthenticated, currentUser } = useAuth();
+  const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
@@ -29,7 +30,10 @@ export const Header = ({ className }) => {
     dark:hover:bg-secondaryDarkHover dark:md:hover:bg-inherit`;
 
   return (
-    <header className={clsx(className, "flex items-center bg-white dark:bg-secondaryDark drop-shadow-xl justify-between")}>
+    <header className={clsx(
+      className,
+      `flex justify-between items-center drop-shadow-xl bg-white dark:bg-secondaryDark`,
+    )}>
       <Label />
       <div ref={headerRef} className={clsx(
         menuOpen ? "block" : "hidden",
@@ -70,9 +74,7 @@ export const Header = ({ className }) => {
           {pathname === routes.signupRoute() && <Link to={routes.loginRoute()}>
             <ButtonComponent variant="outline">{t('header.login')}</ButtonComponent>
           </Link>}
-          {isAuthenticated && <Link to={routes.loginRoute()}>
-            <ButtonComponent onClick={logOut} variant="outline">{t('header.logout')}</ButtonComponent>
-          </Link>}
+          {isAuthenticated && <UserButton />}
         </div>
       </div>
       <LinkComponent route={routes.searchRoute()} className="md:hidden flex w-6 ml-auto mr-4">

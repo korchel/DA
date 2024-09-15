@@ -23,7 +23,6 @@ export const FilesPage = () => {
     t('files.tableHeader.author'),
     t('files.tableHeader.creationDate'),
     t('files.tableHeader.updateDate'),
-    t('files.tableHeader.actions'),
   ];
 
   const tableData = files?.map((file) => ({
@@ -39,16 +38,6 @@ export const FilesPage = () => {
 
   const handleCreate = () => {
     dispatch(openModal({ type: "uploadFile", open: true }))
-  };
-
-  const handleDownload = (event, id: number): void => {
-    event.stopPropagation();
-    window.open(routes.fileDownloadPath(id), '_blank');
-  };
-
-  const handleOverview = (event, id: number) => {
-    event.stopPropagation();
-    window.open(routes.viewFilePath(id), '_blank');
   };
 
   const handleGoToDetailsPage = (id: number) => {
@@ -77,15 +66,6 @@ export const FilesPage = () => {
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
       />
-      {/* <img
-        src={routes.thumbnailPath(file.id)}
-        alt={file.filename}
-        className="max-h-[100px] max-w-[100px] w-auto h-auto block"
-      />
-      <td className="py-4 px-5 flex justify-around">
-        <ActionButton actionType="download" title={t('download')} onClick={(event) => handleDownload(event, file.id)} />
-        <ActionButton actionType="overview" title={t('see')} onClick={(event) => handleOverview(event, file.id)} />
-      </td> */}
     </>
   );
 };

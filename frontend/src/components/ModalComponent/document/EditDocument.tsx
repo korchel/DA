@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Can } from "@casl/react";
 
 import {
   InputField, SelectComponent, MultiSelectComponent,
@@ -16,6 +17,8 @@ import { routes } from "../../../routes";
 import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
 import { editDocFormSchema, IDocForm } from "./docFormSchema";
 import { ISelectOption } from "../../../interfaces";
+import { useAuth } from "../../../context/AuthContext";
+import { defineAbilityFor } from "../../../casl/ability";
 
 export const selectTypeOptions: ISelectOption[] = [
   { value: 1, label: 'Заметка' },
@@ -30,6 +33,8 @@ export const EditDocument = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const id = useSelector(getCurrentDataId);
+  const { currentUser, isAuthenticated } = useAuth();
+  const ability = defineAbilityFor({ user: { ...currentUser, isAuthenticated } });
 
   const { data: users } = getUsers();
   const { data: doc } = getDoc(id);
@@ -78,11 +83,13 @@ export const EditDocument = () => {
         label={t('documents.modal.form.labels.number')}
         error={errors.number}
       />
-      <InputField
-        {...register('authorId')}
-        label={t('documents.modal.form.labels.authorId')}
-        error={errors.authorId}
-      />
+      <Can I="edit" an="author" ability={ability}>
+        <InputField
+          {...register('authorId')}
+          label={t('documents.modal.form.labels.authorId')}
+          error={errors.authorId}
+          />
+      </Can>
       <TextArea
         {...register('content')}
         label={t('documents.modal.form.labels.content')}

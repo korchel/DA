@@ -36,7 +36,8 @@ export const LoginPage = () => {
         if (data.user) {
           const roles = data.user.roles.map((role) => role.name);
           const id = data.user.idUser;
-          logIn({roles, id});
+          const userName = data.user.username;
+          logIn({roles, id, userName});
           navigate(routes.documentsRoute());
         } else {
           if (data.status === 400) {
@@ -54,7 +55,7 @@ export const LoginPage = () => {
 
   return (
     <div className="h-full flex items-center justify-center">
-      <div className="shadow-lg p-6 rounded-md min-w-[400px] bg-white dark:bg-secondaryDark relative">
+      <div className="relative min-w-[400px] p-6 shadow-lg rounded-md bg-white dark:bg-secondaryDark">
         <form id="registerForm" className="flex flex-col gap-7 text-center" onSubmit={handleSubmit(onSubmit)}>
           <Title>{t('loginPage.title')}</Title>
           <InputField

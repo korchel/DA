@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { closeModal, getModalOpen, getModalType } from "../../store/modalSlice";
-import { DeleteDocument } from "./document/DeleteDocument";
 import { CreateDocument } from "./document/CreateDocument";
 import { EditDocument } from "./document/EditDocument";
 import { EditUser } from "./user/EditUser";
-import { DeleteUser } from "./user/DeleteUser";
 import { EditFile } from "./file/EditFile";
 import { UploadFile } from "./file/UploadFile";
 import { ActionButton } from "../ui";
+import { Delete } from "./Delete";
 
 export const ModalComponent = () => {
   const dispatch = useDispatch();
@@ -33,13 +32,14 @@ export const ModalComponent = () => {
         p-4 sm:p-6 md:p-8 
         bg-white dark:bg-secondaryDark"
       >
-        {modalType === "deleteDocument" && <DeleteDocument />}
         {modalType === "createDocument" && <CreateDocument />}
         {modalType === "editDocument" && <EditDocument />}
         {modalType === "editUser" && <EditUser />}
-        {modalType === "deleteUser" && <DeleteUser />}
         {modalType === 'editFile' && <EditFile />}
         {modalType === 'uploadFile' && <UploadFile />}
+        {modalType === 'deleteFile' && <Delete type="file" />}
+        {modalType === "deleteDocument" && <Delete type="doc" />}
+        {modalType === "deleteUser" && <Delete type="user" />}
         <ActionButton
           actionType='close'
           className="absolute text-white top-0 left-[100%] mx-2"

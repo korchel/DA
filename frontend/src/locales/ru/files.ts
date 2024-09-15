@@ -20,8 +20,8 @@ export const files = {
   },
   modal: {
     title: {
-      edit: 'Загрузка файла',
-      create: 'Редактирование доступа к файлу',
+      edit: 'Редактирование доступа к файлу',
+      create: 'Загрузка файла',
     },
     form: {
       labels: {

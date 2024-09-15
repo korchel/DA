@@ -6,7 +6,7 @@ interface IErrorMessage extends DetailedHTMLProps<HTMLAttributes<HTMLHRElement>,
 }
 
 export const ErrorMessage = ({ children, className }: IErrorMessage) => (
-  <p className={clsx(className, "absolute text-sm text-danger")}>
+  <p className={clsx(className, "absolute text-sm text-danger dark:text-[#e67a71]")}>
     {children}
   </p>
 );

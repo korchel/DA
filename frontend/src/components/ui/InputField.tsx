@@ -36,6 +36,8 @@ export const InputField = forwardRef(({
           "block p-2 border bg-transparent outline-primary rounded-sm w-full",
           "focus:ring focus:ring-primary focus:ring-opacity-50",
           "dark:border-whiteDark dark:outline-secondaryDark dark:focus:ring-secondaryDark",
+          "autofill:shadow-[inset_0_0_0px_1000px_var(--white-color)] autofill:[-webkit-text-fill-color:_var(--secondary-color)]",
+          "dark:autofill:shadow-[inset_0_0_0px_1000px_var(--secondary-dark-color)] dark:autofill:[-webkit-text-fill-color:_var(--white-dark-color)]",
         )}
         placeholder={placeholder}
         {...props}
