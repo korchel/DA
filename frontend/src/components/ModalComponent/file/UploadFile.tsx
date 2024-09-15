@@ -53,7 +53,10 @@ export const UploadFile = () => {
   };
   
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-7">
+    <form
+      className="flex flex-col gap-3 sm:gap-5 md:gap-7"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Title>{t('files.modal.title.create')}</Title>
       <Controller
         control={control}
@@ -82,7 +85,7 @@ export const UploadFile = () => {
           />
         )}
       />
-      <div className="flex justify-between">
+      <div className="flex flex-col gap-5 md:flex-row justify-between items-center">
         <Controller
           control={control}
           name='params.public_document'

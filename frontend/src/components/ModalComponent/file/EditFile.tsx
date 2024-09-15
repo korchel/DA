@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,7 +55,10 @@ export const EditFile = () => {
   };
 
   return (
-    <form onSubmit={(handleSubmit(onSubmit))} className="flex flex-col gap-7">
+    <form
+      className="flex flex-col gap-3 sm:gap-5 md:gap-7"
+      onSubmit={(handleSubmit(onSubmit))}
+    >
       <Title>{t('files.modal.title.edit')}</Title>
       <Controller
         control={control}
@@ -71,7 +75,7 @@ export const EditFile = () => {
           />
         )}
       />
-      <div className="flex justify-between">
+      <div className="flex flex-col gap-5 md:flex-row justify-between items-center">
         <Controller
           control={control}
           name='public_document'

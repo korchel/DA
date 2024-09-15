@@ -75,7 +75,7 @@ export const EditUser = () => {
   };
 
   return (
-    <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col gap-3 sm:gap-5 md:gap-7" onSubmit={handleSubmit(onSubmit)}>
       <Title>{t('users.modal.title.edit')}</Title>
       <InputField
         label={t('users.modal.form.labels.username')}

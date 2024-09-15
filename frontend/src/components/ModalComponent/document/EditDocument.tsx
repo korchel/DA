@@ -71,7 +71,10 @@ export const EditDocument = () => {
   };
 
   return (
-    <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="flex flex-col gap-3 sm:gap-5 md:gap-7"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Title>{t('documents.modal.title.edit')}</Title>
       <InputField
         {...register('title')}
@@ -124,7 +127,7 @@ export const EditDocument = () => {
           />
         )}
       />
-      <div className="flex justify-between">
+      <div className="flex flex-col gap-5 md:flex-row justify-between items-center">
         <Controller
           control={control}
           name='public_document'

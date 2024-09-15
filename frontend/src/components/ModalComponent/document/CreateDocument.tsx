@@ -54,7 +54,10 @@ export const CreateDocument = () => {
   };
 
   return (
-    <form className="flex flex-col gap-3 sm:gap-5 md:gap-7" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="flex flex-col gap-3 sm:gap-5 md:gap-7"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Title>{t('documents.modal.title.create')}</Title>
       <InputField
         {...register('title')}

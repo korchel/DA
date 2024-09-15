@@ -55,8 +55,14 @@ export const LoginPage = () => {
 
   return (
     <div className="h-full flex items-center justify-center">
-      <div className="relative min-w-[400px] p-6 shadow-lg rounded-md bg-white dark:bg-secondaryDark">
-        <form id="registerForm" className="flex flex-col gap-7 text-center" onSubmit={handleSubmit(onSubmit)}>
+      <div className="relative md:min-w-[400px] shadow-lg rounded-md
+        bg-white dark:bg-secondaryDark
+        p-4 sm:p-6 md:p-8"
+      >
+        <form
+          className="flex flex-col gap-3 sm:gap-5 md:gap-7"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <Title>{t('loginPage.title')}</Title>
           <InputField
             autoComplete="on"
