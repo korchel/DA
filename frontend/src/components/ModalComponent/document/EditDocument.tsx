@@ -51,7 +51,7 @@ export const EditDocument = () => {
   };
 
   const availableForOptions = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
-  const { register, control, handleSubmit, formState: { errors }, setValue, getValues } = useForm<IDocForm>({ defaultValues, resolver: zodResolver(editDocFormSchema)  });
+  const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<IDocForm>({ defaultValues, resolver: zodResolver(editDocFormSchema)  });
 
   const onSubmit = (data: IDocForm) => {
     if (isEqual(data, defaultValues)) {

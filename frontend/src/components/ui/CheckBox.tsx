@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, ForwardedRef, forwardRef, HtmlHTMLAttributes } from "react";
+import { DetailedHTMLProps, forwardRef, HtmlHTMLAttributes } from "react";
 
 interface ICheckBox extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLInputElement>, HTMLInputElement>  {
   label: string,
@@ -7,7 +7,7 @@ interface ICheckBox extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLInputElemen
   checked?: boolean,
 }
 
-export const CheckBox = forwardRef(({label, value, checked, onChange, ...props}: ICheckBox, ref: ForwardedRef<HTMLSelectElement>) => {
+export const CheckBox = forwardRef(({label, value, checked, onChange, ...props}: ICheckBox) => {
 
 
   return (

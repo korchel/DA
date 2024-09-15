@@ -5,7 +5,7 @@ interface IInputLabelProps extends DetailedHTMLProps<LabelHTMLAttributes<HTMLLab
   children: ReactNode,
 }
 
-export const InputLabel = ({ required = true, children, className, ...props }: IInputLabelProps) => {
+export const InputLabel = ({ required = true, children, ...props }: IInputLabelProps) => {
   return (
     <label
       className="absolute -top-2.5 left-1  text-sm leading-tight mx-2 z-10

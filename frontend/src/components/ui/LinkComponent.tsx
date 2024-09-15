@@ -1,5 +1,5 @@
-import { Link, LinkProps } from "react-router-dom";
-import { ForwardRefExoticComponent, HTMLProps, ReactNode, RefAttributes } from "react";
+import { Link } from "react-router-dom";
+import { ReactNode } from "react";
 import clsx from "clsx";
 
 interface ILinkComponent {

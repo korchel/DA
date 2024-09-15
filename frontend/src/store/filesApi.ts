@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import Cookies from "js-cookie";
 import { IFile, RoleName } from "../interfaces";
-import { IFileForm } from "../components/ModalComponent/file/UploadFile";
 
 export const filesApi = createApi({
   reducerPath: "files",

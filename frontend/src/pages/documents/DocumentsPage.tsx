@@ -64,7 +64,6 @@ export const DocumentsPage = () => {
         {t('documents.createDocument')}
       </ButtonComponent>
       <Table
-        type='documents'
         headers={tableHeaders}
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}

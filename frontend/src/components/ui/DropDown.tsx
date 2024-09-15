@@ -19,7 +19,7 @@ export const DropDown = ({ name, options, action, className }: IDropDown) => {
     action(param);
   };
 
-  const handleClickOutside = (e) => {
+  const handleClickOutside = () => {
     setMenuOpen(false);
   };
 

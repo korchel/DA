@@ -7,7 +7,6 @@ import { ErrorMessage } from "./ErrorMessage";
 
 export interface InputFieldProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   type?: 'text' | 'email' | 'password' | 'number',
-  id?: string,
   error?: FieldError,
   placeholder?: string,
   label?: string,
@@ -15,7 +14,7 @@ export interface InputFieldProps extends DetailedHTMLProps<InputHTMLAttributes<H
 }
 
 export const InputField = forwardRef(({
-  type = "text", id, error, placeholder, label,
+  type = "text", error, placeholder, label,
   className, showActionButton = false, ...props }: InputFieldProps,
   ref: ForwardedRef<HTMLInputElement>) => {
   const [inputType, setInputType] = useState(type);

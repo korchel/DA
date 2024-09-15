@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IDocument, Role, RoleName } from "../interfaces";
+import { IDocument, RoleName } from "../interfaces";
 import { IDocForm } from "../components/ModalComponent/document/docFormSchema";
 
 

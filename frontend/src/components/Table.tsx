@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { DetailedHTMLProps, TableHTMLAttributes } from "react";
 
 interface ITableProps extends DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> {
-  type: 'documents' | 'files' | 'users';
   headers: string[];
   data: {
     id: number;
@@ -11,7 +10,7 @@ interface ITableProps extends DetailedHTMLProps<TableHTMLAttributes<HTMLTableEle
   handleGoToDetailsPage: (id: number) => void;
 }
 
-export const Table = ({ type, headers, data, handleGoToDetailsPage, className }: ITableProps) => {
+export const Table = ({ headers, data, handleGoToDetailsPage, className }: ITableProps) => {
 
   return (
     <table className={clsx(className, "w-[100%] bg-white dark:bg-secondaryDark text-left rounded-md shadow-md table-fixed")}>

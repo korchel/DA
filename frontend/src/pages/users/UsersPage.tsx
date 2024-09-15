@@ -43,7 +43,6 @@ export const UsersPage = () => {
     <>
       <Title>{t('users.title')}</Title>
       <Table
-        type='users'
         headers={tableHeaders}
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}

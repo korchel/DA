@@ -20,7 +20,13 @@ export const FileInput = ({ onChange, ...props }: IFileInput) => {
     <div className="relative border p-2 cursor-pointer border-gray text-gray">
       <InputLabel required htmlFor="file">{t('files.modal.form.labels.addFile')}</InputLabel>
       <div>{fileName}</div>
-      <input id='file' type="file" className="absolute opacity-0 h-full w-full cursor-pointer inset-0 text-[0]" {...props} onChange={handleChange} />
+      <input
+        id='file'
+        type="file"
+        className="absolute opacity-0 h-full w-full cursor-pointer inset-0 text-[0]"
+        {...props}
+        onChange={handleChange}
+      />
     </div>
     
   );

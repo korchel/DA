@@ -61,7 +61,6 @@ export const FilesPage = () => {
         {t('files.addFile')}
       </ButtonComponent>
       <Table
-        type='files'
         headers={tableHeaders}
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}

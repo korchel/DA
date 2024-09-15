@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ButtonHTMLAttributes, DetailedHTMLProps, ForwardRefExoticComponent } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
 interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   variant: 'primary' | 'outline' | 'danger' | 'highLighted' | 'borderLess',

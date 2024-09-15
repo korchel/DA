@@ -12,7 +12,7 @@ export interface ITextAreaProps extends DetailedHTMLProps<TextareaHTMLAttributes
   required?: boolean,
 }
 
-export const TextArea = forwardRef(({ error, placeholder, label, required = true, className, ...props }: ITextAreaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
+export const TextArea = forwardRef(({ error, placeholder, label, className, ...props }: ITextAreaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
 
   return (
     <div className={clsx(className, 'relative')}>

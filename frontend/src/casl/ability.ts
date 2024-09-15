@@ -1,5 +1,5 @@
 import { AbilityBuilder, createMongoAbility, MongoQuery, PureAbility } from '@casl/ability';
-import { Role, RoleName } from '../interfaces';
+import { RoleName } from '../interfaces';
 
 type User = {
   roles: RoleName[],
@@ -30,7 +30,7 @@ interface IAbilityParams {
 }
 
 export const defineAbilityFor = ({user, entity}: IAbilityParams) => {
-  const { can, cannot, build } = new AbilityBuilder<AppAbility>(createMongoAbility);
+  const { can, build } = new AbilityBuilder<AppAbility>(createMongoAbility);
 
   if (user.roles.includes('ROLE_ADMIN') || user.id === entity?.authorId || user.userName === entity?.userName) {
     can('edit', 'document');

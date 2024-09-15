@@ -1,7 +1,5 @@
-import { ForwardedRef, forwardRef } from 'react';
 import { FieldError } from 'react-hook-form';
-import Select, { ClassNamesConfig, GroupBase } from 'react-select';
-import clsx from 'clsx';
+import Select from 'react-select';
 
 import { InputLabel } from '../InputLabel';
 import { ErrorMessage } from '../ErrorMessage';
@@ -19,7 +17,7 @@ interface ISelectInputProps {
   required?: boolean,
 }
 
-export const SelectComponent = forwardRef(({
+export const SelectComponent = ({
   onChange,
   placeholder,
   selectOptions,
@@ -27,9 +25,7 @@ export const SelectComponent = forwardRef(({
   error,
   value,
   ...props
-}: ISelectInputProps,
-  ref: ForwardedRef<HTMLSelectElement>
-) => {
+}: ISelectInputProps) => {
   const handleSelect: onSelect = (option) => {
     const _option = option as ISelectOption;
     onChange(_option.value);
@@ -51,4 +47,4 @@ export const SelectComponent = forwardRef(({
       </div>
     </EmotionCacheProvider>
   );
-});
+};

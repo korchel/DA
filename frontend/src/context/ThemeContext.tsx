@@ -1,5 +1,4 @@
-import { createContext, useState, useContext, ReactNode, FC, useEffect } from "react";
-import { RoleName } from "../interfaces/interfaces";
+import { createContext, useContext, ReactNode, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 type Theme = 'dark' | 'light';

@@ -1,6 +1,5 @@
-import { ForwardedRef, forwardRef } from 'react';
 import { FieldError, Merge } from 'react-hook-form';
-import Select, { type ActionMeta } from 'react-select';
+import Select from 'react-select';
 
 import { InputLabel } from '../InputLabel';
 import { ErrorMessage } from '../ErrorMessage';
@@ -18,7 +17,7 @@ interface ISelectInputProps {
   required?: boolean,
 }
 
-export const MultiSelectComponent = forwardRef(({
+export const MultiSelectComponent = ({
   onChange,
   placeholder,
   selectOptions,
@@ -27,9 +26,7 @@ export const MultiSelectComponent = forwardRef(({
   value,
   required = true,
   ...props
-}: ISelectInputProps,
-  ref: ForwardedRef<HTMLSelectElement>
-) => {
+}: ISelectInputProps) => {
   const handleSelect: onSelect = (options) => {
     const _options = options as  ISelectOption[];
     onChange( _options.map((option: any) => option.value));
@@ -52,4 +49,4 @@ export const MultiSelectComponent = forwardRef(({
       </div>
     </EmotionCacheProvider>
   );
-});
+};

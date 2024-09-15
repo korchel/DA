@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, ReactNode, FC } from "react";
+import { createContext, useState, useContext, ReactNode } from "react";
 import { RoleName } from "../interfaces/interfaces";
 
 interface ICurrentUser {
