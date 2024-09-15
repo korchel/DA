@@ -1,4 +1,5 @@
-import { Controller, useForm } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Controller, FieldError, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -62,6 +63,7 @@ export const UploadFile = () => {
             {...field}
             value={field.value?.fileName}
             onChange={field.onChange}
+            error={errors.file as FieldError}
           />
         )}
       />

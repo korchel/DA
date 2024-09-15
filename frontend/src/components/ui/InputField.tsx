@@ -32,9 +32,11 @@ export const InputField = forwardRef(({
         type={inputType}
         id={label}
         className={clsx(error ? "border-danger" : 'border-gray',
-          "block p-2 border bg-transparent outline-primary rounded-sm w-full",
+          "block p-2 border bg-transparent rounded-sm w-full",
+          "placeholder:text-gray dark:placeholder:text-whiteDark",
+          "outline-none",
           "focus:ring focus:ring-primary focus:ring-opacity-50",
-          "dark:border-whiteDark dark:outline-secondaryDark dark:focus:ring-secondaryDark",
+          "dark:border-whiteDark dark:focus:ring-primaryDark",
           "autofill:shadow-[inset_0_0_0px_1000px_var(--white-color)] autofill:[-webkit-text-fill-color:_var(--secondary-color)]",
           "dark:autofill:shadow-[inset_0_0_0px_1000px_var(--secondary-dark-color)] dark:autofill:[-webkit-text-fill-color:_var(--white-dark-color)]",
         )}
