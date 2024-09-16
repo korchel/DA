@@ -13,7 +13,7 @@ module.exports = {
     port: 3000,
     historyApiFallback: true,
     static: {
-      directory: path.join(__dirname, 'public')
+      directory: path.join(__dirname, '/public')
 },
     open: true,
     hot: true,
