@@ -3,6 +3,7 @@ import { files } from "./files";
 import { signupPage } from "./signupPage";
 import { users } from "./users";
 import { loginPage } from "./loginPage";
+import { error } from "./error";
 
 export const ru = {
   pageDummy: 'Здесь пока ничего нет. Зайдите по-позже.',
@@ -42,4 +43,5 @@ export const ru = {
   download: 'Скачать',
   see: 'Посмотреть',
   edit: 'Изменить',
+  error,
 };

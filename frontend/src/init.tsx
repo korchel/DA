@@ -8,6 +8,8 @@ import App from './App';
 import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
 import store from "./store";
+import ErrorBoundary from './components/ErrorBoundary';
+import { ErrorPage } from './pages/ErrorPage';
 
 export const init = () => {
   const i18n = i18next.createInstance();
@@ -24,14 +26,16 @@ export const init = () => {
     });
 
   return (
-    <Provider store={store}>
-      <AuthProvider>
-        <ThemeProvider>
-          <I18nextProvider i18n={i18n}>
-            <App />
-          </I18nextProvider>
-        </ThemeProvider>
-      </AuthProvider>
-    </Provider>
+    <I18nextProvider i18n={i18n}>
+      <ErrorBoundary fallback={<ErrorPage />}>
+        <Provider store={store}>
+          <AuthProvider>
+            <ThemeProvider>
+              <App />
+            </ThemeProvider>
+          </AuthProvider>
+        </Provider>
+      </ErrorBoundary>
+    </I18nextProvider>
   );
 };

@@ -3,6 +3,7 @@ import { files } from "./files";
 import { signupPage } from "./signupPage";
 import { users } from "./users";
 import { loginPage } from "./loginPage";
+import { error } from "./error";
 
 export const en = {
   pageDummy: 'There\'s nothing here yet. Come back later.',
@@ -42,4 +43,5 @@ export const en = {
   download: 'Download',
   see: 'See details',
   edit: 'Edit',
+  error,
 };
