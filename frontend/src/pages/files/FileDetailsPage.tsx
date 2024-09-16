@@ -56,7 +56,7 @@ export const FileDetailsPage = () => {
           {file?.filename}
         </span>
       </Card.Header>
-      <Card.Body className="flex justify-between">
+      <Card.Body className="flex justify-between gap-3 flex-wrap">
         <div>
           <div><span className="font-bold">{t('files.detailsPage.name')}</span>{file?.filename}</div>
           <div><span className="font-bold">{t('files.detailsPage.type')}</span>{file?.filetype}</div>

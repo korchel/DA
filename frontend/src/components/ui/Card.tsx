@@ -6,7 +6,10 @@ interface ICard extends DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRE
 }
 
 export const Card = ({children}: ICard) => (
-  <div className="bg-white dark:bg-secondaryDark w-1/2 p-4 rounded-md shadow-lg min-w-[350px]">
+  <div
+    className="md:w-1/2 p-4 rounded-md shadow-lg
+    bg-white dark:bg-secondaryDark"
+  >
     {children}
   </div>
 );

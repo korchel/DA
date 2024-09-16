@@ -77,7 +77,7 @@ export const Header = ({ className }) => {
           {isAuthenticated && <UserButton />}
         </div>
       </div>
-      <LinkComponent route={routes.searchRoute()} className="md:hidden flex w-6 ml-auto mr-4">
+      <LinkComponent route={routes.searchRoute()} className="md:hidden flex w-6 ml-auto mr-4 cursor-auto">
         <ActionButton actionType="search" className="ml-auto" />
       </LinkComponent>
       <ActionButton actionType="openMenu" className="md:hidden" onClick={handleClickMenu} />
