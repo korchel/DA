@@ -1,21 +1,21 @@
 FROM maven:3.8.6-eclipse-temurin-17 as builder
-WORKDIR /opt/app
-COPY mvnw pom.xml ./
-COPY ./src ./src
+WORKDIR /DocumentAccounting2/opt/app
+COPY mvnw pom.xml /DocumentAccounting2
+COPY /DocumentAccounting2/src /DocumentAccounting2/src
 RUN mvn clean install -DskipTests
 
 
 FROM eclipse-temurin:17-jre-jammy
-WORKDIR /opt/app
+WORKDIR /DocumentAccounting2/opt/app
 EXPOSE 8080
-COPY --from=builder /opt/app/target/*.jar /opt/app/*jar
-ENTRYPOINT ["java", "-jar", "/opt/app/*jar"]
+COPY --from=builder /DocumentAccounting2/opt/app/target/*.jar /DocumentAccounting2/opt/app/*jar
+ENTRYPOINT ["java", "-jar", "/DocumentAccounting2/opt/app/*jar"]
 
 
 FROM node:18-alpine
-WORKDIR /app
+WORKDIR /frontend/app
 EXPOSE 3000
-COPY ["package.json", "package-lock.json*", "./"]
+COPY ["/frontend/package.json", "/frontend/package-lock.json*", "/frontend"]
 RUN npm install
-COPY . .
+COPY /frontend .
 CMD ["npm", "start"]
