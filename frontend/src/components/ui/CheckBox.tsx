@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, forwardRef, HtmlHTMLAttributes } from "react";
+import { DetailedHTMLProps, HtmlHTMLAttributes } from "react";
 
 interface ICheckBox extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLInputElement>, HTMLInputElement>  {
   label: string,
@@ -7,8 +7,7 @@ interface ICheckBox extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLInputElemen
   checked?: boolean,
 }
 
-export const CheckBox = forwardRef(({label, value, checked, onChange, ...props}: ICheckBox) => {
-
+export const CheckBox = ({label, value, checked, onChange, ...props}: ICheckBox) => {
 
   return (
     <label htmlFor={label} className="flex gap-1 justify-between items-center">{label}
@@ -29,5 +28,5 @@ export const CheckBox = forwardRef(({label, value, checked, onChange, ...props}:
       />
     </label>
   );
-});
+};
 

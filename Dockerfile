@@ -18,4 +18,4 @@ EXPOSE 3000
 COPY ["/frontend/package.json", "/frontend/package-lock.json*", "/frontend"]
 RUN npm install
 COPY . .
-CMD ["npm", "start"]
+CMD /frontend/app/dockerScript.sh
