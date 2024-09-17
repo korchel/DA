@@ -17,5 +17,5 @@ WORKDIR /frontend/app
 EXPOSE 3000
 COPY ["/frontend/package.json", "/frontend/package-lock.json*", "/frontend"]
 RUN npm install
-COPY . .
+COPY /frontend DA/frontend/app
 CMD ["npm", "run", "start:production"]
