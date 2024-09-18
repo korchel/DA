@@ -5,7 +5,12 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.config.common.js');
 
 module.exports = merge(common, {
-  mode: 'development',
+  mode: 'production',
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js',
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html'),
@@ -15,6 +20,9 @@ module.exports = merge(common, {
   optimization: {
     minimize: true,
     usedExports: true,
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   devtool: 'source-map',
 });
