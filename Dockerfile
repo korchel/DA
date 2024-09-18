@@ -13,10 +13,12 @@ ENTRYPOINT ["java", "-jar", "/DocumentAccounting2/opt/app/*jar"]
 
 
 FROM node:18-alpine
-WORKDIR /frontend/app
+WORKDIR /app
 EXPOSE 3000
 COPY /frontend/package.json .
 COPY /frontend/package-lock.json .
 RUN npm install
-COPY /frontend/. .
+COPY frontend .
+ENV port 3000
+EXPOSE $port
 CMD ["npm", "run", "start:production"]
