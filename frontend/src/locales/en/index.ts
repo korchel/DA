@@ -44,4 +44,5 @@ export const en = {
   see: 'See details',
   edit: 'Edit',
   error,
+  emptyTable: 'The table is empty',
 };

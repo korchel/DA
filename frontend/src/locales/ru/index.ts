@@ -44,4 +44,5 @@ export const ru = {
   see: 'Посмотреть',
   edit: 'Изменить',
   error,
+  emptyTable: 'Таблица пуста',
 };
