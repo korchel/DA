@@ -22,16 +22,16 @@ export const Table = ({ headers, data, handleGoToDetailsPage, className }: ITabl
       <thead className="block xl:table-header-group float-left xl:float-none uppercase
         text-secondary dark:text-whiteDark whitespace-nowrap"
       >
-        <tr className="border-r xl:border-r-0 border-b-0 xl:border-b border-gray">
+        <tr className="border-r xl:border-r-0 border-b-0 xl:border-b border-gray overflow-hidden">
           {headers.map((header, index) => (
-            <th key={index} className="block xl:table-cell py-4 px-5">{header}</th>
+            <th key={index} className="block xl:table-cell py-4 px-5 truncate">{header}</th>
           ))}
         </tr>
       </thead>
-      <tbody className="block xl:table-row-group overflow-x-auto relative">
+      <tbody className="block xl:table-row-group overflow-x-auto">
         {isEmpty
-          ? <tr className="text-secondary dark:text-whiteDark font-bold xl:h-44">
-              <td colSpan={7} className="text-center">
+          ? <tr className="text-secondary dark:text-whiteDark font-bold xl:h-44 block mt-10 xl:table-row">
+              <td colSpan={7} className="text-center block xl:table-cell">
                 {t('emptyTable')}
               </td>
             </tr>

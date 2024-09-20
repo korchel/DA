@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ButtonHTMLAttributes, DetailedHTMLProps, ForwardedRef, forwardRef } from "react";
+import { ButtonHTMLAttributes, Children, DetailedHTMLProps, ForwardedRef, forwardRef, ReactNode } from "react";
 
 import {
   DeleteIcon, EditIcon, EyeIcon, CrossedEyeIcon,
@@ -7,13 +7,20 @@ import {
   MenuIcon
 } from "./icons";
 import { SearchIcon } from "./icons/SearchIcon";
+import { ChevronSingle } from "./icons/ChevronSingle";
+import { ChevronDouble } from "./icons/ChevronDouble";
 
 interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  actionType: 'delete' | 'edit' | 'showPassword' | 'hidePassword' | 'close' | 'download' | 'overview' | 'openMenu' | 'search',
+  actionType: 'delete' | 'edit' | 'showPassword' | 'hidePassword' | 'close' | 'download' | 'overview' | 'openMenu' | 'search' | 'chevronSingle' | 'chevronDouble' | 'character',
+  mirrored?: boolean,
+  children?: ReactNode,
 }
 
-export const ActionButton = forwardRef(({ actionType, className, ...props }: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
+export const ActionButton = forwardRef(({ actionType, className, mirrored = false, children, ...props }: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
   const Icon = {
+    chevronSingle: <ChevronSingle />,
+    chevronDouble: <ChevronDouble />,
+    character: children,
     delete: <DeleteIcon />,
     edit: <EditIcon />,
     showPassword: <EyeIcon />,
@@ -31,7 +38,8 @@ export const ActionButton = forwardRef(({ actionType, className, ...props }: But
       {...props}
       className={clsx(
         className,
-        'text-secondary hover:text-secondaryHover dark:text-whiteDark dark:hover:text-whiteDarkHover'
+        mirrored && "rotate-180",
+        'text-secondary hover:text-secondaryHover dark:text-whiteDark dark:hover:text-whiteDarkHover font-bold transition-colors'
       )}
       ref={ref}
     >

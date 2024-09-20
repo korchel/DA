@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import chunk from 'lodash.chunk';
 
 import { Title, ButtonComponent } from "../../components/ui";
 import { routes } from "../../routes";
@@ -9,6 +10,8 @@ import { useGetDocsQuery as getDocs } from "../../store/docsApi";
 import { openModal } from "../../store/modalSlice";
 import { Spinner } from "../../components/ui/icons";
 import { Table } from "../../components/Table";
+import { Pagination } from "../../components/ui/Pagination";
+import { useState } from "react";
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
@@ -16,6 +19,12 @@ export const DocumentsPage = () => {
   const { data: documents, isLoading } = getDocs(currentUser.roles);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 2;
+
+  const chunks = chunk(documents, pageSize);
+  console.log(chunks)
+
 
   const tableHeaders = [
     t('documents.tableHeader.number'),
@@ -45,12 +54,16 @@ export const DocumentsPage = () => {
   };
 
   const handleGoToDetailsPage = (id: number) => {
-    navigate(routes.documentDetailsRoute(id))
+    navigate(routes.documentDetailsRoute(id));
+  };
+
+  const handleChangePage = (page: number) => {
+    setCurrentPage(page);
   };
 
   if (isLoading) {
     return (
-      <Spinner className="h-[100%]" />
+      <Spinner className="h-full" />
     );
   }
   return (
@@ -67,6 +80,12 @@ export const DocumentsPage = () => {
         headers={tableHeaders}
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
+      />
+      <Pagination
+        className="mt-5 ml-auto"
+        numberOfPages={10}
+        currentPage={currentPage}
+        goToPage={handleChangePage}
       />
     </>
   );
