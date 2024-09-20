@@ -13,9 +13,14 @@ interface IPaginationProps {
 export const Pagination = ({ numberOfPages, currentPage, goToPage, className }: IPaginationProps) => {
   const pageNumbers = usePagination({ numberOfPages, currentPage});
 
-  const commonClassNames = 'bg-white hover:bg-whiteHover dark:bg-secondaryDark dark:hover:bg-secondaryDarkHover p-1 border-gray';
-  const activePageClassNames = 'bg-highlight hover:bg-highlight dark:bg-secondaryDarkHover dark:hover:bg-secondaryDarkHover hover:text-secondary dark:hover:text-whiteDark';
-  const inactiveButtonClassNames = 'text-secondaryHover hover:text-secondaryHover hover:bg-white dark:text-whiteDarkHover dark:hover:text-whiteDarkHover dark:hover:bg-secondaryDark';
+
+  const commonClassNames = 'p-1 border-gray';
+  const basicClassNames = 'bg-white hover:bg-whiteHover dark:bg-secondaryDark dark:hover:bg-secondaryDarkHover';
+  const activePageClassNames = `text-secondary hover:text-secondary dark:text-whiteDark dark:hover:text-whiteDark
+    bg-whiteHover hover:bg-whiteHover dark:bg-secondaryDarkHover dark:hover:bg-secondaryDarkHover`;
+  const inactiveButtonClassNames = `text-secondaryHover hover:text-secondaryHover
+    dark:text-whiteDarkHover dark:hover:text-whiteDarkHover
+    bg-white hover:bg-white dark:bg-secondaryDark dark:hover:bg-secondaryDark`;
 
   return (
     <div className={clsx(className, "flex rounded-md overflow-hidden shadow-md")}>
@@ -23,7 +28,7 @@ export const Pagination = ({ numberOfPages, currentPage, goToPage, className }: 
         actionType="chevronDouble"
         className={clsx(
           commonClassNames,
-          currentPage === 1 && inactiveButtonClassNames,
+          currentPage === 1 ? inactiveButtonClassNames : basicClassNames,
           "border-l",
         )}
         mirrored
@@ -34,7 +39,7 @@ export const Pagination = ({ numberOfPages, currentPage, goToPage, className }: 
         actionType="chevronSingle"
         className={clsx(
           commonClassNames,
-          currentPage === 1 && inactiveButtonClassNames,
+          currentPage === 1 ? inactiveButtonClassNames : basicClassNames,
           "border-l",
         )}
         mirrored
@@ -44,10 +49,11 @@ export const Pagination = ({ numberOfPages, currentPage, goToPage, className }: 
       {
         pageNumbers.map((number) => (
           <ActionButton
+            key={number}
             actionType="character"
             className={clsx(
               commonClassNames,
-              number === currentPage && activePageClassNames,
+              number === currentPage ? activePageClassNames : basicClassNames,
               "border-r w-8",
             )}
             disabled={number === currentPage}
@@ -61,7 +67,7 @@ export const Pagination = ({ numberOfPages, currentPage, goToPage, className }: 
         actionType="chevronSingle"
         className={clsx(
           commonClassNames,
-          currentPage === numberOfPages && inactiveButtonClassNames,
+          currentPage === numberOfPages ? inactiveButtonClassNames : basicClassNames,
           "border-r",
         )}
         onClick={() => goToPage(currentPage + 1)}
@@ -71,7 +77,7 @@ export const Pagination = ({ numberOfPages, currentPage, goToPage, className }: 
         actionType="chevronDouble"
         className={clsx(
           commonClassNames,
-          currentPage === numberOfPages && inactiveButtonClassNames,
+          currentPage === numberOfPages ? inactiveButtonClassNames : basicClassNames,
         )}
         onClick={() => goToPage(numberOfPages)}
         disabled={currentPage === numberOfPages}

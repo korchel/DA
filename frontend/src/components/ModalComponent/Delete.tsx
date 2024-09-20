@@ -50,6 +50,12 @@ export const Delete = ( { type }: IDeleteProps) => {
     },
   }[type];
 
+  const route = {
+    user: routes.usersRoute(),
+    file: routes.filesRoute(),
+    doc: routes.documentsRoute(),
+  }[type];
+
   const handleClose = () => {
     dispatch(closeModal());
   };
@@ -64,7 +70,7 @@ export const Delete = ( { type }: IDeleteProps) => {
         toast.error(toasts.error);
       });
     dispatch(closeModal());
-    navigate(routes.usersRoute());
+    navigate(route);
   };
   return (
     <>

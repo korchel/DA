@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import chunk from 'lodash.chunk';
+import chunk from 'lodash/chunk';
+import { useState } from "react";
 
 import { Title, ButtonComponent } from "../../components/ui";
 import { routes } from "../../routes";
@@ -11,7 +12,7 @@ import { openModal } from "../../store/modalSlice";
 import { Spinner } from "../../components/ui/icons";
 import { Table } from "../../components/Table";
 import { Pagination } from "../../components/ui/Pagination";
-import { useState } from "react";
+
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
@@ -22,9 +23,8 @@ export const DocumentsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 2;
 
-  const chunks = chunk(documents, pageSize);
-  console.log(chunks)
-
+  const pages = chunk(documents, pageSize);
+  const numberOfPages = pages.length || 1;
 
   const tableHeaders = [
     t('documents.tableHeader.number'),
@@ -36,7 +36,7 @@ export const DocumentsPage = () => {
     t('documents.tableHeader.updateDate'),
   ];
 
-  const tableData = documents?.map((document) => ({
+  const tableData = pages[currentPage]?.map((document) => ({
     id: document.id,
     data: [
       document.number,
@@ -83,7 +83,7 @@ export const DocumentsPage = () => {
       />
       <Pagination
         className="mt-5 ml-auto"
-        numberOfPages={10}
+        numberOfPages={numberOfPages}
         currentPage={currentPage}
         goToPage={handleChangePage}
       />
