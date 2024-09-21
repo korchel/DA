@@ -14,7 +14,7 @@ export const Pagination = ({ numberOfPages, currentPage, goToPage, className }: 
   const pageNumbers = usePagination({ numberOfPages, currentPage});
 
 
-  const commonClassNames = 'p-1 border-gray';
+  const commonClassNames = 'sm:p-1 border-gray';
   const basicClassNames = 'bg-white hover:bg-whiteHover dark:bg-secondaryDark dark:hover:bg-secondaryDarkHover';
   const activePageClassNames = `text-secondary hover:text-secondary dark:text-whiteDark dark:hover:text-whiteDark
     bg-whiteHover hover:bg-whiteHover dark:bg-secondaryDarkHover dark:hover:bg-secondaryDarkHover`;

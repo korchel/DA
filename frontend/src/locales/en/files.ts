@@ -1,6 +1,10 @@
 export const files = {
   title: 'Files',
   addFile: 'Add file',
+  quantity: {
+    count_one: '{{count}} file',
+    count_other: '{{count}} files',
+  },
   tableHeader: {
     fileName: 'Name',
     author: 'Author',

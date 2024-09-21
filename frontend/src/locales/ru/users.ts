@@ -1,5 +1,10 @@
 export const users = {
   title: 'Список пользователей',
+  quantity: {
+    count_one: '{{count}} пользователль',
+    count_few: '{{count}} пользователя',
+    count_many: '{{count}} пользователей',
+  },
   tableHeader: {
     userName: 'Имя пользователя',
     name: 'Имя',

@@ -12,6 +12,7 @@ import { openModal } from "../../store/modalSlice";
 import { Table } from "../../components/Table";
 import { Spinner } from "../../components/ui/icons";
 import { Pagination } from "../../components/ui/Pagination";
+import { QuantityTag } from "../../components/QuantityTag";
 
 export const FilesPage = () => {
   const { t } = useTranslation();
@@ -20,8 +21,9 @@ export const FilesPage = () => {
   const { currentUser } = useAuth();
   const { data: files, isLoading } = getFiles(currentUser.roles);
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 2;
+  const pageSize = 10;
 
+  const numberOfFiles = files?.length;
   const pages = chunk(files, pageSize);
   const numberOfPages = pages.length || 1;
 
@@ -33,7 +35,7 @@ export const FilesPage = () => {
     t('files.tableHeader.updateDate'),
   ];
 
-  const tableData = pages[currentPage]?.map((file) => ({
+  const tableData = pages[currentPage - 1]?.map((file) => ({
     id: file.id,
     data: [
       file.filename,
@@ -65,13 +67,15 @@ export const FilesPage = () => {
   return (
     <>
       <Title>{t('files.title')}</Title>
-      <ButtonComponent
-        variant="primary"
-        className="my-5 ml-auto"
-        onClick={handleCreate}
-      >
-        {t('files.addFile')}
-      </ButtonComponent>
+      <div className="w-full flex justify-between py-2 md:py-5">
+        <QuantityTag type="files" number={numberOfFiles} />
+        <ButtonComponent
+          variant="primary"
+          onClick={handleCreate}
+        >
+          {t('files.addFile')}
+        </ButtonComponent>
+      </div>
       <Table
         headers={tableHeaders}
         data={tableData}

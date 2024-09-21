@@ -2,6 +2,10 @@ export const documents = {
   title: 'Documents',
   createDocument: 'Create document',
   noData: 'No data',
+  quantity: {
+    count_one: '{{count}} document',
+    count_other: '{{count}} documents',
+  },
   tableHeader: {
     number: 'Number',
     name: 'Name',

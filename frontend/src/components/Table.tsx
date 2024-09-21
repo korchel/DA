@@ -24,7 +24,12 @@ export const Table = ({ headers, data, handleGoToDetailsPage, className }: ITabl
       >
         <tr className="border-r xl:border-r-0 border-b-0 xl:border-b border-gray overflow-hidden">
           {headers.map((header, index) => (
-            <th key={index} className="block xl:table-cell py-4 px-5 truncate">{header}</th>
+            <th
+              key={index}
+              className="block xl:table-cell py-1 sm:py-2 md:py-4 px-1 sm:px-2 md:px-5 truncate"
+            >
+              {header}
+            </th>
           ))}
         </tr>
       </thead>
@@ -37,13 +42,23 @@ export const Table = ({ headers, data, handleGoToDetailsPage, className }: ITabl
             </tr>
           : data?.map((item) => (
             <tr
-              className="table-cell xl:table-row border-r last:border-r-0 xl:border-r-0 xl:border-b xl:last:border-b-0 border-gray overflow-hidden hover:bg-whiteHover dark:hover:bg-secondaryDarkHover cursor-pointer"
+              className="table-cell xl:table-row overflow-hidden cursor-pointer
+                border-gray border-r last:border-r-0 xl:border-r-0 xl:border-b xl:last:border-b-0
+                hover:bg-whiteHover dark:hover:bg-secondaryDarkHover"
               key={item.id}
               onClick={() => handleGoToDetailsPage(item.id)}
             >
               {
                 item.data.map((param, index) => (
-                  <td key={index} className="block max-w-48 xl:table-cell py-4 px-5 truncate h-14">{param}</td>
+                  <td
+                    key={index}
+                    className="block max-w-48 xl:table-cell truncate
+                      h-6 sm:h-9 md:h-14
+                      py-1 sm:py-2 md:py-4
+                      px-1 sm:px-2 md:px-5"
+                  >
+                    {param}
+                  </td>
                 ))
               }
             </tr>

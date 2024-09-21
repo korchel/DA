@@ -1,5 +1,9 @@
 export const users = {
   title: 'Users',
+  quantity: {
+    count_one: '{{count}} users',
+    count_other: '{{count}} users',
+  },
   tableHeader: {
     userName: 'Username',
     name: 'Name',

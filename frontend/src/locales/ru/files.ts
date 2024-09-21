@@ -1,6 +1,11 @@
 export const files = {
   title: 'Список файлов',
   addFile: 'Добавить файл',
+  quantity: {
+    count_one: '{{count}} файл',
+    count_few: '{{count}} файла',
+    count_many: '{{count}} файлов',
+  },
   tableHeader: {
     fileName: 'Название',
     author: 'Автор',

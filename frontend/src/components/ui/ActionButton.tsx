@@ -1,17 +1,16 @@
 import clsx from "clsx";
-import { ButtonHTMLAttributes, Children, DetailedHTMLProps, ForwardedRef, forwardRef, ReactNode } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps, ForwardedRef, forwardRef, ReactNode } from "react";
 
 import {
   DeleteIcon, EditIcon, EyeIcon, CrossedEyeIcon,
   CloseIcon, DownloadIcon, OverviewIcon,
-  MenuIcon
+  MenuIcon, SearchIcon, ChevronSingle, ChevronDouble,
 } from "./icons";
-import { SearchIcon } from "./icons/SearchIcon";
-import { ChevronSingle } from "./icons/ChevronSingle";
-import { ChevronDouble } from "./icons/ChevronDouble";
 
 interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  actionType: 'delete' | 'edit' | 'showPassword' | 'hidePassword' | 'close' | 'download' | 'overview' | 'openMenu' | 'search' | 'chevronSingle' | 'chevronDouble' | 'character',
+  actionType: 'delete' | 'edit' | 'showPassword' | 'hidePassword'
+              | 'close' | 'download' | 'overview' | 'openMenu'
+              | 'search' | 'chevronSingle' | 'chevronDouble' | 'character',
   mirrored?: boolean,
   children?: ReactNode,
 }
@@ -39,7 +38,8 @@ export const ActionButton = forwardRef(({ actionType, className, mirrored = fals
       className={clsx(
         className,
         mirrored && "rotate-180",
-        'text-secondary hover:text-secondaryHover dark:text-whiteDark dark:hover:text-whiteDarkHover font-bold transition-colors'
+        'text-secondary hover:text-secondaryHover dark:text-whiteDark dark:hover:text-whiteDarkHover font-bold transition-colors',
+        'text-xs sm:text-sm md:text-md',
       )}
       ref={ref}
     >

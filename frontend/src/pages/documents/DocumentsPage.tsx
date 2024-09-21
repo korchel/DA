@@ -12,6 +12,7 @@ import { openModal } from "../../store/modalSlice";
 import { Spinner } from "../../components/ui/icons";
 import { Table } from "../../components/Table";
 import { Pagination } from "../../components/ui/Pagination";
+import { QuantityTag } from "../../components/QuantityTag";
 
 
 export const DocumentsPage = () => {
@@ -21,8 +22,9 @@ export const DocumentsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 2;
+  const pageSize = 10;
 
+  const numberOfDocuments = documents?.length;
   const pages = chunk(documents, pageSize);
   const numberOfPages = pages.length || 1;
 
@@ -36,7 +38,7 @@ export const DocumentsPage = () => {
     t('documents.tableHeader.updateDate'),
   ];
 
-  const tableData = pages[currentPage]?.map((document) => ({
+  const tableData = pages[currentPage - 1]?.map((document) => ({
     id: document.id,
     data: [
       document.number,
@@ -69,13 +71,15 @@ export const DocumentsPage = () => {
   return (
     <>
       <Title>{t('documents.title')}</Title>
-      <ButtonComponent
-        variant="primary"
-        className="my-5 ml-auto"
-        onClick={handleCreate}
-      >
-        {t('documents.createDocument')}
-      </ButtonComponent>
+      <div className="w-full flex justify-between py-2 md:py-5">
+        <QuantityTag type="documents" number={numberOfDocuments} />
+        <ButtonComponent
+          variant="primary"
+          onClick={handleCreate}
+        >
+          {t('documents.createDocument')}
+        </ButtonComponent>
+      </div>
       <Table
         headers={tableHeaders}
         data={tableData}

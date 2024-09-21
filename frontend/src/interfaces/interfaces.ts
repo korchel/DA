@@ -1,5 +1,7 @@
 import { ActionMeta } from "react-select";
 
+export type Entity = 'files' | 'documents' | 'users';
+
 export type RoleName = 'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_MODERATOR';
 
 export type Role = {

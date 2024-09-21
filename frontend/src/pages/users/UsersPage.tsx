@@ -9,14 +9,16 @@ import { Spinner } from "../../components/ui/icons";
 import { Title } from "../../components/ui";
 import { Table } from "../../components/Table";
 import { Pagination } from "../../components/ui/Pagination";
+import { QuantityTag } from "../../components/QuantityTag";
 
 export const UsersPage = () => {
   const { t } = useTranslation();
   const { data: users, isLoading } = getUsers();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 2;
+  const pageSize = 10;
 
+  const numberOfUsers = users?.length;
   const pages = chunk(users, pageSize);
   const numberOfPages = pages.length  || 1;
 
@@ -27,7 +29,7 @@ export const UsersPage = () => {
     t('users.tableHeader.roles'),
   ];
 
-  const tableData = pages[currentPage]?.map((user) => ({
+  const tableData = pages[currentPage - 1]?.map((user) => ({
     id: user.id,
     data: [
       user.username,
@@ -54,6 +56,9 @@ export const UsersPage = () => {
   return (
     <>
       <Title>{t('users.title')}</Title>
+        <div className="w-full flex justify-between py-2 md:py-5">
+          <QuantityTag type="users" number={numberOfUsers} />
+        </div>
       <Table
         headers={tableHeaders}
         data={tableData}

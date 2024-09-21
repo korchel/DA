@@ -1,3 +1,5 @@
+export { ChevronSingle } from './ChevronSingle';
+export { ChevronDouble } from './ChevronDouble';
 export { CloseIcon } from "./CloseIcon";
 export { CrossedEyeIcon } from './CrossedEyeIcon';
 export { DeleteIcon } from './DeleteIcon';
@@ -7,5 +9,6 @@ export { EyeIcon } from './EyeIcon';
 export { MenuIcon } from './MenuIcon';
 export { MoonIcon } from './MoonIcon';
 export { OverviewIcon } from './OverviewIcon';
+export { SearchIcon } from './SearchIcon';
 export { Spinner } from './Spinner';
 export { SunIcon } from './SunIcon';

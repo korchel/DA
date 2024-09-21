@@ -2,6 +2,11 @@ export const documents = {
   title: 'Список документов',
   createDocument: 'Создать документ',
   noData: 'Нет данных',
+  quantity: {
+    count_one: '{{count}} документ',
+    count_few: '{{count}} документа',
+    count_many: '{{count}} документов',
+  },
   tableHeader: {
     number: 'Номер',
     name: 'Название',
