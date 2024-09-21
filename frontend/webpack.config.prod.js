@@ -8,8 +8,8 @@ module.exports = merge(common, {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: '[name].[contenthash].js',
-    chunkFilename: '[name].[contenthash].js',
+    filename: '[name].bundle.js',
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -21,8 +21,8 @@ module.exports = merge(common, {
     minimize: true,
     usedExports: true,
     splitChunks: {
-      chunks: 'all',
-    },
+       chunks: 'all',
+     },
   },
   devtool: 'source-map',
 });

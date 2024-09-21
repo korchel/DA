@@ -1,13 +1,12 @@
-FROM node:18-alpine
-
+FROM node:18-alpine as build
 WORKDIR /app
-
-EXPOSE 3000
-
-COPY ["package.json", "package-lock.json*", "./"]
-
+COPY ["package.json", "package-lock.json", "./"]
 RUN npm install
-
 COPY . .
+RUN npm run start:development
 
-CMD ["npm", "run", "start:development"]
+FROM nginx:stable-alpine
+COPY --from=build /dist /usr/share/nginx/html
+COPY --from=build nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 3000
+CMD ["nginx", "-g", "daemon off;"]

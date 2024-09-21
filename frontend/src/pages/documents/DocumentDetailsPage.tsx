@@ -10,7 +10,7 @@ import { useAuth } from "../../context/AuthContext";
 import { defineAbilityFor } from "../../casl/ability";
 import { Can } from "@casl/react";
 
-export const DocumentDetailsPage = () => {
+const DocumentDetailsPage = () => {
   const { id } = useParams();
   const { currentUser, isAuthenticated } = useAuth();
   const { t } = useTranslation();
@@ -65,3 +65,5 @@ export const DocumentDetailsPage = () => {
     </Card>
   );
 };
+
+export default DocumentDetailsPage;

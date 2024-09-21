@@ -11,7 +11,7 @@ import { routes } from "../../routes";
 import { useAuth } from "../../context/AuthContext";
 import { defineAbilityFor } from "../../casl/ability";
 
-export const FileDetailsPage = () => {
+const FileDetailsPage = () => {
   const { id } = useParams();
   const { currentUser, isAuthenticated } = useAuth();
   const { t } = useTranslation();
@@ -88,3 +88,5 @@ export const FileDetailsPage = () => {
     </Card>
   );
 };
+
+export default FileDetailsPage;
