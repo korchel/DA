@@ -1,5 +1,5 @@
 logs:
-	sudo docker-compose logs
+	sudo docker compose logs
 
 stop:
 	sudo docker-compose stop
