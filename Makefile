@@ -23,4 +23,4 @@ run-dev:
 	sudo docker-compose -f docker-compose.dev.yml up --build -d
 
 run-prod:
-	sudo docker-compose up --build -d
+	sudo docker compose up --build -d

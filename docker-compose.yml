@@ -51,7 +51,8 @@ services:
 
   frontend:
     image: frontend:0.0.1
-    build: ./frontend
+    build:
+      context: ./frontend
     restart: always
     ports:
       - '3000:3000'
