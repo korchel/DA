@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:development": "webpack serve --open --config webpack.config.dev.js",
-    "start:production": "webpack --config webpack.config.prod.js"
+    "start:production": "webpack --config webpack.config.prod.js "
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,8 @@
     "@eslint/js": "^9.10.0",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash.chunk": "^4.2.9",
+    "@types/lodash.isequal": "^4.5.8",
+    "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.20",
@@ -49,10 +51,9 @@
     "@emotion/react": "^11.13.0",
     "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.2.7",
-    "@types/lodash.isequal": "^4.5.8",
     "clsx": "^2.1.1",
+    "dotenv-webpack": "^8.1.0",
     "i18next": "^23.12.2",
-    "js-cookie": "^3.0.5",
     "lodash.chunk": "^4.2.0",
     "lodash.isequal": "^4.5.0",
     "react": "^18.3.1",

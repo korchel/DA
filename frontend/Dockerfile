@@ -3,7 +3,7 @@ WORKDIR /app
 COPY ["package.json", "package-lock.json", "./"]
 RUN npm install
 COPY . .
-RUN npm run start:development
+RUN npm run start:production
 
 FROM nginx:stable-alpine
 COPY --from=build /dist /usr/share/nginx/html

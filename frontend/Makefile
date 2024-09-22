@@ -2,7 +2,7 @@ install:
 	npm install
 
 start:
-	npm start
+	npm run start:development
 
 lint:
 	npx eslint .

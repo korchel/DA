@@ -5,7 +5,7 @@ const { merge } = require('webpack-merge');
 
 const common = require('./webpack.config.common.js');
 
-module.exports = merge(common, {
+module.exports = merge(common('development'), {
   mode: 'development',
   devServer: {
     port: 3000,
@@ -21,6 +21,6 @@ module.exports = merge(common, {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html')
-    })
+    }),
   ]
 });

@@ -1,7 +1,3 @@
-# Быстрая пересборка только измененного кода
-restart-fast:
-	sudo docker-compose up -d --no-deps --build app
-
 logs:
 	sudo docker-compose logs
 
@@ -10,9 +6,6 @@ stop:
 
 start:
 	sudo docker-compose start
-
-run:
-	sudo docker-compose up --build -d
 
 run-f:
 	sudo docker-compose up -d
@@ -25,3 +18,9 @@ log:
 
 status:
 	sudo docker-compose ps -a
+
+run-dev:
+	sudo docker-compose -f docker-compose.dev.yml up --build -d
+
+run-prod:
+	sudo docker-compose up --build -d

@@ -1,6 +1,7 @@
-const path = require('path');
+/* eslint-disable @typescript-eslint/no-require-imports */
+const Dotenv = require('dotenv-webpack');
 
-module.exports = {
+module.exports = (env) => ({
   entry: './src/index.ts',
 
   target: 'web',
@@ -20,4 +21,9 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-}
+  plugins: [
+    new Dotenv({
+			path: `./.env.${env}`
+		})
+  ],
+});
