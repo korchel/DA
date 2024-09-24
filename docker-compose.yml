@@ -47,9 +47,6 @@ services:
       JAVA_OPTS: '-Xmx512m'
     networks:
       - prod
-    depends_on:
-      - document_accounting_db
-      - frontend
 
   frontend:
     image: frontend:0.0.1
