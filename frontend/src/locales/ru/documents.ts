@@ -2,6 +2,12 @@ export const documents = {
   title: 'Список документов',
   createDocument: 'Создать документ',
   noData: 'Нет данных',
+  type: {
+    NOTE: 'Записка',
+    REPORT: 'Отчет',
+    PRESENTATION: 'Презентация',
+    ARTICLE: 'Статья',
+  },
   quantity: {
     count_one: '{{count}} документ',
     count_few: '{{count}} документа',

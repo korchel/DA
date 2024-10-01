@@ -44,7 +44,7 @@ export const DocumentsPage = () => {
       document.number,
       document.title,
       document.author.username,
-      document.type.type,
+      t(`documents.type.${document.type.type}`),
       document.content,
       document.creationDate ?? t('documents.noData'),
       document.updateDate ?? t('documents.noData'),
@@ -68,6 +68,7 @@ export const DocumentsPage = () => {
       <Spinner className="h-full" />
     );
   }
+  
   return (
     <>
       <Title>{t('documents.title')}</Title>

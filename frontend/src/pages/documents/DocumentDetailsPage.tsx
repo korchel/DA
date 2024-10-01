@@ -33,7 +33,7 @@ const DocumentDetailsPage = () => {
 
   if (isLoading) {
     return (
-      <Spinner className="h-[100%]" />
+      <Spinner className="h-full" />
     );
   }
 
@@ -45,12 +45,12 @@ const DocumentDetailsPage = () => {
           {doc?.title}
         </span>
       </Card.Header>
-      <Card.Body>
+      <Card.Body className="">
         <div><span className="font-bold">{t('documents.detailsPage.number')}</span>{doc?.number}</div>
         <div><span className="font-bold">{t('documents.detailsPage.author')}</span>{doc?.author.username}</div>
-        <div><span className="font-bold">{t('documents.detailsPage.type')}</span>{doc?.type.type}</div>
+        <div><span className="font-bold">{t('documents.detailsPage.type')}</span>{doc && t(`documents.type.${doc.type.type}`)}</div>
         <div className="font-bold">{t('documents.detailsPage.content')}</div>
-        <div>{doc?.content}</div>
+        <div className="overflow-y-auto h-72 my-2">{doc?.content}</div>
         <div><span className="font-bold">{t('documents.detailsPage.creationDate')}</span>{doc?.creationDate}</div>
         <div><span className="font-bold">{t('documents.detailsPage.updateDate')}</span>{doc?.updateDate}</div>
       </Card.Body>

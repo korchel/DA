@@ -2,6 +2,12 @@ export const documents = {
   title: 'Documents',
   createDocument: 'Create document',
   noData: 'No data',
+  type: {
+    NOTE: 'Note',
+    REPORT: 'Report',
+    PRESENTATION: 'Presentation',
+    ARTICLE: 'Article',
+  },
   quantity: {
     count_one: '{{count}} document',
     count_other: '{{count}} documents',

@@ -5,10 +5,10 @@ interface ICard extends DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRE
   children: ReactNode
 }
 
-export const Card = ({children}: ICard) => (
+export const Card = ({children, className}: ICard) => (
   <div
-    className="md:w-1/2 p-4 rounded-md shadow-lg
-    bg-white dark:bg-secondaryDark"
+    className={clsx(className, `md:w-1/2 p-4 rounded-md shadow-lg 
+    bg-white dark:bg-secondaryDark`)}
   >
     {children}
   </div>
@@ -25,7 +25,7 @@ Card.Body = ({ children, className }: {children: ReactNode, className?: string})
 );
 
 Card.Footer = ({ children }) => (
-  <div className="flex flex-col xs:flex-row justify-between gap-1 mt-5">
+  <div className="flex flex-col xs:flex-row justify-between gap-1 mt-5 bg-white dark:bg-secondaryDark">
     {children}
   </div>
 );

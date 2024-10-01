@@ -60,7 +60,7 @@ export const FilesPage = () => {
 
   if (isLoading) {
     return (
-      <Spinner className="h-[100%]" />
+      <Spinner className="h-full" />
     );
   }
 

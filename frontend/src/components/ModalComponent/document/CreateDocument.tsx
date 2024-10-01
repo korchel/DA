@@ -16,14 +16,9 @@ import { routes } from "../../../routes";
 import { closeModal } from "../../../store/modalSlice";
 import { createDocFormSchema, IDocForm } from "./docFormSchema";
 import { ISelectOption } from "../../../interfaces";
+import { useEffect } from "react";
 
-export const selectTypeOptions: ISelectOption[] = [
-  { value: 1, label: 'Заметка' },
-  { value: 2, label: 'Отчет' },
-  { value: 3, label: 'Презентация' },
-  { value: 4, label: 'Статья' },
-  { value: 5, label: 'По умолчанию???' },
-];
+
 
 export const CreateDocument = () => {
   const { t } = useTranslation();
@@ -31,8 +26,15 @@ export const CreateDocument = () => {
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
 
+  const selectTypeOptions: ISelectOption[] = [
+    { value: 1, label: t('documents.type.NOTE') },
+    { value: 2, label: t('documents.type.REPORT') },
+    { value: 3, label: t('documents.type.PRESENTATION') },
+    { value: 4, label: t('documents.type.ARTICLE') },
+  ];
+
   const {
-    register, control, handleSubmit, formState: { errors }, setValue
+    register, control, handleSubmit, formState: { errors }, setValue, setFocus,
   } = useForm<IDocForm>({ defaultValues: { public_document: false, available_for: [] }, resolver: zodResolver(createDocFormSchema) });
 
 
@@ -52,6 +54,10 @@ export const CreateDocument = () => {
     dispatch(closeModal());
     navigate(routes.documentsRoute());
   };
+
+  useEffect(() => {
+    setFocus('title');
+  }, [setFocus]);
 
   return (
     <form

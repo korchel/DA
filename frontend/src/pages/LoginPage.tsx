@@ -51,7 +51,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     setFocus('username');
-  });
+  }, [setFocus]);
 
   return (
     <div className="h-full flex items-center justify-center">
@@ -60,7 +60,7 @@ export const LoginPage = () => {
         p-4 sm:p-6 md:p-8"
       >
         <form
-          className="flex flex-col gap-3 sm:gap-5 md:gap-7"
+          className="flex flex-col gap-5 md:gap-7"
           onSubmit={handleSubmit(onSubmit)}
         >
           <Title>{t('loginPage.title')}</Title>
@@ -94,8 +94,8 @@ export const LoginPage = () => {
               }
             })}
           />
-          {authFailed && <ErrorMessage className="bottom-16">{t('errorMessages.wrongPasswordOrUsername')}</ErrorMessage>}
-          <ButtonComponent disabled={buttonDisabled} type="submit" variant="primary">{t('loginPage.button')}</ButtonComponent>
+          {authFailed && !errors.password && <ErrorMessage className="bottom-14 sm:bottom-16 md:bottom-[70px]">{t('errorMessages.wrongPasswordOrUsername')}</ErrorMessage>}
+          <ButtonComponent disabled={buttonDisabled} type="submit" variant="primary" className="mt-4 md:mt-0">{t('loginPage.button')}</ButtonComponent>
         </form>
       </div>
     </div>

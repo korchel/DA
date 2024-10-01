@@ -20,14 +20,6 @@ import { ISelectOption } from "../../../interfaces";
 import { useAuth } from "../../../context/AuthContext";
 import { defineAbilityFor } from "../../../casl/ability";
 
-export const selectTypeOptions: ISelectOption[] = [
-  { value: 1, label: 'Заметка' },
-  { value: 2, label: 'Отчет' },
-  { value: 3, label: 'Презентация' },
-  { value: 4, label: 'Статья' },
-  { value: 5, label: 'По умолчанию???' },
-];
-
 export const EditDocument = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -39,6 +31,13 @@ export const EditDocument = () => {
   const { data: users } = getUsers();
   const { data: doc } = getDoc(id);
   const [editDoc] = useEditDocMutation();
+
+  const selectTypeOptions: ISelectOption[] = [
+    { value: 1, label: t('documents.type.NOTE') },
+    { value: 2, label: t('documents.type.REPORT') },
+    { value: 3, label: t('documents.type.PRESENTATION') },
+    { value: 4, label: t('documents.type.ARTICLE') },
+  ];
 
   const defaultValues = {
     title: doc?.title,
