@@ -16,8 +16,8 @@ services:
       - '443:443'
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./www-html:/usr/share/nginx/html
-      - ./etc-letsencrypt:/etc/letsencrypt
+      - www-html:/usr/share/nginx/html
+      - etc-letsencrypt:/etc/letsencrypt
     depends_on:
       - document_accounting_db
       - app
@@ -31,8 +31,8 @@ services:
     depends_on:
       - nginx
     volumes:
-      - ./etc-letsencrypt:/etc/letsencrypt
-      - ./www-html:/usr/share/nginx/html
+      - etc-letsencrypt:/etc/letsencrypt
+      - www-html:/usr/share/nginx/html
     command: certonly --webroot --webroot-path=/usr/share/nginx/html --email korchel21@gmail.com --agree-tos --no-eff-email -d da-korchel-ivan.ru
 
   document_accounting_db:
