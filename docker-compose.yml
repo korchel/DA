@@ -33,7 +33,7 @@ services:
     volumes:
       - etc-letsencrypt:/etc/letsencrypt:rw
       - www-html:/usr/share/nginx/html:rw
-    command: certonly --webroot --webroot-path=/usr/share/nginx/html --email korchel21@gmail.com --agree-tos --no-eff-email -d da-korchel-ivan.ru
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html --force-renewal --email korchel21@gmail.com --agree-tos --no-eff-email -d da-korchel-ivan.ru
 
   document_accounting_db:
     image: postgres
