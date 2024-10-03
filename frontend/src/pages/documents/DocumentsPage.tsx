@@ -13,6 +13,7 @@ import { Spinner } from "../../components/ui/icons";
 import { Table } from "../../components/Table";
 import { Pagination } from "../../components/ui/Pagination";
 import { QuantityTag } from "../../components/QuantityTag";
+import { PageSizeSwitcher } from "../../components/PageSizeSwitcher";
 
 
 export const DocumentsPage = () => {
@@ -21,8 +22,9 @@ export const DocumentsPage = () => {
   const { data: documents, isLoading } = getDocs(currentUser.roles);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
+  const [pageSize, setPageSize] = useState<number>(10);
 
   const numberOfDocuments = documents?.length;
   const pages = chunk(documents, pageSize);
@@ -73,7 +75,10 @@ export const DocumentsPage = () => {
     <>
       <Title>{t('documents.title')}</Title>
       <div className="w-full flex justify-between py-2 md:py-5">
-        <QuantityTag type="documents" number={numberOfDocuments} />
+        <div className="flex items-center gap-2">
+          <QuantityTag type="documents" number={numberOfDocuments} />
+          <PageSizeSwitcher onChange={setPageSize} value={pageSize} />
+        </div>
         <ButtonComponent
           variant="primary"
           onClick={handleCreate}
@@ -92,6 +97,7 @@ export const DocumentsPage = () => {
         currentPage={currentPage}
         goToPage={handleChangePage}
       />
+
     </>
   );
 };

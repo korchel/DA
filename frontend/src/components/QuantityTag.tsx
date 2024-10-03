@@ -16,7 +16,7 @@ export const QuantityTag = ({ number, type }: INumberTagProps) => {
   }[type];
 
   return (
-    <div className="h-9 p-2 rounded leading-none box-border flex items-center text-nowrap
+    <div className="h-9 md:h-10 p-2 rounded leading-none box-border flex items-center text-nowrap
       text-secondary dark:text-whiteDark
       bg-white dark:bg-secondaryDark"
     >

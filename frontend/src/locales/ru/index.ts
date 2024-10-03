@@ -45,4 +45,5 @@ export const ru = {
   edit: 'Изменить',
   error,
   emptyTable: 'Таблица пуста',
+  show: 'Показывать по:',
 };

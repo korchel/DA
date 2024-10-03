@@ -6,15 +6,17 @@ import { ErrorMessage } from '../ErrorMessage';
 import { ISelectOption, onSelect } from'./../../../interfaces';
 import { EmotionCacheProvider } from './EmotionProvider';
 import { classNames } from './styles';
+import clsx from 'clsx';
 
 interface ISelectInputProps {
   onChange: (option: number) => void,
-  placeholder: string,
+  placeholder?: string,
   selectOptions: ISelectOption[],
   error?: FieldError,
   value: number,
   label?: string,
   required?: boolean,
+  className?: string,
 }
 
 export const SelectComponent = ({
@@ -24,6 +26,8 @@ export const SelectComponent = ({
   label,
   error,
   value,
+  required = true,
+  className,
   ...props
 }: ISelectInputProps) => {
   const handleSelect: onSelect = (option) => {
@@ -33,8 +37,8 @@ export const SelectComponent = ({
 
   return (
     <EmotionCacheProvider>
-      <div className='relative'>
-        <InputLabel>{label}</InputLabel>
+      <div className={clsx(className, 'relative')}>
+        <InputLabel required={required}>{label}</InputLabel>
         <Select
           value={value ? selectOptions.find(option => option.value === value) : undefined}
           classNames={classNames}
