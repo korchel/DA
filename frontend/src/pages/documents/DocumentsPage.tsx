@@ -74,7 +74,7 @@ export const DocumentsPage = () => {
   return (
     <>
       <Title>{t('documents.title')}</Title>
-      <div className="w-full flex justify-between py-2 md:py-5">
+      <div className="w-full flex justify-between py-2 md:py-5 flex-wrap gap-2">
         <div className="flex items-center gap-2">
           <QuantityTag type="documents" number={numberOfDocuments} />
           <PageSizeSwitcher onChange={setPageSize} value={pageSize} />
