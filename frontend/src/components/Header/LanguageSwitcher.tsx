@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
-import { DropDown } from "../ui";
+import { DropDown } from '../ui';
 
 export const LanguageSwitcher = () => {
   const { t, i18n } = useTranslation();
@@ -8,7 +8,7 @@ export const LanguageSwitcher = () => {
   const handleChangeLanguage = (language: string) => {
     if (language === i18n.language) return;
     i18n.changeLanguage(language);
-    localStorage.setItem("language", language);
+    localStorage.setItem('language', language);
   };
 
   const languages = {
@@ -17,6 +17,10 @@ export const LanguageSwitcher = () => {
   };
 
   return (
-    <DropDown options={languages} name={languages[i18n.language]} action={handleChangeLanguage} />
+    <DropDown
+      options={languages}
+      name={languages[i18n.language]}
+      action={handleChangeLanguage}
+    />
   );
 };

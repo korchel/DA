@@ -1,30 +1,33 @@
-import { Controller, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { ChangeEventHandler } from "react";
+import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { ChangeEventHandler } from 'react';
 
-import { InputField, CheckBox, ButtonComponent, Title } from "../../ui";
-import { useEditUserMutation, useGetUserQuery as getUser } from "../../../store/usersApi";
-import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
-import { routes } from "../../../routes";
-import { useAuth } from "../../../context/AuthContext";
-import { defineAbilityFor } from "../../../casl/ability";
-import { Can } from "@casl/react";
+import { InputField, CheckBox, ButtonComponent, Title } from '../../ui';
+import {
+  useEditUserMutation,
+  useGetUserQuery as getUser,
+} from '../../../store/usersApi';
+import { closeModal, getCurrentDataId } from '../../../store/modalSlice';
+import { routes } from '../../../routes';
+import { useAuth } from '../../../context/AuthContext';
+import { defineAbilityFor } from '../../../casl/ability';
+import { Can } from '@casl/react';
 
 export interface IEditUserForm {
-  username: string,
-  email: string,
-  name: string,
-  lastName: string,
-  role_ids: number[],
+  username: string;
+  email: string;
+  name: string;
+  lastName: string;
+  role_ids: number[];
 }
 
 const roles = [
-  { label: "Администратор", value: 1 },
-  { label: "Пользователь", value: 3 },
-  { label: "Модератор", value: 2 },
+  { label: 'Администратор', value: 1 },
+  { label: 'Пользователь', value: 3 },
+  { label: 'Модератор', value: 2 },
 ];
 
 export const EditUser = () => {
@@ -34,7 +37,7 @@ export const EditUser = () => {
   const dispatch = useDispatch();
   const id = useSelector(getCurrentDataId);
 
-  const {data: user} = getUser(id);
+  const { data: user } = getUser(id);
   const [editUser] = useEditUserMutation();
 
   const ability = defineAbilityFor({
@@ -49,7 +52,8 @@ export const EditUser = () => {
     role_ids: user?.roles.map((role) => role.idRole),
   };
 
-  const { register, control, handleSubmit, formState: { errors }, getValues, setValue } = useForm<IEditUserForm>({defaultValues});
+  const { register, control, handleSubmit, getValues, setValue } =
+    useForm<IEditUserForm>({ defaultValues });
 
   const onSubmit = (data: IEditUserForm) => {
     editUser({ data, id })
@@ -66,16 +70,22 @@ export const EditUser = () => {
 
   const handleCheck: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { checked, value } = e.target;
-    const roles = getValues('role_ids')
+    const roles = getValues('role_ids');
     if (checked) {
       setValue('role_ids', [...roles, Number(value)]);
     } else {
-      setValue('role_ids', roles.filter((role) => role !== Number(value)));
+      setValue(
+        'role_ids',
+        roles.filter((role) => role !== Number(value)),
+      );
     }
   };
 
   return (
-    <form className="flex flex-col gap-3 sm:gap-5 md:gap-7" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className='flex flex-col gap-3 sm:gap-5 md:gap-7'
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Title>{t('users.modal.title.edit')}</Title>
       <InputField
         label={t('users.modal.form.labels.username')}
@@ -93,27 +103,29 @@ export const EditUser = () => {
         label={t('users.modal.form.labels.lastname')}
         {...register('lastName')}
       />
-      <Can I="edit" a="role" ability={ability}>
+      <Can I='edit' a='role' ability={ability}>
         <fieldset>
           {roles.map((role) => (
             <Controller
-            key={role.value}
-            control={control}
-            name='role_ids'
-            render={({ field }) => (
-              <CheckBox
-              {...field}
-              label={role.label}
-              checked={field.value?.includes(role.value)}
-              value={role.value}
-              onChange={(e) => handleCheck(e)}
-              />
-            )}
+              key={role.value}
+              control={control}
+              name='role_ids'
+              render={({ field }) => (
+                <CheckBox
+                  {...field}
+                  label={role.label}
+                  checked={field.value?.includes(role.value)}
+                  value={role.value}
+                  onChange={(e) => handleCheck(e)}
+                />
+              )}
             />
           ))}
         </fieldset>
       </Can>
-      <ButtonComponent type="submit" variant="primary">{t('users.modal.edit.button')}</ButtonComponent>
+      <ButtonComponent type='submit' variant='primary'>
+        {t('users.modal.edit.button')}
+      </ButtonComponent>
     </form>
   );
 };

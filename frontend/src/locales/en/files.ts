@@ -40,22 +40,21 @@ export const files = {
     delete: {
       areYouSure: 'Are you sure you want to delete this file?',
       toast: {
-        error: "Error occurred",
-        success: "File deleted",
+        error: 'Error occurred',
+        success: 'File deleted',
       },
     },
     upload: {
       toast: {
-        error: "Error occurred",
-        success: "File added",
+        error: 'Error occurred',
+        success: 'File added',
       },
       button: 'Upload file',
-
     },
     edit: {
       toast: {
-        error: "Error occurred",
-        success: "Access to file changed",
+        error: 'Error occurred',
+        success: 'Access to file changed',
       },
       button: 'Save changes',
     },

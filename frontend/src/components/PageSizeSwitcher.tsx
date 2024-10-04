@@ -1,14 +1,17 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
-import { ISelectOption } from "../interfaces";
-import { SelectComponent } from "./ui";
+import { ISelectOption } from '../interfaces';
+import { SelectComponent } from './ui';
 
 interface IPageSizeSwitcherProps {
-  onChange: (option: number) => void,
-  value: number,
+  onChange: (option: number) => void;
+  value: number;
 }
 
-export const PageSizeSwitcher = ({ onChange, value }: IPageSizeSwitcherProps) => {
+export const PageSizeSwitcher = ({
+  onChange,
+  value,
+}: IPageSizeSwitcherProps) => {
   const { t } = useTranslation();
 
   const selectOptions: ISelectOption[] = [
@@ -18,9 +21,15 @@ export const PageSizeSwitcher = ({ onChange, value }: IPageSizeSwitcherProps) =>
   ];
 
   return (
-    <div className="flex gap-2 items-center text-secondary dark:text-whiteDark">
+    <div className='flex gap-2 items-center text-secondary dark:text-whiteDark'>
       <div>{t('show')}</div>
-      <SelectComponent className="w-20" required={false} onChange={onChange} selectOptions={selectOptions} value={value} />
+      <SelectComponent
+        className='w-20'
+        required={false}
+        onChange={onChange}
+        selectOptions={selectOptions}
+        value={value}
+      />
     </div>
   );
 };

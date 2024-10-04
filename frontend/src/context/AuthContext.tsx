@@ -1,10 +1,10 @@
-import { createContext, useState, useContext, ReactNode } from "react";
-import { RoleName } from "../interfaces/interfaces";
+import { createContext, useState, useContext, ReactNode } from 'react';
+import { RoleName } from '../interfaces/interfaces';
 
 interface ICurrentUser {
   roles: RoleName[];
   id: number | null;
-  userName: string | null,
+  userName: string | null;
 }
 
 interface IAuthContext {
@@ -23,13 +23,17 @@ const initialContext = {
     id: null,
     userName: null,
   },
-}
+};
 
 export const AuthContext = createContext<IAuthContext>(initialContext);
 
-const AuthProvider = ({ children }: {children: ReactNode}) => {
+const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [currentUser, setCurrentUser] = useState<ICurrentUser>({ roles: [], id: null, userName: null});
+  const [currentUser, setCurrentUser] = useState<ICurrentUser>({
+    roles: [],
+    id: null,
+    userName: null,
+  });
 
   const logIn = (currentUser: ICurrentUser) => {
     setCurrentUser(currentUser);

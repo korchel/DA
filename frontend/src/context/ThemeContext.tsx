@@ -1,5 +1,5 @@
-import { createContext, useContext, ReactNode, useEffect } from "react";
-import { useLocalStorage } from "usehooks-ts";
+import { createContext, useContext, ReactNode, useEffect } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 type Theme = 'dark' | 'light';
 
@@ -12,21 +12,21 @@ interface IThemeContext {
 const initialContext = {
   theme: 'light' as Theme,
   setDarkTheme: () => undefined,
-  setLightTheme: () =>  undefined,
+  setLightTheme: () => undefined,
 };
 
 export const ThemeContext = createContext<IThemeContext>(initialContext);
 
-const ThemeProvider = ({ children }: {children: ReactNode}) => {
+const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useLocalStorage<Theme>('theme', 'light');
 
   const setDarkTheme = () => {
     setTheme('dark');
-  }
+  };
 
   const setLightTheme = () => {
     setTheme('light');
-  }
+  };
 
   useEffect(() => {
     document.body.classList.remove('light', 'dark');
@@ -39,7 +39,9 @@ const ThemeProvider = ({ children }: {children: ReactNode}) => {
     setLightTheme,
   };
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
 };
 
 const useTheme = () => useContext(ThemeContext) as IThemeContext;

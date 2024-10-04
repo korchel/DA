@@ -26,7 +26,12 @@ export const ThemeSwitcher = ({ className }: IThemeSwitcher) => {
       className={className}
       isToggled={isToggled}
       onToggle={handleChangeTheme}
-      icons={{ left: <SunIcon className='absolute text-white z-20 left-0.5 top-0.5' />, right: <MoonIcon className='absolute text-whiteDark z-20 right-0.5 top-[3px]' /> }}
+      icons={{
+        left: <SunIcon className='absolute text-white z-20 left-0.5 top-0.5' />,
+        right: (
+          <MoonIcon className='absolute text-whiteDark z-20 right-0.5 top-[3px]' />
+        ),
+      }}
     />
   );
 };

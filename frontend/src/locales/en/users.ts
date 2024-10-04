@@ -36,23 +36,21 @@ export const users = {
         name: 'Name',
         lastname: 'Last name',
       },
-      plaveholders: {
-
-      },
+      plaveholders: {},
     },
     edit: {
       toast: {
-        error: "Error occurred",
-        success: "User info updated",
+        error: 'Error occurred',
+        success: 'User info updated',
       },
       button: 'Save changes',
     },
     delete: {
       areYouSure: 'Are you sure you want to delete this user?',
       toast: {
-        error: "Error occurred",
-        success: "User deleted",
-      }
+        error: 'Error occurred',
+        success: 'User deleted',
+      },
     },
-  }
+  },
 };

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldError, Merge } from 'react-hook-form';
 import Select from 'react-select';
 
@@ -8,13 +9,13 @@ import { ISelectOption, onSelect } from './../../../interfaces';
 import { classNames } from './styles';
 
 interface ISelectInputProps {
-  onChange: (option: ISelectOption[]) => void,
-  placeholder: string,
-  selectOptions: ISelectOption[],
-  error?:Merge<FieldError, (FieldError | undefined)[]>,
-  value: number[] | undefined,
-  label?: string,
-  required?: boolean,
+  onChange: (option: ISelectOption[]) => void;
+  placeholder: string;
+  selectOptions: ISelectOption[];
+  error?: Merge<FieldError, (FieldError | undefined)[]>;
+  value: number[] | undefined;
+  label?: string;
+  required?: boolean;
 }
 
 export const MultiSelectComponent = ({
@@ -28,8 +29,8 @@ export const MultiSelectComponent = ({
   ...props
 }: ISelectInputProps) => {
   const handleSelect: onSelect = (options) => {
-    const _options = options as  ISelectOption[];
-    onChange( _options.map((option: any) => option.value));
+    const _options = options as ISelectOption[];
+    onChange(_options.map((option: any) => option.value));
   };
 
   return (
@@ -41,7 +42,9 @@ export const MultiSelectComponent = ({
           options={selectOptions}
           placeholder={placeholder}
           isMulti
-          value={selectOptions.filter((option) => value?.includes(option.value) )}
+          value={selectOptions.filter((option) =>
+            value?.includes(option.value),
+          )}
           classNames={classNames}
           {...props}
         />

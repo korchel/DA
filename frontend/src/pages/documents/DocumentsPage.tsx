@@ -1,20 +1,19 @@
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import chunk from 'lodash/chunk';
-import { useState } from "react";
+import { useState } from 'react';
 
-import { Title, ButtonComponent } from "../../components/ui";
-import { routes } from "../../routes";
-import { useAuth } from "../../context/AuthContext";
-import { useGetDocsQuery as getDocs } from "../../store/docsApi";
-import { openModal } from "../../store/modalSlice";
-import { Spinner } from "../../components/ui/icons";
-import { Table } from "../../components/Table";
-import { Pagination } from "../../components/ui/Pagination";
-import { QuantityTag } from "../../components/QuantityTag";
-import { PageSizeSwitcher } from "../../components/PageSizeSwitcher";
-
+import { Title, ButtonComponent } from '../../components/ui';
+import { routes } from '../../routes';
+import { useAuth } from '../../context/AuthContext';
+import { useGetDocsQuery as getDocs } from '../../store/docsApi';
+import { openModal } from '../../store/modalSlice';
+import { Spinner } from '../../components/ui/icons';
+import { Table } from '../../components/Table';
+import { Pagination } from '../../components/ui/Pagination';
+import { QuantityTag } from '../../components/QuantityTag';
+import { PageSizeSwitcher } from '../../components/PageSizeSwitcher';
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
@@ -54,7 +53,7 @@ export const DocumentsPage = () => {
   }));
 
   const handleCreate = () => {
-    dispatch(openModal({ type: "createDocument", open: true }))
+    dispatch(openModal({ type: 'createDocument', open: true }));
   };
 
   const handleGoToDetailsPage = (id: number) => {
@@ -66,23 +65,18 @@ export const DocumentsPage = () => {
   };
 
   if (isLoading) {
-    return (
-      <Spinner className="h-full" />
-    );
+    return <Spinner className='h-full' />;
   }
-  
+
   return (
     <>
       <Title>{t('documents.title')}</Title>
-      <div className="w-full flex justify-between py-2 md:py-5 flex-wrap gap-2">
-        <div className="flex items-center gap-2">
-          <QuantityTag type="documents" number={numberOfDocuments} />
+      <div className='w-full flex justify-between py-2 md:py-5 flex-wrap gap-2'>
+        <div className='flex items-center gap-2'>
+          <QuantityTag type='documents' number={numberOfDocuments} />
           <PageSizeSwitcher onChange={setPageSize} value={pageSize} />
         </div>
-        <ButtonComponent
-          variant="primary"
-          onClick={handleCreate}
-        >
+        <ButtonComponent variant='primary' onClick={handleCreate}>
           {t('documents.createDocument')}
         </ButtonComponent>
       </div>
@@ -92,12 +86,11 @@ export const DocumentsPage = () => {
         handleGoToDetailsPage={handleGoToDetailsPage}
       />
       <Pagination
-        className="mt-5 ml-auto"
+        className='mt-5 ml-auto'
         numberOfPages={numberOfPages}
         currentPage={currentPage}
         goToPage={handleChangePage}
       />
-
     </>
   );
 };

@@ -1,9 +1,9 @@
-import { documents } from "./documents";
-import { files } from "./files";
-import { signupPage } from "./signupPage";
-import { users } from "./users";
-import { loginPage } from "./loginPage";
-import { error } from "./error";
+import { documents } from './documents';
+import { files } from './files';
+import { signupPage } from './signupPage';
+import { users } from './users';
+import { loginPage } from './loginPage';
+import { error } from './error';
 
 export const ru = {
   pageDummy: 'Здесь пока ничего нет. Зайдите попозже.',

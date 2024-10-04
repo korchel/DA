@@ -1,11 +1,20 @@
-import clsx from "clsx";
-import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+import clsx from 'clsx';
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
-interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  variant: 'primary' | 'outline' | 'danger' | 'highLighted' | 'borderLess',
+interface ButtonProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  variant: 'primary' | 'outline' | 'danger' | 'highLighted' | 'borderLess';
 }
 
-export const ButtonComponent = ({ variant, className, children, ...props }: ButtonProps) => {
+export const ButtonComponent = ({
+  variant,
+  className,
+  children,
+  ...props
+}: ButtonProps) => {
   const cn = clsx(
     className,
     'transition-colors',

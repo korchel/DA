@@ -1,22 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Controller, FieldError, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Controller, FieldError, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
-import { CheckBox, FileInput, ButtonComponent, MultiSelectComponent, Title } from "../../ui";
-import { useUploadFileMutation } from "../../../store/filesApi";
-import { closeModal } from "../../../store/modalSlice";
-import { routes } from "../../../routes";
+import { useGetUsersQuery as getUsers } from '../../../store/usersApi';
+import {
+  CheckBox,
+  FileInput,
+  ButtonComponent,
+  MultiSelectComponent,
+  Title,
+} from '../../ui';
+import { useUploadFileMutation } from '../../../store/filesApi';
+import { closeModal } from '../../../store/modalSlice';
+import { routes } from '../../../routes';
 
 export interface IFileForm {
-  file: any,
+  file: any;
   params: {
-    available_for: number[],
-    public_document: boolean,
-  }
+    available_for: number[];
+    public_document: boolean;
+  };
 }
 
 const defaultValues = {
@@ -33,9 +39,17 @@ export const UploadFile = () => {
 
   const { data: users } = getUsers();
   const [uploadFile] = useUploadFileMutation();
-  const availableForOptions = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
-  const { control, handleSubmit, formState: { errors }, setValue } = useForm<IFileForm>({ defaultValues });
-  
+  const availableForOptions = users?.map((user) => ({
+    label: user.name,
+    value: user.id,
+  })) ?? [{ label: '', value: 0 }];
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<IFileForm>({ defaultValues });
+
   const onSubmit = (data: IFileForm) => {
     const fomrData = new FormData();
     fomrData.append('params', JSON.stringify(data.params));
@@ -51,16 +65,16 @@ export const UploadFile = () => {
     dispatch(closeModal());
     navigate(routes.filesRoute());
   };
-  
+
   return (
     <form
-      className="flex flex-col gap-3 sm:gap-5 md:gap-7"
+      className='flex flex-col gap-3 sm:gap-5 md:gap-7'
       onSubmit={handleSubmit(onSubmit)}
     >
       <Title>{t('files.modal.title.create')}</Title>
       <Controller
         control={control}
-        name="file"
+        name='file'
         render={({ field }) => (
           <FileInput
             {...field}
@@ -85,7 +99,7 @@ export const UploadFile = () => {
           />
         )}
       />
-      <div className="flex flex-col gap-5 md:flex-row justify-between items-center">
+      <div className='flex flex-col gap-5 md:flex-row justify-between items-center'>
         <Controller
           control={control}
           name='params.public_document'
@@ -93,13 +107,17 @@ export const UploadFile = () => {
             <CheckBox
               {...field}
               checked={!!field.value}
-              label="Сделать документ публичным"
-              onChange={(e) => setValue('params.public_document', e.target.checked)}
+              label='Сделать документ публичным'
+              onChange={(e) =>
+                setValue('params.public_document', e.target.checked)
+              }
             />
           )}
         />
-        <ButtonComponent type="submit" variant="primary">Загрузить файл</ButtonComponent>
+        <ButtonComponent type='submit' variant='primary'>
+          Загрузить файл
+        </ButtonComponent>
       </div>
     </form>
-  )
-}
+  );
+};

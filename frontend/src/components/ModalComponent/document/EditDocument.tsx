@@ -1,24 +1,32 @@
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Can } from "@casl/react";
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Can } from '@casl/react';
 
 import {
-  InputField, SelectComponent, MultiSelectComponent,
-  TextArea, CheckBox, ButtonComponent, Title,
-} from "../../ui";
-import isEqual from "lodash.isequal";
-import { useEditDocMutation, useGetDocQuery as getDoc } from "../../../store/docsApi";
-import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
-import { routes } from "../../../routes";
-import { closeModal, getCurrentDataId } from "../../../store/modalSlice";
-import { editDocFormSchema, IDocForm } from "./docFormSchema";
-import { ISelectOption } from "../../../interfaces";
-import { useAuth } from "../../../context/AuthContext";
-import { defineAbilityFor } from "../../../casl/ability";
+  InputField,
+  SelectComponent,
+  MultiSelectComponent,
+  TextArea,
+  CheckBox,
+  ButtonComponent,
+  Title,
+} from '../../ui';
+import isEqual from 'lodash.isequal';
+import {
+  useEditDocMutation,
+  useGetDocQuery as getDoc,
+} from '../../../store/docsApi';
+import { useGetUsersQuery as getUsers } from '../../../store/usersApi';
+import { routes } from '../../../routes';
+import { closeModal, getCurrentDataId } from '../../../store/modalSlice';
+import { editDocFormSchema, IDocForm } from './docFormSchema';
+import { ISelectOption } from '../../../interfaces';
+import { useAuth } from '../../../context/AuthContext';
+import { defineAbilityFor } from '../../../casl/ability';
 
 export const EditDocument = () => {
   const { t } = useTranslation();
@@ -26,7 +34,9 @@ export const EditDocument = () => {
   const dispatch = useDispatch();
   const id = useSelector(getCurrentDataId);
   const { currentUser, isAuthenticated } = useAuth();
-  const ability = defineAbilityFor({ user: { ...currentUser, isAuthenticated } });
+  const ability = defineAbilityFor({
+    user: { ...currentUser, isAuthenticated },
+  });
 
   const { data: users } = getUsers();
   const { data: doc } = getDoc(id);
@@ -49,8 +59,20 @@ export const EditDocument = () => {
     public_document: !!doc?.public_document,
   };
 
-  const availableForOptions = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
-  const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<IDocForm>({ defaultValues, resolver: zodResolver(editDocFormSchema)  });
+  const availableForOptions = users?.map((user) => ({
+    label: user.name,
+    value: user.id,
+  })) ?? [{ label: '', value: 0 }];
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<IDocForm>({
+    defaultValues,
+    resolver: zodResolver(editDocFormSchema),
+  });
 
   const onSubmit = (data: IDocForm) => {
     if (isEqual(data, defaultValues)) {
@@ -71,7 +93,7 @@ export const EditDocument = () => {
 
   return (
     <form
-      className="flex flex-col gap-3 sm:gap-5 md:gap-7"
+      className='flex flex-col gap-3 sm:gap-5 md:gap-7'
       onSubmit={handleSubmit(onSubmit)}
     >
       <Title>{t('documents.modal.title.edit')}</Title>
@@ -85,12 +107,12 @@ export const EditDocument = () => {
         label={t('documents.modal.form.labels.number')}
         error={errors.number}
       />
-      <Can I="edit" an="author" ability={ability}>
+      <Can I='edit' an='author' ability={ability}>
         <InputField
           {...register('authorId')}
           label={t('documents.modal.form.labels.authorId')}
           error={errors.authorId}
-          />
+        />
       </Can>
       <TextArea
         {...register('content')}
@@ -126,7 +148,7 @@ export const EditDocument = () => {
           />
         )}
       />
-      <div className="flex flex-col gap-5 md:flex-row justify-between items-center">
+      <div className='flex flex-col gap-5 md:flex-row justify-between items-center'>
         <Controller
           control={control}
           name='public_document'
@@ -139,7 +161,9 @@ export const EditDocument = () => {
             />
           )}
         />
-        <ButtonComponent type="submit" variant="primary">{t('documents.modal.edit.button')}</ButtonComponent>
+        <ButtonComponent type='submit' variant='primary'>
+          {t('documents.modal.edit.button')}
+        </ButtonComponent>
       </div>
     </form>
   );

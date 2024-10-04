@@ -4,14 +4,14 @@
 
 :root {
   --black-color: #222629;
-  --secondary-color: #1D3557;
+  --secondary-color: #1d3557;
   --secondary-color-hover: #607189;
-  --primary-color: #A8DADC;
+  --primary-color: #a8dadc;
   --highlight-color: #65afb2;
-  --danger-color: #E63946;
+  --danger-color: #e63946;
   --danger-color-hover: #cf333f;
-  --attention-color: #F8E9A1;
-  --white-color: #F1FAEE;
+  --attention-color: #f8e9a1;
+  --white-color: #f1faee;
   --white-color-hover: #d8e1d6;
   --gray-color: #64748b;
 
@@ -31,4 +31,3 @@
   --toastify-color-warning: #f1c40f;
   --toastify-color-error: var(--danger-color);
 }
-

@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
-import { Title } from "../../components/ui";
+import { Title } from '../../components/ui';
 
 export const SearchPage = () => {
   const { t } = useTranslation();

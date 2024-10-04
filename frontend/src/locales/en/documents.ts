@@ -52,28 +52,28 @@ export const documents = {
         number: 'Enter a number',
         type: 'Choose type',
         availableFor: 'Choose users',
-      }
+      },
     },
     delete: {
       areYouSure: 'Are you sure you want to delete this record?',
       toast: {
-        error: "Error occurred",
-        success: "Record deleted",
+        error: 'Error occurred',
+        success: 'Record deleted',
       },
     },
     create: {
       toast: {
-        error: "Error occurred",
-        success: "Document created",
+        error: 'Error occurred',
+        success: 'Document created',
       },
       button: 'Add document',
     },
     edit: {
       toast: {
-        error: "Error occurred",
-        success: "Document updated",
+        error: 'Error occurred',
+        success: 'Document updated',
       },
       button: 'Save changes',
     },
-  }
+  },
 };

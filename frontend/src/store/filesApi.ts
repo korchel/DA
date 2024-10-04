@@ -1,23 +1,23 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IFile, RoleName } from "../interfaces";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IFile, RoleName } from '../interfaces';
 
 export const filesApi = createApi({
-  reducerPath: "files",
+  reducerPath: 'files',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.URL}/api/files`,
-    credentials: "include",
+    credentials: 'include',
   }),
-  tagTypes: ["files", 'file'],
+  tagTypes: ['files', 'file'],
 
   endpoints: (builder) => ({
     getFiles: builder.query<IFile[], RoleName[]>({
       query: (roles: RoleName[]) => {
-        if (roles.includes("ROLE_ADMIN") || roles.includes("ROLE_MODERATOR")) {
+        if (roles.includes('ROLE_ADMIN') || roles.includes('ROLE_MODERATOR')) {
           return { url: '' };
         }
-        return { url: "/for_user" };
+        return { url: '/for_user' };
       },
-      providesTags: ["files"],
+      providesTags: ['files'],
     }),
 
     uploadFile: builder.mutation<void, FormData>({
@@ -27,7 +27,7 @@ export const filesApi = createApi({
         body: data,
         formData: true,
       }),
-      invalidatesTags: ["files"],
+      invalidatesTags: ['files'],
     }),
 
     getFile: builder.query<IFile, string | undefined>({
@@ -38,7 +38,7 @@ export const filesApi = createApi({
     }),
 
     editFile: builder.mutation({
-      query: ({id, data}) => ({
+      query: ({ id, data }) => ({
         url: `/${id}`,
         method: 'PUT',
         body: data,
@@ -51,7 +51,7 @@ export const filesApi = createApi({
         url: `/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ["files"],
+      invalidatesTags: ['files'],
     }),
 
     searchFiles: builder.query({

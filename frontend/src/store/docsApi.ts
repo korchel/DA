@@ -1,40 +1,39 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IDocument, RoleName } from "../interfaces";
-import { IDocForm } from "../components/ModalComponent/document/docFormSchema";
-
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IDocument, RoleName } from '../interfaces';
+import { IDocForm } from '../components/ModalComponent/document/docFormSchema';
 
 export const docsApi = createApi({
-  reducerPath: "documents",
+  reducerPath: 'documents',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.URL}/api/documents`,
-    credentials: "include",
+    credentials: 'include',
   }),
-  tagTypes: ["docs", "doc"],
+  tagTypes: ['docs', 'doc'],
   endpoints: (builder) => ({
     getDocs: builder.query<IDocument[], RoleName[]>({
       query: (roles: RoleName[]) => {
-        if (roles.includes("ROLE_ADMIN") || roles.includes("ROLE_MODERATOR")) {
+        if (roles.includes('ROLE_ADMIN') || roles.includes('ROLE_MODERATOR')) {
           return { url: '' };
         }
-        return { url: "/for_user" };
+        return { url: '/for_user' };
       },
-      providesTags: ["docs"],
+      providesTags: ['docs'],
     }),
 
     getDoc: builder.query<IDocument, string | undefined>({
       query: (id) => ({
         url: `/${id}`,
       }),
-      providesTags: ["doc"],
+      providesTags: ['doc'],
     }),
 
     createDoc: builder.mutation<void, IDocForm>({
       query: (data) => ({
-        url: "",
-        method: "POST",
+        url: '',
+        method: 'POST',
         body: data,
       }),
-      invalidatesTags: ["docs"],
+      invalidatesTags: ['docs'],
     }),
 
     deleteDoc: builder.mutation<void, string | undefined>({
@@ -42,19 +41,23 @@ export const docsApi = createApi({
         url: `/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ["docs"],
+      invalidatesTags: ['docs'],
     }),
 
-    editDoc: builder.mutation<boolean, {data: IDocForm, id: string | undefined}>({
-      query: ({data, id}) => ({
+    editDoc: builder.mutation<
+      boolean,
+      { data: IDocForm; id: string | undefined }
+    >({
+      query: ({ data, id }) => ({
         url: `/for_admin/${id}`,
         method: 'PUT',
         body: data,
       }),
-      invalidatesTags: ["docs", "doc"],
+      invalidatesTags: ['docs', 'doc'],
     }),
 
-    searchDoc: builder.query({   //pageNumber
+    searchDoc: builder.query({
+      //pageNumber
       query: (params) => ({
         url: `/search?${params}`,
       }),

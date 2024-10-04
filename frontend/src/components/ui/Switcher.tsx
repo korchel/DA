@@ -1,19 +1,26 @@
-import clsx from "clsx";
-import { ReactNode } from "react";
+import clsx from 'clsx';
+import { ReactNode } from 'react';
 
 interface ISwitcher {
   isToggled: boolean;
   onToggle: () => void;
   className?: string;
-  icons?: { left: ReactNode, right: ReactNode };
+  icons?: { left: ReactNode; right: ReactNode };
 }
 
-export const Switcher = ({ isToggled, onToggle, icons, className }: ISwitcher) => {
+export const Switcher = ({
+  isToggled,
+  onToggle,
+  icons,
+  className,
+}: ISwitcher) => {
   return (
-    <label className={clsx(className, "relative box-border w-12 h-6 cursor-pointer")}>
+    <label
+      className={clsx(className, 'relative box-border w-12 h-6 cursor-pointer')}
+    >
       <input
-        type="checkbox"
-        className="peer hidden"
+        type='checkbox'
+        className='peer hidden'
         checked={isToggled}
         onChange={onToggle}
       />

@@ -1,19 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
-import { closeModal, getCurrentDataId } from "../../store/modalSlice";
-import { toast } from "react-toastify";
-import { routes } from "../../routes";
-import { ButtonComponent } from "../ui";
-import { useDeleteUserMutation } from "../../store/usersApi";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useDeleteDocMutation } from "../../store/docsApi";
-import { useDeleteFileMutation } from "../../store/filesApi";
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal, getCurrentDataId } from '../../store/modalSlice';
+import { toast } from 'react-toastify';
+import { routes } from '../../routes';
+import { ButtonComponent } from '../ui';
+import { useDeleteUserMutation } from '../../store/usersApi';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useDeleteDocMutation } from '../../store/docsApi';
+import { useDeleteFileMutation } from '../../store/filesApi';
 
 interface IDeleteProps {
-  type: 'file' | 'user' | 'doc',
+  type: 'file' | 'user' | 'doc';
 }
 
-export const Delete = ( { type }: IDeleteProps) => {
+export const Delete = ({ type }: IDeleteProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -74,21 +74,15 @@ export const Delete = ( { type }: IDeleteProps) => {
   };
   return (
     <>
-      <div className="mb-4 font-bold text-center">{question}</div>
-      <div className="flex justify-between gap-4">
-        <ButtonComponent
-          variant="outline"
-          onClick={handleClose}
-        >
+      <div className='mb-4 font-bold text-center'>{question}</div>
+      <div className='flex justify-between gap-4'>
+        <ButtonComponent variant='outline' onClick={handleClose}>
           {t('cancel')}
         </ButtonComponent>
-        <ButtonComponent
-          variant="danger"
-          onClick={handleDelete}
-        >
+        <ButtonComponent variant='danger' onClick={handleDelete}>
           {t('delete')}
         </ButtonComponent>
       </div>
     </>
-  )
+  );
 };

@@ -1,9 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 
-import { docsApi } from "./docsApi";
-import { usersApi } from "./usersApi";
-import { filesApi } from "./filesApi";
-import modalSlice from "./modalSlice";
+import { docsApi } from './docsApi';
+import { usersApi } from './usersApi';
+import { filesApi } from './filesApi';
+import modalSlice from './modalSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,7 +13,11 @@ const store = configureStore({
     modalSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(docsApi.middleware, usersApi.middleware, filesApi.middleware),
+    getDefaultMiddleware().concat(
+      docsApi.middleware,
+      usersApi.middleware,
+      filesApi.middleware,
+    ),
 });
 
 export type RootStateType = ReturnType<typeof store.getState>;

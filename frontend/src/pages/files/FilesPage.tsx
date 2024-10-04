@@ -1,18 +1,18 @@
-import { useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import chunk from 'lodash/chunk';
-import { useState } from "react";
+import { useState } from 'react';
 
-import { ButtonComponent, Title } from "../../components/ui";
-import { useGetFilesQuery as getFiles } from "../../store/filesApi";
-import { routes } from "../../routes";
-import { useAuth } from "../../context/AuthContext";
-import { openModal } from "../../store/modalSlice";
-import { Table } from "../../components/Table";
-import { Spinner } from "../../components/ui/icons";
-import { Pagination } from "../../components/ui/Pagination";
-import { QuantityTag } from "../../components/QuantityTag";
+import { ButtonComponent, Title } from '../../components/ui';
+import { useGetFilesQuery as getFiles } from '../../store/filesApi';
+import { routes } from '../../routes';
+import { useAuth } from '../../context/AuthContext';
+import { openModal } from '../../store/modalSlice';
+import { Table } from '../../components/Table';
+import { Spinner } from '../../components/ui/icons';
+import { Pagination } from '../../components/ui/Pagination';
+import { QuantityTag } from '../../components/QuantityTag';
 
 export const FilesPage = () => {
   const { t } = useTranslation();
@@ -51,7 +51,7 @@ export const FilesPage = () => {
   };
 
   const handleCreate = () => {
-    dispatch(openModal({ type: "uploadFile", open: true }))
+    dispatch(openModal({ type: 'uploadFile', open: true }));
   };
 
   const handleGoToDetailsPage = (id: number) => {
@@ -59,20 +59,15 @@ export const FilesPage = () => {
   };
 
   if (isLoading) {
-    return (
-      <Spinner className="h-full" />
-    );
+    return <Spinner className='h-full' />;
   }
 
   return (
     <>
       <Title>{t('files.title')}</Title>
-      <div className="w-full flex justify-between py-2 md:py-5">
-        <QuantityTag type="files" number={numberOfFiles} />
-        <ButtonComponent
-          variant="primary"
-          onClick={handleCreate}
-        >
+      <div className='w-full flex justify-between py-2 md:py-5'>
+        <QuantityTag type='files' number={numberOfFiles} />
+        <ButtonComponent variant='primary' onClick={handleCreate}>
           {t('files.addFile')}
         </ButtonComponent>
       </div>
@@ -82,7 +77,7 @@ export const FilesPage = () => {
         handleGoToDetailsPage={handleGoToDetailsPage}
       />
       <Pagination
-        className="mt-5 ml-auto"
+        className='mt-5 ml-auto'
         numberOfPages={numberOfPages}
         currentPage={currentPage}
         goToPage={handleChangePage}

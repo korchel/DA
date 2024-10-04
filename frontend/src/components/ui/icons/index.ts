@@ -1,6 +1,6 @@
 export { ChevronSingle } from './ChevronSingle';
 export { ChevronDouble } from './ChevronDouble';
-export { CloseIcon } from "./CloseIcon";
+export { CloseIcon } from './CloseIcon';
 export { CrossedEyeIcon } from './CrossedEyeIcon';
 export { DeleteIcon } from './DeleteIcon';
 export { DownloadIcon } from './DownloadIcon';

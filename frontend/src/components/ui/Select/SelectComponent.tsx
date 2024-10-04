@@ -3,20 +3,20 @@ import Select from 'react-select';
 
 import { InputLabel } from '../InputLabel';
 import { ErrorMessage } from '../ErrorMessage';
-import { ISelectOption, onSelect } from'./../../../interfaces';
+import { ISelectOption, onSelect } from './../../../interfaces';
 import { EmotionCacheProvider } from './EmotionProvider';
 import { classNames } from './styles';
 import clsx from 'clsx';
 
 interface ISelectInputProps {
-  onChange: (option: number) => void,
-  placeholder?: string,
-  selectOptions: ISelectOption[],
-  error?: FieldError,
-  value: number,
-  label?: string,
-  required?: boolean,
-  className?: string,
+  onChange: (option: number) => void;
+  placeholder?: string;
+  selectOptions: ISelectOption[];
+  error?: FieldError;
+  value: number;
+  label?: string;
+  required?: boolean;
+  className?: string;
 }
 
 export const SelectComponent = ({
@@ -40,7 +40,11 @@ export const SelectComponent = ({
       <div className={clsx(className, 'relative')}>
         <InputLabel required={required}>{label}</InputLabel>
         <Select
-          value={value ? selectOptions.find(option => option.value === value) : undefined}
+          value={
+            value
+              ? selectOptions.find((option) => option.value === value)
+              : undefined
+          }
           classNames={classNames}
           onChange={handleSelect}
           options={selectOptions}

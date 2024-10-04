@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
-import { useAuth } from "../../context/AuthContext";
-import { DropDown } from "../ui";
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../context/AuthContext';
+import { DropDown } from '../ui';
 
 export const UserButton = () => {
   const { logOut, currentUser } = useAuth();

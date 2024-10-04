@@ -1,24 +1,27 @@
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import {
-  InputField, TextArea, SelectComponent, CheckBox,
-  ButtonComponent, MultiSelectComponent, Title,
-} from "../../ui";
-import { useCreateDocMutation } from "../../../store/docsApi";
-import { useAuth } from "../../../context/AuthContext";
-import { useGetUsersQuery as getUsers } from "../../../store/usersApi";
-import { routes } from "../../../routes";
-import { closeModal } from "../../../store/modalSlice";
-import { createDocFormSchema, IDocForm } from "./docFormSchema";
-import { ISelectOption } from "../../../interfaces";
-import { useEffect } from "react";
-
-
+  InputField,
+  TextArea,
+  SelectComponent,
+  CheckBox,
+  ButtonComponent,
+  MultiSelectComponent,
+  Title,
+} from '../../ui';
+import { useCreateDocMutation } from '../../../store/docsApi';
+import { useAuth } from '../../../context/AuthContext';
+import { useGetUsersQuery as getUsers } from '../../../store/usersApi';
+import { routes } from '../../../routes';
+import { closeModal } from '../../../store/modalSlice';
+import { createDocFormSchema, IDocForm } from './docFormSchema';
+import { ISelectOption } from '../../../interfaces';
+import { useEffect } from 'react';
 
 export const CreateDocument = () => {
   const { t } = useTranslation();
@@ -34,13 +37,23 @@ export const CreateDocument = () => {
   ];
 
   const {
-    register, control, handleSubmit, formState: { errors }, setValue, setFocus,
-  } = useForm<IDocForm>({ defaultValues: { public_document: false, available_for: [] }, resolver: zodResolver(createDocFormSchema) });
-
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    setFocus,
+  } = useForm<IDocForm>({
+    defaultValues: { public_document: false, available_for: [] },
+    resolver: zodResolver(createDocFormSchema),
+  });
 
   const [createDoc] = useCreateDocMutation();
   const { data: users } = getUsers();
-  const options = users?.map((user) => ({ label: user.name, value: user.id })) ?? [{ label: '', value: 0 }];
+  const options = users?.map((user) => ({
+    label: user.name,
+    value: user.id,
+  })) ?? [{ label: '', value: 0 }];
 
   const onSubmit = (data: IDocForm) => {
     createDoc({ ...data, authorId: currentUser.id as number })
@@ -61,7 +74,7 @@ export const CreateDocument = () => {
 
   return (
     <form
-      className="flex flex-col gap-3 sm:gap-5 md:gap-7"
+      className='flex flex-col gap-3 sm:gap-5 md:gap-7'
       onSubmit={handleSubmit(onSubmit)}
     >
       <Title>{t('documents.modal.title.create')}</Title>
@@ -111,13 +124,15 @@ export const CreateDocument = () => {
           />
         )}
       />
-      <div className="flex flex-col gap-5 md:flex-row justify-between items-center">
+      <div className='flex flex-col gap-5 md:flex-row justify-between items-center'>
         <CheckBox
           label={t('documents.modal.form.labels.publicDocument')}
           {...register('public_document')}
           onChange={(e) => setValue('public_document', e.target.checked)}
         />
-        <ButtonComponent type="submit" variant="primary">{t('documents.modal.create.button')}</ButtonComponent>
+        <ButtonComponent type='submit' variant='primary'>
+          {t('documents.modal.create.button')}
+        </ButtonComponent>
       </div>
     </form>
   );
