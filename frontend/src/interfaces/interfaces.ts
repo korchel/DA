@@ -67,3 +67,9 @@ export interface ISelectOption {
   label: string;
   value: number;
 }
+
+export interface ITableColumn {
+  label: string;
+  accessor: string;
+  sortable: boolean;
+}

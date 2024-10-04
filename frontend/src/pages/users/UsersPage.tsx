@@ -22,11 +22,27 @@ export const UsersPage = () => {
   const pages = chunk(users, pageSize);
   const numberOfPages = pages.length || 1;
 
-  const tableHeaders = [
-    t('users.tableHeader.userName'),
-    t('users.tableHeader.name'),
-    t('users.tableHeader.lastName'),
-    t('users.tableHeader.roles'),
+  const tableColumns = [
+    {
+      label: t('users.tableHeader.userName'),
+      accessor: 'userName',
+      sortable: true,
+    },
+    {
+      label: t('users.tableHeader.name'),
+      accessor: 'name',
+      sortable: true,
+    },
+    {
+      label: t('users.tableHeader.lastName'),
+      accessor: 'lastName',
+      sortable: true,
+    },
+    {
+      label: t('users.tableHeader.roles'),
+      accessor: 'type',
+      sortable: false,
+    },
   ];
 
   const tableData = pages[currentPage - 1]?.map((user) => ({
@@ -58,7 +74,7 @@ export const UsersPage = () => {
         <QuantityTag type='users' number={numberOfUsers} />
       </div>
       <Table
-        headers={tableHeaders}
+        tableColumns={tableColumns}
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
         className='mt-4'

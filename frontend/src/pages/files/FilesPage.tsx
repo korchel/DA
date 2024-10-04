@@ -27,12 +27,32 @@ export const FilesPage = () => {
   const pages = chunk(files, pageSize);
   const numberOfPages = pages.length || 1;
 
-  const tableHeaders = [
-    t('files.tableHeader.fileName'),
-    t('files.tableHeader.fileType'),
-    t('files.tableHeader.author'),
-    t('files.tableHeader.creationDate'),
-    t('files.tableHeader.updateDate'),
+  const tableColumns = [
+    {
+      label: t('files.tableHeader.fileName'),
+      accessor: 'name',
+      sortable: true,
+    },
+    {
+      label: t('files.tableHeader.author'),
+      accessor: 'author',
+      sortable: true,
+    },
+    {
+      label: t('files.tableHeader.fileType'),
+      accessor: 'type',
+      sortable: false,
+    },
+    {
+      label: t('files.tableHeader.creationDate'),
+      accessor: 'creationDate',
+      sortable: true,
+    },
+    {
+      label: t('files.tableHeader.updateDate'),
+      accessor: 'updateDate',
+      sortable: true,
+    },
   ];
 
   const tableData = pages[currentPage - 1]?.map((file) => ({
@@ -41,8 +61,8 @@ export const FilesPage = () => {
       file.filename,
       file.filetype,
       file.author,
-      file.creationDate ?? 'no data',
-      file.updateDate ?? 'no data',
+      file.creationDate ? Date.parse(file.creationDate) : 'no data',
+      file.updateDate ? Date.parse(file.updateDate) : 'no data',
     ],
   }));
 
@@ -72,7 +92,7 @@ export const FilesPage = () => {
         </ButtonComponent>
       </div>
       <Table
-        headers={tableHeaders}
+        tableColumns={tableColumns}
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
       />

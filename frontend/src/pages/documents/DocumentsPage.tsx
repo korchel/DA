@@ -17,10 +17,11 @@ import { PageSizeSwitcher } from '../../components/PageSizeSwitcher';
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
-  const { currentUser } = useAuth();
-  const { data: documents, isLoading } = getDocs(currentUser.roles);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { currentUser } = useAuth();
+
+  const { data: documents, isLoading } = getDocs(currentUser.roles);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -29,14 +30,42 @@ export const DocumentsPage = () => {
   const pages = chunk(documents, pageSize);
   const numberOfPages = pages.length || 1;
 
-  const tableHeaders = [
-    t('documents.tableHeader.number'),
-    t('documents.tableHeader.name'),
-    t('documents.tableHeader.author'),
-    t('documents.tableHeader.type'),
-    t('documents.tableHeader.content'),
-    t('documents.tableHeader.creationDate'),
-    t('documents.tableHeader.updateDate'),
+  const tableColumns = [
+    {
+      label: t('documents.tableHeader.number'),
+      accessor: 'number',
+      sortable: true,
+    },
+    {
+      label: t('documents.tableHeader.name'),
+      accessor: 'name',
+      sortable: true,
+    },
+    {
+      label: t('documents.tableHeader.author'),
+      accessor: 'author',
+      sortable: true,
+    },
+    {
+      label: t('documents.tableHeader.type'),
+      accessor: 'type',
+      sortable: false,
+    },
+    {
+      label: t('documents.tableHeader.content'),
+      accessor: 'content',
+      sortable: false,
+    },
+    {
+      label: t('documents.tableHeader.creationDate'),
+      accessor: 'creationDate',
+      sortable: true,
+    },
+    {
+      label: t('documents.tableHeader.updateDate'),
+      accessor: 'updateDate',
+      sortable: true,
+    },
   ];
 
   const tableData = pages[currentPage - 1]?.map((document) => ({
@@ -47,8 +76,12 @@ export const DocumentsPage = () => {
       document.author.username,
       t(`documents.type.${document.type.type}`),
       document.content,
-      document.creationDate ?? t('documents.noData'),
-      document.updateDate ?? t('documents.noData'),
+      document.creationDate
+        ? new Date(document.creationDate)
+        : t('documents.noData'),
+      document.updateDate
+        ? new Date(document.updateDate)
+        : t('documents.noData'),
     ],
   }));
 
@@ -81,7 +114,7 @@ export const DocumentsPage = () => {
         </ButtonComponent>
       </div>
       <Table
-        headers={tableHeaders}
+        tableColumns={tableColumns}
         data={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
       />

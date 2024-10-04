@@ -1,30 +1,50 @@
 import clsx from 'clsx';
 
-import { DetailedHTMLProps, TableHTMLAttributes } from 'react';
+import {
+  DetailedHTMLProps,
+  SetStateAction,
+  TableHTMLAttributes,
+  useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
+import { ITableColumn } from '../interfaces';
 
 interface ITableProps
   extends DetailedHTMLProps<
     TableHTMLAttributes<HTMLTableElement>,
     HTMLTableElement
   > {
-  headers: string[];
+  tableColumns: ITableColumn[];
   data:
     | {
         id: number;
-        data: (string | number | undefined)[];
+        data: (string | number | undefined | Date)[];
       }[]
     | undefined;
   handleGoToDetailsPage: (id: number) => void;
 }
 
 export const Table = ({
-  headers,
+  tableColumns,
   data,
   handleGoToDetailsPage,
   className,
 }: ITableProps) => {
   const { t } = useTranslation();
+
+  const [tableData, setTableData] = useState(data);
+  const [sortField, setSortField] = useState('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'decs'>('asc');
+
+  const sortTable = (sortField, sortOrder) => {};
+
+  const handleSort = (accessor) => {
+    const newSortOrder =
+      accessor === sortField && sortOrder === 'asc' ? 'desc' : 'asc';
+    setSortField(accessor);
+    setSortOrder(newSortOrder as SetStateAction<'asc' | 'decs'>);
+    sortTable(accessor, newSortOrder);
+  };
 
   const isEmpty = !(data && data.length > 0);
 
@@ -40,12 +60,17 @@ export const Table = ({
         text-secondary dark:text-whiteDark whitespace-nowrap'
       >
         <tr className='border-r xl:border-r-0 border-b-0 xl:border-b border-gray overflow-hidden'>
-          {headers.map((header, index) => (
+          {tableColumns.map((tableColumn) => (
             <th
-              key={index}
+              key={tableColumn.accessor}
+              onClick={
+                tableColumn.sortable
+                  ? () => handleSort(tableColumn.accessor)
+                  : undefined
+              }
               className='block xl:table-cell py-1 sm:py-2 md:py-4 px-1 sm:px-2 md:px-5 truncate'
             >
-              {header}
+              {tableColumn.label}
             </th>
           ))}
         </tr>
@@ -58,7 +83,7 @@ export const Table = ({
             </td>
           </tr>
         ) : (
-          data?.map((item) => (
+          tableData?.map((item) => (
             <tr
               className='table-cell xl:table-row overflow-hidden cursor-pointer
                 border-gray border-r last:border-r-0 xl:border-r-0 xl:border-b xl:last:border-b-0
@@ -74,7 +99,7 @@ export const Table = ({
                       py-1 sm:py-2 md:py-4
                       px-1 sm:px-2 md:px-5'
                 >
-                  {param}
+                  {param instanceof Date ? param.toLocaleDateString() : param}
                 </td>
               ))}
             </tr>
