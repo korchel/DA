@@ -4,10 +4,13 @@ import {
   DetailedHTMLProps,
   SetStateAction,
   TableHTMLAttributes,
+  useEffect,
   useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ITableColumn } from '../interfaces';
+import { ITableColumn, ITableData } from '../interfaces';
+import { SortArrow } from './ui/icons';
+import { useSortableTable } from '../hooks';
 
 interface ITableProps
   extends DetailedHTMLProps<
@@ -15,38 +18,35 @@ interface ITableProps
     HTMLTableElement
   > {
   tableColumns: ITableColumn[];
-  data:
-    | {
-        id: number;
-        data: (string | number | undefined | Date)[];
-      }[]
-    | undefined;
+  tableData: ITableData[] | undefined;
   handleGoToDetailsPage: (id: number) => void;
 }
 
 export const Table = ({
   tableColumns,
-  data,
+  tableData,
   handleGoToDetailsPage,
   className,
 }: ITableProps) => {
   const { t } = useTranslation();
 
-  const [tableData, setTableData] = useState(data);
   const [sortField, setSortField] = useState('');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'decs'>('asc');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortedData, sortTable] = useSortableTable(tableData);
 
-  const sortTable = (sortField, sortOrder) => {};
+  useEffect(() => {
+    sortTable(sortField, sortOrder);
+  }, [tableData]);
 
   const handleSort = (accessor) => {
     const newSortOrder =
       accessor === sortField && sortOrder === 'asc' ? 'desc' : 'asc';
     setSortField(accessor);
-    setSortOrder(newSortOrder as SetStateAction<'asc' | 'decs'>);
+    setSortOrder(newSortOrder as SetStateAction<'asc' | 'desc'>);
     sortTable(accessor, newSortOrder);
   };
 
-  const isEmpty = !(data && data.length > 0);
+  const isEmpty = !(tableData && tableData.length > 0);
 
   return (
     <table
@@ -68,9 +68,18 @@ export const Table = ({
                   ? () => handleSort(tableColumn.accessor)
                   : undefined
               }
-              className='block xl:table-cell py-1 sm:py-2 md:py-4 px-1 sm:px-2 md:px-5 truncate'
+              className={clsx(
+                tableColumn.sortable && 'cursor-pointer',
+                'flex xl:table-cell py-1 sm:py-2 md:py-4 px-1 sm:px-2 md:px-5 '
+              )}
             >
-              {tableColumn.label}
+              <div className='flex it'>
+                <div className='truncate'>{tableColumn.label}</div>
+                {tableColumn.sortable && <SortArrow
+                  className={clsx(sortOrder === 'asc' && tableColumn.accessor === sortField && 'rotate-180', "block, min-w-6")}
+                  active={tableColumn.accessor === sortField}
+                />}
+              </div>
             </th>
           ))}
         </tr>
@@ -83,7 +92,7 @@ export const Table = ({
             </td>
           </tr>
         ) : (
-          tableData?.map((item) => (
+          sortedData?.map((item) => (
             <tr
               className='table-cell xl:table-row overflow-hidden cursor-pointer
                 border-gray border-r last:border-r-0 xl:border-r-0 xl:border-b xl:last:border-b-0
@@ -91,7 +100,7 @@ export const Table = ({
               key={item.id}
               onClick={() => handleGoToDetailsPage(item.id)}
             >
-              {item.data.map((param, index) => (
+              {Object.values(item.data).map((param, index) => (
                 <td
                   key={index}
                   className='block max-w-48 xl:table-cell truncate

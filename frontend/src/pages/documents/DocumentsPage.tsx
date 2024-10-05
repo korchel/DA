@@ -70,19 +70,19 @@ export const DocumentsPage = () => {
 
   const tableData = pages[currentPage - 1]?.map((document) => ({
     id: document.id,
-    data: [
-      document.number,
-      document.title,
-      document.author.username,
-      t(`documents.type.${document.type.type}`),
-      document.content,
-      document.creationDate
+    data: {
+      number: document.number,
+      name: document.title,
+      author: document.author.username,
+      type: t(`documents.type.${document.type.type}`),
+      content: document.content,
+      creationDate: document.creationDate
         ? new Date(document.creationDate)
         : t('documents.noData'),
-      document.updateDate
+      updateDate: document.updateDate
         ? new Date(document.updateDate)
         : t('documents.noData'),
-    ],
+    },
   }));
 
   const handleCreate = () => {
@@ -115,7 +115,7 @@ export const DocumentsPage = () => {
       </div>
       <Table
         tableColumns={tableColumns}
-        data={tableData}
+        tableData={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
       />
       <Pagination

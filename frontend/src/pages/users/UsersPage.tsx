@@ -10,13 +10,14 @@ import { Title } from '../../components/ui';
 import { Table } from '../../components/Table';
 import { Pagination } from '../../components/ui/Pagination';
 import { QuantityTag } from '../../components/QuantityTag';
+import { PageSizeSwitcher } from '../../components/PageSizeSwitcher';
 
 export const UsersPage = () => {
   const { t } = useTranslation();
   const { data: users, isLoading } = getUsers();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
+  const [pageSize, setPageSize] = useState<number>(10);
 
   const numberOfUsers = users?.length;
   const pages = chunk(users, pageSize);
@@ -40,19 +41,19 @@ export const UsersPage = () => {
     },
     {
       label: t('users.tableHeader.roles'),
-      accessor: 'type',
+      accessor: 'roles',
       sortable: false,
     },
   ];
 
   const tableData = pages[currentPage - 1]?.map((user) => ({
     id: user.id,
-    data: [
-      user.username,
-      user.name,
-      user.lastname,
-      user.roles.map((role) => t(`users.roles.${role.name}`)).join(', '),
-    ],
+    data: {
+      userName: user.username,
+      name: user.name,
+      lastName: user.lastname,
+      roles: user.roles.map((role) => t(`users.roles.${role.name}`)).join(', '),
+    },
   }));
 
   const handleChangePage = (page: number) => {
@@ -71,11 +72,14 @@ export const UsersPage = () => {
     <>
       <Title>{t('users.title')}</Title>
       <div className='w-full flex justify-between py-2 md:py-5'>
+      <div className='flex items-center gap-2'>
         <QuantityTag type='users' number={numberOfUsers} />
+        <PageSizeSwitcher onChange={setPageSize} value={pageSize} />
+      </div>
       </div>
       <Table
         tableColumns={tableColumns}
-        data={tableData}
+        tableData={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
         className='mt-4'
       />

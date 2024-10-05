@@ -73,3 +73,8 @@ export interface ITableColumn {
   accessor: string;
   sortable: boolean;
 }
+
+export interface ITableData {
+  id: number;
+  data: Record<string, (string | number | undefined | Date)>;
+}

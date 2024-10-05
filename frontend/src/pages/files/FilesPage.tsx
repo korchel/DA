@@ -13,6 +13,7 @@ import { Table } from '../../components/Table';
 import { Spinner } from '../../components/ui/icons';
 import { Pagination } from '../../components/ui/Pagination';
 import { QuantityTag } from '../../components/QuantityTag';
+import { PageSizeSwitcher } from '../../components/PageSizeSwitcher';
 
 export const FilesPage = () => {
   const { t } = useTranslation();
@@ -20,8 +21,9 @@ export const FilesPage = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const { data: files, isLoading } = getFiles(currentUser.roles);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
+  const [pageSize, setPageSize] = useState<number>(10);
 
   const numberOfFiles = files?.length;
   const pages = chunk(files, pageSize);
@@ -57,13 +59,13 @@ export const FilesPage = () => {
 
   const tableData = pages[currentPage - 1]?.map((file) => ({
     id: file.id,
-    data: [
-      file.filename,
-      file.filetype,
-      file.author,
-      file.creationDate ? Date.parse(file.creationDate) : 'no data',
-      file.updateDate ? Date.parse(file.updateDate) : 'no data',
-    ],
+    data: {
+      name: file.filename,
+      type: file.filetype,
+      author: file.author,
+      creationDate: file.creationDate ? Date.parse(file.creationDate) : 'no data',
+      updateDate: file.updateDate ? Date.parse(file.updateDate) : 'no data',
+    },
   }));
 
   const handleChangePage = (page: number) => {
@@ -86,14 +88,17 @@ export const FilesPage = () => {
     <>
       <Title>{t('files.title')}</Title>
       <div className='w-full flex justify-between py-2 md:py-5'>
-        <QuantityTag type='files' number={numberOfFiles} />
+        <div className='flex items-center gap-2'>
+          <QuantityTag type='files' number={numberOfFiles} />
+          <PageSizeSwitcher onChange={setPageSize} value={pageSize} />
+        </div>
         <ButtonComponent variant='primary' onClick={handleCreate}>
           {t('files.addFile')}
         </ButtonComponent>
       </div>
       <Table
         tableColumns={tableColumns}
-        data={tableData}
+        tableData={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
       />
       <Pagination

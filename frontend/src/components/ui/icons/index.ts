@@ -10,5 +10,6 @@ export { MenuIcon } from './MenuIcon';
 export { MoonIcon } from './MoonIcon';
 export { OverviewIcon } from './OverviewIcon';
 export { SearchIcon } from './SearchIcon';
+export { SortArrow } from './SortArrow';
 export { Spinner } from './Spinner';
 export { SunIcon } from './SunIcon';
