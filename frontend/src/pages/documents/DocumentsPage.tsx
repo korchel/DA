@@ -1,8 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import chunk from 'lodash/chunk';
-import { useState } from 'react';
 
 import { Title, ButtonComponent } from '../../components/ui';
 import { routes } from '../../routes';
@@ -11,9 +9,7 @@ import { useGetDocsQuery as getDocs } from '../../store/docsApi';
 import { openModal } from '../../store/modalSlice';
 import { Spinner } from '../../components/ui/icons';
 import { Table } from '../../components/Table';
-import { Pagination } from '../../components/ui/Pagination';
 import { QuantityTag } from '../../components/QuantityTag';
-import { PageSizeSwitcher } from '../../components/PageSizeSwitcher';
 
 export const DocumentsPage = () => {
   const { t } = useTranslation();
@@ -23,12 +19,7 @@ export const DocumentsPage = () => {
 
   const { data: documents, isLoading } = getDocs(currentUser.roles);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState<number>(10);
-
   const numberOfDocuments = documents?.length;
-  const pages = chunk(documents, pageSize);
-  const numberOfPages = pages.length || 1;
 
   const tableColumns = [
     {
@@ -68,7 +59,7 @@ export const DocumentsPage = () => {
     },
   ];
 
-  const tableData = pages[currentPage - 1]?.map((document) => ({
+  const tableData = documents?.map((document) => ({
     id: document.id,
     data: {
       number: document.number,
@@ -93,10 +84,6 @@ export const DocumentsPage = () => {
     navigate(routes.documentDetailsRoute(id));
   };
 
-  const handleChangePage = (page: number) => {
-    setCurrentPage(page);
-  };
-
   if (isLoading) {
     return <Spinner className='h-full' />;
   }
@@ -105,10 +92,7 @@ export const DocumentsPage = () => {
     <>
       <Title>{t('documents.title')}</Title>
       <div className='w-full flex justify-between py-2 md:py-5 flex-wrap gap-2'>
-        <div className='flex items-center gap-2'>
-          <QuantityTag type='documents' number={numberOfDocuments} />
-          <PageSizeSwitcher onChange={setPageSize} value={pageSize} />
-        </div>
+        <QuantityTag type='documents' number={numberOfDocuments} />
         <ButtonComponent variant='primary' onClick={handleCreate}>
           {t('documents.createDocument')}
         </ButtonComponent>
@@ -117,12 +101,6 @@ export const DocumentsPage = () => {
         tableColumns={tableColumns}
         tableData={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
-      />
-      <Pagination
-        className='mt-5 ml-auto'
-        numberOfPages={numberOfPages}
-        currentPage={currentPage}
-        goToPage={handleChangePage}
       />
     </>
   );
