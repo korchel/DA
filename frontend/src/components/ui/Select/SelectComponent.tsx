@@ -7,6 +7,7 @@ import { ISelectOption, onSelect } from './../../../interfaces';
 import { EmotionCacheProvider } from './EmotionProvider';
 import { classNames } from './styles';
 import clsx from 'clsx';
+import { ForwardedRef, forwardRef } from 'react';
 
 interface ISelectInputProps {
   onChange: (option: number) => void;
@@ -19,40 +20,46 @@ interface ISelectInputProps {
   className?: string;
 }
 
-export const SelectComponent = ({
-  onChange,
-  placeholder,
-  selectOptions,
-  label,
-  error,
-  value,
-  required = true,
-  className,
-  ...props
-}: ISelectInputProps) => {
-  const handleSelect: onSelect = (option) => {
-    const _option = option as ISelectOption;
-    onChange(_option.value);
-  };
+export const SelectComponent = forwardRef(
+  (
+    {
+      onChange,
+      placeholder,
+      selectOptions,
+      label,
+      error,
+      value,
+      required = true,
+      className,
+      ...props
+    }: ISelectInputProps,
+    ref: ForwardedRef<null>,
+  ) => {
+    const handleSelect: onSelect = (option) => {
+      const _option = option as ISelectOption;
+      onChange(_option.value);
+    };
 
-  return (
-    <EmotionCacheProvider>
-      <div className={clsx(className, 'relative')}>
-        <InputLabel required={required}>{label}</InputLabel>
-        <Select
-          value={
-            value
-              ? selectOptions.find((option) => option.value === value)
-              : undefined
-          }
-          classNames={classNames}
-          onChange={handleSelect}
-          options={selectOptions}
-          placeholder={placeholder}
-          {...props}
-        />
-        {error && <ErrorMessage>{error.message}</ErrorMessage>}
-      </div>
-    </EmotionCacheProvider>
-  );
-};
+    return (
+      <EmotionCacheProvider>
+        <div className={clsx(className, 'relative')}>
+          <InputLabel required={required}>{label}</InputLabel>
+          <Select
+            value={
+              value
+                ? selectOptions.find((option) => option.value === value)
+                : undefined
+            }
+            classNames={classNames}
+            onChange={handleSelect}
+            options={selectOptions}
+            placeholder={placeholder}
+            ref={ref}
+            {...props}
+          />
+          {error && <ErrorMessage>{error.message}</ErrorMessage>}
+        </div>
+      </EmotionCacheProvider>
+    );
+  },
+);
