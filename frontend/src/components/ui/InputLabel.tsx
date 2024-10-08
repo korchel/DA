@@ -17,7 +17,7 @@ export const InputLabel = ({
   return (
     <label
       className='absolute -top-2.5 left-1  text-sm leading-tight mx-2 z-10
-        bg-white text-gray
+        bg-white text-secondary
         dark:bg-secondaryDark dark:text-whiteDark'
       {...props}
     >

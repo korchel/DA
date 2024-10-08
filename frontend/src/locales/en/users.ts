@@ -1,5 +1,6 @@
 export const users = {
   title: 'Users',
+  searchPlaceholder: "User's name",
   quantity: {
     count_one: '{{count}} users',
     count_other: '{{count}} users',

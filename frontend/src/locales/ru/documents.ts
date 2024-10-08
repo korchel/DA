@@ -1,6 +1,7 @@
 export const documents = {
   title: 'Список документов',
-  createDocument: 'Создать документ',
+  create: 'Создать документ',
+  searchPlaceholder: 'Документ или пользователь',
   noData: 'Нет данных',
   type: {
     NOTE: 'Записка',

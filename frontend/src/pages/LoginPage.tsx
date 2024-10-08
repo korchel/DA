@@ -8,6 +8,7 @@ import {
   InputField,
   ErrorMessage,
   Title,
+  ActionButton,
 } from '../components/ui';
 import { routes } from '../routes';
 import { useAuth } from '../context/AuthContext';
@@ -29,6 +30,16 @@ export const LoginPage = () => {
   const navigate = useNavigate();
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
   const [authFailed, setauthFailed] = useState<boolean>(false);
+
+  const [passwordInputType, setInputType] = useState('password');
+  const [passwordShown, setPasswordShown] = useState<boolean>(false);
+
+  const toggleShowPassword = () => {
+    setPasswordShown((prevState) => !prevState);
+    setInputType((prevState) =>
+      prevState === 'password' ? 'text' : 'password',
+    );
+  };
 
   const onSubmit = (data: ILoginData) => {
     setauthFailed(false);
@@ -90,8 +101,7 @@ export const LoginPage = () => {
           />
           <InputField
             autoComplete='on'
-            type='password'
-            showActionButton
+            type={passwordInputType as 'password' | 'text'}
             placeholder={t('loginPage.placeholders.password')}
             error={errors.password}
             {...register('password', {
@@ -108,6 +118,13 @@ export const LoginPage = () => {
                 message: t('errorMessages.passwordLength'),
               },
             })}
+            actionButton={
+              <ActionButton
+                className='absolute top-2 right-3'
+                onClick={toggleShowPassword}
+                actionType={passwordShown ? 'hidePassword' : 'showPassword'}
+              />
+            }
           />
           {authFailed && !errors.password && (
             <ErrorMessage className='bottom-14 sm:bottom-16 md:bottom-[70px]'>

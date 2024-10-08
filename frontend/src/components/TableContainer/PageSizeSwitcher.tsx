@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
-import { ISelectOption } from '../interfaces';
-import { SelectComponent } from './ui';
+import { ISelectOption } from '../../interfaces';
+import { SelectComponent } from '../ui';
 import clsx from 'clsx';
 
 interface IPageSizeSwitcherProps {

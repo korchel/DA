@@ -1,5 +1,6 @@
 export const users = {
   title: 'Список пользователей',
+  searchPlaceholder: 'Имя пользователя',
   quantity: {
     count_one: '{{count}} пользователль',
     count_few: '{{count}} пользователя',

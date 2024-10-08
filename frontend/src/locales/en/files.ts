@@ -1,6 +1,7 @@
 export const files = {
   title: 'Files',
-  addFile: 'Add file',
+  create: 'Add file',
+  searchPlaceholder: "Files's name",
   quantity: {
     count_one: '{{count}} file',
     count_other: '{{count}} files',

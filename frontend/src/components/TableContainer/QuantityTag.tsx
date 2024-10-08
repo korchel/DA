@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Entity } from '../interfaces';
+import { Entity } from '../../interfaces';
 
 interface INumberTagProps {
   number: number | undefined;
@@ -17,9 +17,9 @@ export const QuantityTag = ({ number, type }: INumberTagProps) => {
 
   return (
     <div
-      className='h-9 md:h-10 p-2 rounded leading-none box-border flex items-center text-nowrap
-      text-secondary dark:text-whiteDark
-      bg-white dark:bg-secondaryDark'
+      className='h-9 md:h-10 p-2 rounded-sm leading-none box-border flex items-center text-nowrap
+      text-secondary dark:text-primaryDark
+      bg-highlightDark dark:bg-highlight'
     >
       {info}
     </div>

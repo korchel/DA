@@ -33,7 +33,7 @@ export const Header = ({ className }) => {
     <header
       className={clsx(
         className,
-        `flex justify-between items-center drop-shadow-xl bg-white dark:bg-secondaryDark`,
+        `flex justify-between items-center drop-shadow-xl bg-white dark:bg-secondaryDark z-10`,
       )}
     >
       <Label />

@@ -2,14 +2,13 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { ButtonComponent, Title } from '../../components/ui';
+import { Title } from '../../components/ui';
 import { useGetFilesQuery as getFiles } from '../../store/filesApi';
 import { routes } from '../../routes';
 import { useAuth } from '../../context/AuthContext';
 import { openModal } from '../../store/modalSlice';
-import { Table } from '../../components/Table';
+import { TableContainer } from '../../components/TableContainer';
 import { Spinner } from '../../components/ui/icons';
-import { QuantityTag } from '../../components/QuantityTag';
 
 export const FilesPage = () => {
   const { t } = useTranslation();
@@ -17,8 +16,6 @@ export const FilesPage = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const { data: files, isLoading } = getFiles(currentUser.roles);
-
-  const numberOfFiles = files?.length;
 
   const tableColumns = [
     {
@@ -76,16 +73,13 @@ export const FilesPage = () => {
   return (
     <>
       <Title>{t('files.title')}</Title>
-      <div className='w-full flex justify-between py-2 md:py-5'>
-        <QuantityTag type='files' number={numberOfFiles} />
-        <ButtonComponent variant='primary' onClick={handleCreate}>
-          {t('files.addFile')}
-        </ButtonComponent>
-      </div>
-      <Table
+      <TableContainer
         tableColumns={tableColumns}
         tableData={tableData}
         handleGoToDetailsPage={handleGoToDetailsPage}
+        type='files'
+        handleCreate={handleCreate}
+        className='mt-4'
       />
     </>
   );

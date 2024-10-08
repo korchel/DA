@@ -9,11 +9,11 @@ export const classNames:
     clsx(
       'bg-transparent',
       state.isFocused
-        ? `ring ring-primary ring-opacity-50 border-gray
+        ? `ring ring-primary ring-opacity-50 border-secondary
         dark:ring-whiteDark dark:!ring-primaryDark`
-        : 'border-gray dark:border-whiteDark',
+        : 'border-secondary dark:border-whiteDark',
 
-      'hover:border-gray dark:hover:border-whiteDark rounded-sm cursor-pointer',
+      'hover:border-secondary dark:hover:border-whiteDark rounded-sm cursor-pointer',
     ),
   valueContainer: () => 'p-1',
   option: ({ isSelected, isFocused }) =>
@@ -23,12 +23,13 @@ export const classNames:
       'cursor-pointer',
     ),
   menu: () => 'z-20 dark:bg-secondaryDark',
-  placeholder: () => 'text-gray dark:text-whiteDark',
-  singleValue: () => 'text-gray dark:text-whiteDark',
+  placeholder: () => 'text-secondary dark:text-whiteDark',
+  singleValue: () => 'text-secondary dark:text-whiteDark',
   multiValue: () =>
-    'text-gray dark:text-whiteDark bg-primary dark:bg-primaryDark',
+    'text-secondary dark:text-whiteDark bg-primary dark:bg-primaryDark',
   multiValueLabel: () =>
-    'text-gray dark:text-whiteDark bg-primary dark:bg-primaryDark',
-  clearIndicator: () => 'text-gray dark:text-whiteDark',
-  dropdownIndicator: () => 'text-gray dark:text-whiteDark',
+    'text-secondary dark:text-whiteDark bg-primary dark:bg-primaryDark',
+  clearIndicator: () => 'text-secondary dark:text-whiteDark',
+  dropdownIndicator: () => 'text-secondary dark:text-whiteDark',
+  indicatorSeparator: () => 'bg-secondary dark:bg-whiteDark',
 };

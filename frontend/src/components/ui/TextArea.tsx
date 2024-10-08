@@ -31,7 +31,7 @@ export const TextArea = forwardRef(
         <InputLabel htmlFor={label}>{label}</InputLabel>
         <textarea
           className={clsx(
-            error ? 'border-danger' : 'border-gray',
+            error ? 'border-danger' : 'border-secondary',
             'block p-2 min-h-44',
             'border outline-none rounded-sm w-full bg-transparent focus:ring focus:ring-primary focus:ring-opacity-50',
             'dark:border-whiteDark dark:focus:ring-primaryDark',

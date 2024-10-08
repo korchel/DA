@@ -4,10 +4,9 @@ import {
   ForwardedRef,
   forwardRef,
   InputHTMLAttributes,
-  useState,
+  ReactNode,
 } from 'react';
 import { FieldError } from 'react-hook-form';
-import { ActionButton } from './ActionButton';
 import { InputLabel } from './InputLabel';
 import { ErrorMessage } from './ErrorMessage';
 
@@ -20,7 +19,7 @@ export interface InputFieldProps
   error?: FieldError;
   placeholder?: string;
   label?: string;
-  showActionButton?: boolean;
+  actionButton?: ReactNode;
 }
 
 export const InputField = forwardRef(
@@ -31,29 +30,19 @@ export const InputField = forwardRef(
       placeholder,
       label,
       className,
-      showActionButton = false,
+      actionButton = null,
       ...props
     }: InputFieldProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
-    const [inputType, setInputType] = useState(type);
-    const [passwordShown, setPasswordShown] = useState<boolean>(false);
-
-    const toggleShowPassword = () => {
-      setPasswordShown((prevState) => !prevState);
-      setInputType((prevState) =>
-        prevState === 'password' ? 'text' : 'password',
-      );
-    };
-
     return (
       <div className={clsx(className, 'relative')}>
         {label && <InputLabel htmlFor={label}>{label}</InputLabel>}
         <input
-          type={inputType}
+          type={type}
           id={label}
           className={clsx(
-            error ? 'border-danger' : 'border-gray',
+            error ? 'border-danger' : 'border-secondary',
             'block p-2 border bg-transparent rounded-sm w-full',
             'placeholder:text-gray dark:placeholder:text-whiteDark',
             'outline-none',
@@ -66,13 +55,7 @@ export const InputField = forwardRef(
           {...props}
           ref={ref}
         />
-        {!error && showActionButton && (
-          <ActionButton
-            className='absolute top-2 right-3'
-            onClick={toggleShowPassword}
-            actionType={passwordShown ? 'hidePassword' : 'showPassword'}
-          />
-        )}
+        {actionButton}
         {error && <ErrorMessage>{error.message}</ErrorMessage>}
       </div>
     );
