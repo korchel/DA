@@ -17,7 +17,7 @@ const DocumentDetailsPage = () => {
   const dispatch = useDispatch();
 
   const { data: doc, isLoading } = getDoc(id);
-  console.log(doc?.updateDate && Date.parse(doc.updateDate));
+
   const ability = defineAbilityFor({
     user: { ...currentUser, isAuthenticated },
     entity: { authorId: doc?.author.idUser },

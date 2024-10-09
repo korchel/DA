@@ -7,10 +7,11 @@ import {
   useState,
 } from 'react';
 import chunk from 'lodash/chunk';
+// import Highlighter from 'react-highlight-words';
 import { useTranslation } from 'react-i18next';
 import { Entity, ITableColumn, ITableData } from '../../interfaces';
 import { SortArrow } from '../ui/icons';
-import { useSortableTable } from '../../hooks';
+import { useFilteredTable, useSortableTable } from '../../hooks';
 import { PageSizeSwitcher } from './PageSizeSwitcher';
 import { Pagination } from '../ui/Pagination';
 import { ActionButton, ButtonComponent, InputField } from '../ui';
@@ -38,15 +39,26 @@ export const TableContainer = ({
 }: ITableProps) => {
   const { t } = useTranslation();
 
+  const filterFields = {
+    documents: ['author', 'name'],
+    files: ['author', 'name'],
+    users: ['username', 'name', 'lastname'],
+  };
+  const [searchValue, setSearchValue] = useState('');
+  const [filteredTable, filterTable] = useFilteredTable(tableData ?? [], filterFields[type]);
+
   const [sortField, setSortField] = useState('');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const [sortedData, sortTable] = useSortableTable(tableData);
+  const [sortedData, sortTable] = useSortableTable(filteredTable);
 
-  const numberOfDocuments = tableData?.length;
+  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+    filterTable(event.target.value);
+  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState<number>(10);
-  const pages = chunk(sortedData, pageSize);
+  const pages = chunk(sortField ? sortedData : filteredTable, pageSize);
   const numberOfPages = pages.length || 1;
   const handleChangePage = (page: number) => {
     setCurrentPage(page);
@@ -54,6 +66,10 @@ export const TableContainer = ({
 
   useEffect(() => {
     sortTable(sortField, sortOrder);
+  }, [filteredTable]);
+
+  useEffect(() => {
+    filterTable(searchValue);
   }, [tableData]);
 
   const handleSort = (accessor) => {
@@ -69,7 +85,7 @@ export const TableContainer = ({
   return (
     <div className={clsx(className, 'flex flex-col gap-2 md:gap-4')}>
       <div className='flex gap-2 flex-wrap bg-white dark:bg-secondaryDark p-2 md:p-4 rounded-md'>
-        <QuantityTag type={type} number={numberOfDocuments} />
+        <QuantityTag type={type} number={filteredTable.length} />
         <PageSizeSwitcher
           onChange={setPageSize}
           value={pageSize}
@@ -84,6 +100,7 @@ export const TableContainer = ({
           }
           placeholder={t(`${type}.searchPlaceholder`)}
           className='max-w-96 min-w-60 md:ml-auto flex-1'
+          onChange={handleFilter}
         />
         {!(type === 'users') && (
           <ButtonComponent variant='primary' onClick={handleCreate}>

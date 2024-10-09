@@ -20,6 +20,7 @@ export interface InputFieldProps
   placeholder?: string;
   label?: string;
   actionButton?: ReactNode;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const InputField = forwardRef(
@@ -31,6 +32,7 @@ export const InputField = forwardRef(
       label,
       className,
       actionButton = null,
+      onChange,
       ...props
     }: InputFieldProps,
     ref: ForwardedRef<HTMLInputElement>,
@@ -54,6 +56,7 @@ export const InputField = forwardRef(
           placeholder={placeholder}
           {...props}
           ref={ref}
+          onChange={onChange}
         />
         {actionButton}
         {error && <ErrorMessage>{error.message}</ErrorMessage>}

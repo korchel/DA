@@ -33,7 +33,7 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    command: certonly --webroot --webroot-path=/var/www/certbot --email korchel21@gmail.com --agree-tos --no-eff-email -d da-korchel-ivan.ru
+    command: certonly --webroot --webroot-path=/var/www/certbot --email korchel21@gmail.com --force-renewal --agree-tos --no-eff-email -d da-korchel-ivan.ru
 
   document_accounting_db:
     image: postgres
