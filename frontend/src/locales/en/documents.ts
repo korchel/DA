@@ -1,7 +1,7 @@
 export const documents = {
   title: 'Documents',
   create: 'Create document',
-  searchPlaceholder: "Document's or user's name",
+  searchPlaceholder: "Document or user's name",
   noData: 'No data',
   type: {
     NOTE: 'Note',

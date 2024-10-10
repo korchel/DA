@@ -1,7 +1,7 @@
 export const files = {
   title: 'Список файлов',
   create: 'Добавить файл',
-  searchPlaceholder: 'Название файла',
+  searchPlaceholder: 'Файл или пользователь',
   quantity: {
     count_one: '{{count}} файл',
     count_few: '{{count}} файла',

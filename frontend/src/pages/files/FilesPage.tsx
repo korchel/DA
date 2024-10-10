@@ -24,14 +24,14 @@ export const FilesPage = () => {
       sortable: true,
     },
     {
-      label: t('files.tableHeader.author'),
-      accessor: 'author',
-      sortable: true,
-    },
-    {
       label: t('files.tableHeader.fileType'),
       accessor: 'type',
       sortable: false,
+    },
+    {
+      label: t('files.tableHeader.author'),
+      accessor: 'author',
+      sortable: true,
     },
     {
       label: t('files.tableHeader.creationDate'),

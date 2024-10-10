@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import chunk from 'lodash/chunk';
-// import Highlighter from 'react-highlight-words';
+import Highlighter from 'react-highlight-words';
 import { useTranslation } from 'react-i18next';
 import { Entity, ITableColumn, ITableData } from '../../interfaces';
 import { SortArrow } from '../ui/icons';
@@ -45,7 +45,10 @@ export const TableContainer = ({
     users: ['username', 'name', 'lastname'],
   };
   const [searchValue, setSearchValue] = useState('');
-  const [filteredTable, filterTable] = useFilteredTable(tableData ?? [], filterFields[type]);
+  const [filteredTable, filterTable] = useFilteredTable(
+    tableData ?? [],
+    filterFields[type],
+  );
 
   const [sortField, setSortField] = useState('');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
@@ -148,11 +151,31 @@ export const TableContainer = ({
                 key={item.id}
                 onClick={() => handleGoToDetailsPage(item.id)}
               >
-                {Object.values(item.data).map((param, index) => (
-                  <Td key={index}>
-                    {param instanceof Date ? param.toLocaleDateString() : param}
-                  </Td>
-                ))}
+                {Object.entries(item.data).map(([key, param], index) => {
+                  const string = (
+                    param instanceof Date ? param.toLocaleDateString() : param
+                  ) as string;
+
+                  if (filterFields[type].includes(key)) {
+                    return (
+                      <Td key={index}>
+                        <Highlighter
+                          highlightClassName='bg-highlightDark dark:text-primaryDark'
+                          searchWords={[searchValue]}
+                          autoEscape={true}
+                          textToHighlight={string}
+                        />
+                      </Td>
+                    );
+                  }
+                  return (
+                    <Td key={index}>
+                      {param instanceof Date
+                        ? param.toLocaleDateString()
+                        : param}
+                    </Td>
+                  );
+                })}
               </TBody.Tr>
             ))
           )}
