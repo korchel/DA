@@ -24,3 +24,6 @@ run-dev:
 
 run-prod:
 	sudo docker-compose up --build -d
+
+run-prod-cert:
+	sudo docker-compose -f docker-compose-cert.yml up --build -d

@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 networks:
   prod:
@@ -12,9 +12,12 @@ services:
   nginx:
     image: nginx:stable-alpine
     ports:
-      - "80:80"
+      - '80:80'
+      - '443:443'
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     depends_on:
       - document_accounting_db
       - app
@@ -22,6 +25,15 @@ services:
     restart: always
     networks:
       - prod
+
+  certbot:
+    image: certbot/certbot:latest
+    depends_on:
+      - nginx
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot --webroot-path=/var/www/certbot --email korchel21@gmail.com --force-renewal --agree-tos --no-eff-email -d da-korchel-ivan.ru
 
   document_accounting_db:
     image: postgres
@@ -33,7 +45,7 @@ services:
     volumes:
       - document_accounting:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - '5432:5432'
     networks:
       - prod
 
@@ -41,16 +53,16 @@ services:
     restart: always
     build: ./DocumentAccounting2
     ports:
-      - "8080:8080"
+      - '8080:8080'
     depends_on:
       - document_accounting_db
     environment:
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://document_accounting_db:5432/document_accounting_db"
-      JAVA_OPTS: "-Xmx512m"
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://document_accounting_db:5432/document_accounting_db'
+      JAVA_OPTS: '-Xmx512m'
     logging:
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
     networks:
       - prod
 
@@ -60,7 +72,7 @@ services:
       context: ./frontend
     restart: always
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - /app/node_modules
       - ./frontend:/app
